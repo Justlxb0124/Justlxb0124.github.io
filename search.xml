@@ -1,22 +1,65 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title>Hello World</title>
-    <url>/2020/07/03/hello-world/</url>
-    <content><![CDATA[<p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
+    <title>29.两数相除</title>
+    <url>/2020/07/04/29-%E4%B8%A4%E6%95%B0%E7%9B%B8%E9%99%A4/</url>
+    <content><![CDATA[<h1 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h1><p>给定两个整数，被除数 dividend 和除数 divisor。将两数相除，要求不使用乘法、除法和 mod 运算符。</p>
+<p>返回被除数 dividend 除以除数 divisor 得到的商。</p>
+<p>整数除法的结果应当截去（truncate）其小数部分，例如：truncate(8.345) = 8 以及 truncate(-2.7335) = -2</p>
+<p><strong>示例一</strong>：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">输入: dividend &#x3D; 10, divisor &#x3D; 3</span><br><span class="line">输出: 3</span><br><span class="line">解释: 10&#x2F;3 &#x3D; truncate(3.33333..) &#x3D; truncate(3) &#x3D; 3</span><br></pre></td></tr></table></figure>
 
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
+<p><strong>示例二</strong>：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">输入: dividend &#x3D; 7, divisor &#x3D; -3</span><br><span class="line">输出: -2</span><br><span class="line">解释: 7&#x2F;-3 &#x3D; truncate(-2.33333..) &#x3D; -2</span><br></pre></td></tr></table></figure>
 
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
+<h1 id="题解"><a href="#题解" class="headerlink" title="题解"></a>题解</h1><h2 id="位运算"><a href="#位运算" class="headerlink" title="位运算"></a>位运算</h2><p>首先想到的是对被除数循环递减, 记录能减多少次就好了, 但是明显效率太低.</p>
+<p>那么这个循环递减的过程就可以使用移位运算优化一下.<strong>计算机在做移位时效率很高, 向左移1位相当于乘以2, 向右移1位相当于除以2</strong></p>
+<p>设循环初始值为<code>i = 31</code>, 每次循环都比较<code>dividend&gt;&gt;i</code> 和 <code>devisor</code>的大小, 起初结果肯定是小于关系. 一旦变成了等于或大于关系, 则说明商至少是<code>2^i</code></p>
+<p>以100除以3为例说明:</p>
+<p><code>i</code>从31, 30, …,开始循环, 当<code>i=5</code>时, 有<code>(100&gt;&gt;5)&gt;=3</code>, 即<code>100/32&gt;=3</code>, 说明100中至少有32个3, 然后让余数4继续完成遍历.</p>
+<p>这样的方法最多只只需要遍历31个数字即可.</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">divide</span><span class="params">(<span class="keyword">int</span> dividend, <span class="keyword">int</span> divisor)</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (dividend == <span class="number">0</span>)</span><br><span class="line">            <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">if</span> (dividend == Integer.MIN_VALUE &amp;&amp; divisor == -<span class="number">1</span>)</span><br><span class="line">            <span class="keyword">return</span> Integer.MAX_VALUE;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">boolean</span> negative = (dividend ^ divisor) &lt; <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">long</span> t = Math.abs((<span class="keyword">long</span>) dividend);</span><br><span class="line">        <span class="keyword">long</span> d = Math.abs((<span class="keyword">long</span>) divisor);</span><br><span class="line">        <span class="keyword">int</span> res = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">31</span>; i &gt;= <span class="number">0</span>; i--) &#123;</span><br><span class="line">            <span class="keyword">if</span> ((t &gt;&gt; i) &gt;= d) &#123;</span><br><span class="line">                res += <span class="number">1</span> &lt;&lt; i;</span><br><span class="line">                t -= d &lt;&lt; i;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> negative ? -res : res;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
 
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
 
-<p>More info: <a href="https://hexo.io/docs/one-command-deployment.html" target="_blank" rel="noopener">Deployment</a></p>
-]]></content>
+
+<h2 id=""><a href="#" class="headerlink" title=""></a></h2>]]></content>
+      <categories>
+        <category>算法</category>
+      </categories>
+      <tags>
+        <tag>数学</tag>
+        <tag>位运算</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>153.寻找旋转排序数组中的最小值</title>
+    <url>/2020/07/04/153-%E5%AF%BB%E6%89%BE%E6%97%8B%E8%BD%AC%E6%8E%92%E5%BA%8F%E6%95%B0%E7%BB%84%E4%B8%AD%E7%9A%84%E6%9C%80%E5%B0%8F%E5%80%BC/</url>
+    <content><![CDATA[<h1 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h1><p>假设按照升序排序的数组在预先未知的某个点上进行了旋转。</p>
+<p>( 例如，数组 [0,1,2,4,5,6,7] 可能变为 [4,5,6,7,0,1,2] )。</p>
+<p>请找出其中最小的元素。</p>
+<p>你可以假设数组中不存在重复元素。</p>
+<p><strong>示例一</strong>：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">输入: [3,4,5,1,2]</span><br><span class="line">输出: 1</span><br></pre></td></tr></table></figure>
+
+<p><strong>示例二</strong>：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">输入: [4,5,6,7,0,1,2]</span><br><span class="line">输出: 0</span><br></pre></td></tr></table></figure>
+
+<h1 id="题解"><a href="#题解" class="headerlink" title="题解"></a>题解</h1><h2 id="二分查找"><a href="#二分查找" class="headerlink" title="二分查找"></a>二分查找</h2><p>这道题与&lt;剑指OFFER&gt;中的11题相似, 但是这道题相较之下简化了一些, 不存在重复元素.</p>
+<p>这道题在二分查找算法模板的基础上进行变动:</p>
+<ul>
+<li>首先是每次查找时目标值的确定. 每次比较时选取<code>nums[right]</code>来与<code>nums[mid]</code>进行比较, 因为不是重复数组, 所以也可与<code>nums[left]</code>进行比较</li>
+<li></li>
+</ul>
+<hr>
+<h2 id="递归方法"><a href="#递归方法" class="headerlink" title="递归方法"></a>递归方法</h2><hr>
+<h2 id="一次遍历解法"><a href="#一次遍历解法" class="headerlink" title="一次遍历解法"></a>一次遍历解法</h2>]]></content>
+      <categories>
+        <category>算法</category>
+      </categories>
+      <tags>
+        <tag>数组</tag>
+        <tag>二分查找</tag>
+      </tags>
   </entry>
   <entry>
     <title>287.寻找重复数</title>
@@ -61,8 +104,67 @@
         <category>算法</category>
       </categories>
       <tags>
-        <tag>二分查找</tag>
         <tag>数组</tag>
+        <tag>二分查找</tag>
       </tags>
+  </entry>
+  <entry>
+    <title>32.最长有效括号</title>
+    <url>/2020/07/04/32-%E6%9C%80%E9%95%BF%E6%9C%89%E6%95%88%E6%8B%AC%E5%8F%B7/</url>
+    <content><![CDATA[<h1 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h1><p>给定一个只包含 <code>&#39;(&#39;</code> 和 <code>&#39;)&#39;</code> 的字符串，找出最长的包含有效括号的子串的长度。</p>
+<p><strong>示例一</strong>：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">输入: &quot;(()&quot;</span><br><span class="line">输出: 2</span><br><span class="line">解释: 最长有效括号子串为 &quot;()&quot;</span><br></pre></td></tr></table></figure>
+
+<p><strong>示例二</strong>：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">输入: &quot;)()())&quot;</span><br><span class="line">输出: 4</span><br><span class="line">解释: 最长有效括号子串为 &quot;()()&quot;</span><br></pre></td></tr></table></figure>
+
+<h1 id="题解"><a href="#题解" class="headerlink" title="题解"></a>题解</h1><h2 id="栈"><a href="#栈" class="headerlink" title="栈"></a>栈</h2><p>刚做这道题时忽略了题目中<strong>子串</strong>的要求, 直接求了共有多少有效括号, 提交后才发现.</p>
+<p>首先想到的还是用栈来解决有效括号的问题, 这道题麻烦在必须是子串才可以, 字符前后需要建立联系.</p>
+<p>具体做法是我们始终保持栈底元素为当前已经遍历过的元素中「最后一个没有被匹配的右括号的下标」，这样的做法主要是考虑了边界条件的处理，栈里其他元素维护左括号的下标：</p>
+<ul>
+<li>对于遇到的每个<code>(</code> ，我们将它的下标放入栈中</li>
+<li>对于遇到的每个<code>)</code>，我们先弹出栈顶元素表示匹配了当前右括号：<ul>
+<li>如果栈为空，说明当前的右括号为没有被匹配的右括号，我们将其下标放入栈中来更新我们之前提到的「最后一个没有被匹配的右括号的下标」</li>
+<li>如果栈不为空，当前右括号的下标减去栈顶元素即为「以该右括号为结尾的最长有效括号的长度」</li>
+</ul>
+</li>
+</ul>
+<p>需要注意的是，如果一开始栈为空，第一个字符为左括号的时候我们会将其放入栈中，这样就不满足提及的「最后一个没有被匹配的右括号的下标」，为了保持统一，我们在一开始的时候往栈中放入一个值为 -1−1 的元素。</p>
+<p><img src="https://assets.leetcode-cn.com/solution-static/32/1.png" alt=""></p>
+<p><img src="https://assets.leetcode-cn.com/solution-static/32/2.png" alt=""></p>
+<p><img src="https://assets.leetcode-cn.com/solution-static/32/3.png" alt=""></p>
+<p><img src="https://assets.leetcode-cn.com/solution-static/32/4.png" alt=""></p>
+<p><img src="https://assets.leetcode-cn.com/solution-static/32/5.png" alt=""></p>
+<p><img src="https://assets.leetcode-cn.com/solution-static/32/6.png" alt=""></p>
+<p><img src="https://assets.leetcode-cn.com/solution-static/32/7.png" alt=""></p>
+<p><img src="https://assets.leetcode-cn.com/solution-static/32/8.png" alt=""></p>
+<p><img src="https://assets.leetcode-cn.com/solution-static/32/9.png" alt=""></p>
+<p><img src="https://assets.leetcode-cn.com/solution-static/32/10.png" alt=""></p>
+<p><img src="https://assets.leetcode-cn.com/solution-static/32/11.png" alt=""></p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">longestValidParentheses</span><span class="params">(String s)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> max = <span class="number">0</span>;</span><br><span class="line">        Stack&lt;Integer&gt; stack = <span class="keyword">new</span> Stack&lt;&gt;();</span><br><span class="line">        stack.push(-<span class="number">1</span>);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; s.length(); i++) &#123;</span><br><span class="line">            <span class="keyword">if</span> (s.charAt(i) == <span class="string">'('</span>)</span><br><span class="line">                stack.push(i);</span><br><span class="line">            <span class="keyword">else</span> &#123;</span><br><span class="line">                stack.pop();</span><br><span class="line">                <span class="keyword">if</span> (stack.empty()) &#123;</span><br><span class="line">                    stack.push(i);</span><br><span class="line">                &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                    max = Math.max(max, i - stack.peek());</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> max;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+]]></content>
+      <tags>
+        <tag>字符串</tag>
+        <tag>栈</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Hello World</title>
+    <url>/2020/07/03/hello-world/</url>
+    <content><![CDATA[<p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p>
+<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p>
+<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p>
+<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p>
+<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/one-command-deployment.html" target="_blank" rel="noopener">Deployment</a></p>
+]]></content>
   </entry>
 </search>
