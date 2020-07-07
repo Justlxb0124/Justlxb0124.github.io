@@ -1,6 +1,70 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>153.寻找旋转排序数组中的最小值</title>
+    <url>/2020/07/04/153-%E5%AF%BB%E6%89%BE%E6%97%8B%E8%BD%AC%E6%8E%92%E5%BA%8F%E6%95%B0%E7%BB%84%E4%B8%AD%E7%9A%84%E6%9C%80%E5%B0%8F%E5%80%BC/</url>
+    <content><![CDATA[<h1 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h1><p>假设按照升序排序的数组在预先未知的某个点上进行了旋转。</p>
+<p>( 例如，数组 [0,1,2,4,5,6,7] 可能变为 [4,5,6,7,0,1,2] )。</p>
+<p>请找出其中最小的元素。</p>
+<p>你可以假设数组中不存在重复元素。</p>
+<p><strong>示例一</strong>：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">输入: [3,4,5,1,2]</span><br><span class="line">输出: 1</span><br></pre></td></tr></table></figure>
+
+<p><strong>示例二</strong>：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">输入: [4,5,6,7,0,1,2]</span><br><span class="line">输出: 0</span><br></pre></td></tr></table></figure>
+
+<h3 id="题解"><a href="#题解" class="headerlink" title="题解"></a>题解</h3><h4 id="二分查找"><a href="#二分查找" class="headerlink" title="二分查找"></a>二分查找</h4><p>因为不存在重复的数字, 所以只需要考虑大于和等于的情况, 比较对象为<code>nums[right]</code></p>
+<ol>
+<li><p>循环二分： 设置 <code>i</code>,<code>j</code> 指针分别指向<code>numbers</code> 数组左右两端，<code>m = (i + j) / 2</code> 为每次二分的中点（ “/“ 代表向下取整除法），可分为以下三种情况：</p>
+<ol>
+<li><p>当<code>numbers[m] &gt; numbers[j]</code>时： <code>m</code> 一定在 左排序数组 中，即旋转点 <code>x</code>一定在<code>[m + 1, j]</code>闭区间内，因此执行<code>i = m + 1</code>；</p>
+</li>
+<li><p>当 <code>numbers[m] &lt; numbers[j]</code>时： <code>m</code> 一定在 右排序数组 中，即旋转点 <code>x</code> 一定在<code>[i, m]</code> 闭区间内，因此执行<code>j = m</code>；</p>
+</li>
+</ol>
+</li>
+<li><p>返回值： 当<code>i = j</code>时跳出二分循环，并返回 <code>numbers[i]</code>即可。</p>
+</li>
+</ol>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">findMin</span><span class="params">(<span class="keyword">int</span>[] nums)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> left = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">int</span> right = nums.length - <span class="number">1</span>;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">while</span> (left &lt; right) &#123;</span><br><span class="line">            <span class="keyword">int</span> mid = (left + right) / <span class="number">2</span>;</span><br><span class="line">            <span class="keyword">if</span> (nums[mid] &lt; nums[right]) &#123;</span><br><span class="line">                right = mid;</span><br><span class="line">            &#125; <span class="keyword">else</span> <span class="keyword">if</span> (nums[mid] &gt; nums[right]) &#123;</span><br><span class="line">                left = mid + <span class="number">1</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> nums[left];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
+      <categories>
+        <category>算法</category>
+      </categories>
+      <tags>
+        <tag>数组</tag>
+        <tag>二分查找</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>29.两数相除</title>
+    <url>/2020/07/04/29-%E4%B8%A4%E6%95%B0%E7%9B%B8%E9%99%A4/</url>
+    <content><![CDATA[<h1 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h1><p>给定两个整数，被除数 dividend 和除数 divisor。将两数相除，要求不使用乘法、除法和 mod 运算符。</p>
+<p>返回被除数 dividend 除以除数 divisor 得到的商。</p>
+<p>整数除法的结果应当截去（truncate）其小数部分，例如：truncate(8.345) = 8 以及 truncate(-2.7335) = -2</p>
+<p><strong>示例一</strong>：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">输入: dividend &#x3D; 10, divisor &#x3D; 3</span><br><span class="line">输出: 3</span><br><span class="line">解释: 10&#x2F;3 &#x3D; truncate(3.33333..) &#x3D; truncate(3) &#x3D; 3</span><br></pre></td></tr></table></figure>
+
+<p><strong>示例二</strong>：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">输入: dividend &#x3D; 7, divisor &#x3D; -3</span><br><span class="line">输出: -2</span><br><span class="line">解释: 7&#x2F;-3 &#x3D; truncate(-2.33333..) &#x3D; -2</span><br></pre></td></tr></table></figure>
+
+<h1 id="题解"><a href="#题解" class="headerlink" title="题解"></a>题解</h1><h2 id="位运算"><a href="#位运算" class="headerlink" title="位运算"></a>位运算</h2><p>首先想到的是对被除数循环递减, 记录能减多少次就好了, 但是明显效率太低.</p>
+<p>那么这个循环递减的过程就可以使用移位运算优化一下.<strong>计算机在做移位时效率很高, 向左移1位相当于乘以2, 向右移1位相当于除以2</strong></p>
+<p>设循环初始值为<code>i = 31</code>, 每次循环都比较<code>dividend&gt;&gt;i</code> 和 <code>devisor</code>的大小, 起初结果肯定是小于关系. 一旦变成了等于或大于关系, 则说明商至少是<code>2^i</code></p>
+<p>以100除以3为例说明:</p>
+<p><code>i</code>从31, 30, …,开始循环, 当<code>i=5</code>时, 有<code>(100&gt;&gt;5)&gt;=3</code>, 即<code>100/32&gt;=3</code>, 说明100中至少有32个3, 然后让余数4继续完成遍历.</p>
+<p>这样的方法最多只只需要遍历31个数字即可.</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">divide</span><span class="params">(<span class="keyword">int</span> dividend, <span class="keyword">int</span> divisor)</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (dividend == <span class="number">0</span>)</span><br><span class="line">            <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">if</span> (dividend == Integer.MIN_VALUE &amp;&amp; divisor == -<span class="number">1</span>)</span><br><span class="line">            <span class="keyword">return</span> Integer.MAX_VALUE;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">boolean</span> negative = (dividend ^ divisor) &lt; <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">long</span> t = Math.abs((<span class="keyword">long</span>) dividend);</span><br><span class="line">        <span class="keyword">long</span> d = Math.abs((<span class="keyword">long</span>) divisor);</span><br><span class="line">        <span class="keyword">int</span> res = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">31</span>; i &gt;= <span class="number">0</span>; i--) &#123;</span><br><span class="line">            <span class="keyword">if</span> ((t &gt;&gt; i) &gt;= d) &#123;</span><br><span class="line">                res += <span class="number">1</span> &lt;&lt; i;</span><br><span class="line">                t -= d &lt;&lt; i;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> negative ? -res : res;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+]]></content>
+      <categories>
+        <category>算法</category>
+      </categories>
+      <tags>
+        <tag>数学</tag>
+        <tag>位运算</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>287.寻找重复数</title>
     <url>/2020/07/03/287-%E5%AF%BB%E6%89%BE%E9%87%8D%E5%A4%8D%E6%95%B0/</url>
     <content><![CDATA[<h1 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h1><p>给定一个包含 n + 1 个整数的数组 nums，其数字都在 1 到 n 之间（包括 1 和 n），可知至少存在一个重复的整数。假设只有一个重复的整数，找出这个重复的数。</p>
@@ -43,8 +107,8 @@
         <category>算法</category>
       </categories>
       <tags>
-        <tag>二分查找</tag>
         <tag>数组</tag>
+        <tag>二分查找</tag>
       </tags>
   </entry>
   <entry>
@@ -90,82 +154,6 @@
         <tag>字符串</tag>
         <tag>栈</tag>
       </tags>
-  </entry>
-  <entry>
-    <title>153.寻找旋转排序数组中的最小值</title>
-    <url>/2020/07/04/153-%E5%AF%BB%E6%89%BE%E6%97%8B%E8%BD%AC%E6%8E%92%E5%BA%8F%E6%95%B0%E7%BB%84%E4%B8%AD%E7%9A%84%E6%9C%80%E5%B0%8F%E5%80%BC/</url>
-    <content><![CDATA[<h1 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h1><p>假设按照升序排序的数组在预先未知的某个点上进行了旋转。</p>
-<p>( 例如，数组 [0,1,2,4,5,6,7] 可能变为 [4,5,6,7,0,1,2] )。</p>
-<p>请找出其中最小的元素。</p>
-<p>你可以假设数组中不存在重复元素。</p>
-<p><strong>示例一</strong>：</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">输入: [3,4,5,1,2]</span><br><span class="line">输出: 1</span><br></pre></td></tr></table></figure>
-
-<p><strong>示例二</strong>：</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">输入: [4,5,6,7,0,1,2]</span><br><span class="line">输出: 0</span><br></pre></td></tr></table></figure>
-
-<h1 id="题解"><a href="#题解" class="headerlink" title="题解"></a>题解</h1><h2 id="二分查找"><a href="#二分查找" class="headerlink" title="二分查找"></a>二分查找</h2><p>这道题与&lt;剑指OFFER&gt;中的11题相似, 但是这道题相较之下简化了一些, 不存在重复元素.</p>
-<p>这道题在二分查找算法模板的基础上进行变动:</p>
-<ul>
-<li>首先是每次查找时目标值的确定. 每次比较时选取<code>nums[right]</code>来与<code>nums[mid]</code>进行比较, 因为不是重复数组, 所以也可与<code>nums[left]</code>进行比较</li>
-<li></li>
-</ul>
-<hr>
-<h2 id="writing…"><a href="#writing…" class="headerlink" title="(writing…)"></a>(writing…)</h2>]]></content>
-      <categories>
-        <category>算法</category>
-      </categories>
-      <tags>
-        <tag>二分查找</tag>
-        <tag>数组</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>29.两数相除</title>
-    <url>/2020/07/04/29-%E4%B8%A4%E6%95%B0%E7%9B%B8%E9%99%A4/</url>
-    <content><![CDATA[<h1 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h1><p>给定两个整数，被除数 dividend 和除数 divisor。将两数相除，要求不使用乘法、除法和 mod 运算符。</p>
-<p>返回被除数 dividend 除以除数 divisor 得到的商。</p>
-<p>整数除法的结果应当截去（truncate）其小数部分，例如：truncate(8.345) = 8 以及 truncate(-2.7335) = -2</p>
-<p><strong>示例一</strong>：</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">输入: dividend &#x3D; 10, divisor &#x3D; 3</span><br><span class="line">输出: 3</span><br><span class="line">解释: 10&#x2F;3 &#x3D; truncate(3.33333..) &#x3D; truncate(3) &#x3D; 3</span><br></pre></td></tr></table></figure>
-
-<p><strong>示例二</strong>：</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">输入: dividend &#x3D; 7, divisor &#x3D; -3</span><br><span class="line">输出: -2</span><br><span class="line">解释: 7&#x2F;-3 &#x3D; truncate(-2.33333..) &#x3D; -2</span><br></pre></td></tr></table></figure>
-
-<h1 id="题解"><a href="#题解" class="headerlink" title="题解"></a>题解</h1><h2 id="位运算"><a href="#位运算" class="headerlink" title="位运算"></a>位运算</h2><p>首先想到的是对被除数循环递减, 记录能减多少次就好了, 但是明显效率太低.</p>
-<p>那么这个循环递减的过程就可以使用移位运算优化一下.<strong>计算机在做移位时效率很高, 向左移1位相当于乘以2, 向右移1位相当于除以2</strong></p>
-<p>设循环初始值为<code>i = 31</code>, 每次循环都比较<code>dividend&gt;&gt;i</code> 和 <code>devisor</code>的大小, 起初结果肯定是小于关系. 一旦变成了等于或大于关系, 则说明商至少是<code>2^i</code></p>
-<p>以100除以3为例说明:</p>
-<p><code>i</code>从31, 30, …,开始循环, 当<code>i=5</code>时, 有<code>(100&gt;&gt;5)&gt;=3</code>, 即<code>100/32&gt;=3</code>, 说明100中至少有32个3, 然后让余数4继续完成遍历.</p>
-<p>这样的方法最多只只需要遍历31个数字即可.</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">divide</span><span class="params">(<span class="keyword">int</span> dividend, <span class="keyword">int</span> divisor)</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (dividend == <span class="number">0</span>)</span><br><span class="line">            <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">if</span> (dividend == Integer.MIN_VALUE &amp;&amp; divisor == -<span class="number">1</span>)</span><br><span class="line">            <span class="keyword">return</span> Integer.MAX_VALUE;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">boolean</span> negative = (dividend ^ divisor) &lt; <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">long</span> t = Math.abs((<span class="keyword">long</span>) dividend);</span><br><span class="line">        <span class="keyword">long</span> d = Math.abs((<span class="keyword">long</span>) divisor);</span><br><span class="line">        <span class="keyword">int</span> res = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">31</span>; i &gt;= <span class="number">0</span>; i--) &#123;</span><br><span class="line">            <span class="keyword">if</span> ((t &gt;&gt; i) &gt;= d) &#123;</span><br><span class="line">                res += <span class="number">1</span> &lt;&lt; i;</span><br><span class="line">                t -= d &lt;&lt; i;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> negative ? -res : res;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
-
-]]></content>
-      <categories>
-        <category>算法</category>
-      </categories>
-      <tags>
-        <tag>数学</tag>
-        <tag>位运算</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Hello World</title>
-    <url>/2020/07/03/hello-world/</url>
-    <content><![CDATA[<p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/one-command-deployment.html" target="_blank" rel="noopener">Deployment</a></p>
-]]></content>
   </entry>
   <entry>
     <title>javaweb小记</title>
@@ -585,6 +573,8 @@
 
 <p>随便填写表单, 输出为:</p>
 <p><img src="http://qcxz71s06.bkt.clouddn.com/QQ%E6%88%AA%E5%9B%BE20200705214305.png" alt=""></p>
+<h2 id="i18n"><a href="#i18n" class="headerlink" title="i18n"></a>i18n</h2><p>国际化三要素:</p>
+<p><img src="http://qcxz71s06.bkt.clouddn.com/QQ%E6%88%AA%E5%9B%BE20200705231026.png" alt=""></p>
 ]]></content>
       <categories>
         <category>JavaWeb</category>
@@ -594,6 +584,204 @@
         <tag>Filter</tag>
         <tag>Json</tag>
         <tag>AJAX</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Java拾遗</title>
+    <url>/2020/07/07/Java%E6%8B%BE%E9%81%97/</url>
+    <content><![CDATA[<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>Java 语言基础中知识点繁多, 大多数只是在第一次学习时有印象, 但是因为长时间没有运用到会遗忘, 这篇博文就用来记录和总结遇到的生僻的知识点.</p>
+<h2 id="抽象类"><a href="#抽象类" class="headerlink" title="抽象类"></a>抽象类</h2><p><code>abstract</code> 修饰符可以用来修饰方法, 也可以用来修饰类, 如果修饰方法, 那么该方法就是抽象方法; 如果修饰类, 那么该类就是抽象类.</p>
+<ul>
+<li>不能<code>new</code> 抽象类, 只能靠子类去实现它</li>
+<li>抽象类中可以写普通方法</li>
+<li>抽象方法必须在抽象类中</li>
+</ul>
+<h2 id="接口"><a href="#接口" class="headerlink" title="接口"></a>接口</h2><ul>
+<li>在接口中定义的常量会默认加上修饰符 <code>public static final</code>, 在实现了该接口的类中可以直接拿来用</li>
+<li>在接口中定义的方法会默认加上修饰符 <code>pubilc abstract</code> </li>
+<li>接口中没有构造方法, 这是不能被实例化的原因</li>
+</ul>
+<h2 id="内部类"><a href="#内部类" class="headerlink" title="内部类"></a>内部类</h2><h3 id="成员内部类"><a href="#成员内部类" class="headerlink" title="成员内部类"></a>成员内部类</h3><p>定义以下的类:</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Outer</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">int</span> id;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">out</span><span class="params">()</span></span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"这是外部类的方法"</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="class"><span class="keyword">class</span> <span class="title">Inner</span></span>&#123;</span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">in</span><span class="params">()</span></span>&#123;</span><br><span class="line">            System.out.println(<span class="string">"这是内部类的方法"</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>两个类中分别定义了各自的方法. 然后实例化外部类的对象, 对该类进行测试.</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Application</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        Outer outer = <span class="keyword">new</span> Outer();</span><br><span class="line">        Outer.Inner inner = outer.<span class="keyword">new</span> Inner();</span><br><span class="line">        inner.in();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>这里就要注意 <code>new</code> 内部类对象时写法上的区别了.</p>
+<p>可以通过定义内部类的方法来获取外部类的私有属性, 修改外部类如下:</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Outer</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">int</span> id = <span class="number">10</span>;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">out</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"这是外部类的方法"</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="class"><span class="keyword">class</span> <span class="title">Inner</span> </span>&#123;</span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">in</span><span class="params">()</span> </span>&#123;</span><br><span class="line">            System.out.println(<span class="string">"这是内部类的方法"</span>);</span><br><span class="line"></span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">getId</span><span class="params">()</span> </span>&#123;</span><br><span class="line">            System.out.println(id);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>然后通过内部类的对象调用:</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Application</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        Outer outer = <span class="keyword">new</span> Outer();</span><br><span class="line">        Outer.Inner inner = outer.<span class="keyword">new</span> Inner();</span><br><span class="line">        inner.in();</span><br><span class="line">        inner.getId();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>输出为:</p>
+<p><img src="http://qcxz71s06.bkt.clouddn.com/QQ%E6%88%AA%E5%9B%BE20200707193414.png" alt=""></p>
+<h3 id="静态内部类"><a href="#静态内部类" class="headerlink" title="静态内部类"></a>静态内部类</h3><p>在定义内部类时添加 <code>statc</code> 关键字即可. </p>
+<p>因为创建内部类的方式与调用方法的步骤与成员内部类相同, 所以就不再赘述.</p>
+<p>但是需要注意的是, 静态内部类是随外部类加载时创建的, 所以<strong>不能调用成员变量</strong>.</p>
+<h3 id="局部内部类"><a href="#局部内部类" class="headerlink" title="局部内部类"></a>局部内部类</h3><p>在外部类的方法中定义的类叫局部内部类.</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Outer</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">int</span> id = <span class="number">10</span>;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">method</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="class"><span class="keyword">class</span> <span class="title">Inner</span></span>&#123;</span><br><span class="line">            <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">in</span><span class="params">()</span></span>&#123;</span><br><span class="line">                System.out.println(<span class="string">"这是内部类的方法"</span>);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="异常"><a href="#异常" class="headerlink" title="异常"></a>异常</h2><p><img src="http://qcxz71s06.bkt.clouddn.com/QQ%E6%88%AA%E5%9B%BE20200707200724.png" alt=""></p>
+<p><strong>Error</strong>:</p>
+<p>通常是灾难性的致命的错误, 是程序员无法控制和处理的, 当出现这些异常时, JVM一般会终止线程</p>
+<p><strong>Exception</strong>:</p>
+<p>通常情况下是可以被程序处理, 并且在程序中应该尽可能的去处理这些异常</p>
+]]></content>
+      <categories>
+        <category>Java</category>
+      </categories>
+      <tags>
+        <tag>抽象类</tag>
+        <tag>接口</tag>
+        <tag>内部类</tag>
+        <tag>异常</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Hello World</title>
+    <url>/2020/07/03/hello-world/</url>
+    <content><![CDATA[<p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p>
+<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p>
+<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p>
+<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p>
+<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/one-command-deployment.html" target="_blank" rel="noopener">Deployment</a></p>
+]]></content>
+  </entry>
+  <entry>
+    <title>团灭四道搜索旋转排序数组题</title>
+    <url>/2020/07/07/%E5%9B%A2%E7%81%AD%E5%9B%9B%E9%81%93%E6%90%9C%E7%B4%A2%E6%97%8B%E8%BD%AC%E6%8E%92%E5%BA%8F%E6%95%B0%E7%BB%84%E9%A2%98/</url>
+    <content><![CDATA[<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>在刷关于二分查找的算法题目时, 有一块内容是绕不过去的, 那就是旋转排序数组的题目. </p>
+<p>我们知道, 在查找排序数组时往往采用二分查找的方法, 但是旋转排序数组只保留了区域性的排序, 这就让人比较头疼.通常的二分查找题目有两类, 一类是目标值查找, 即从数组中查找目标值, 返回其下标; 另一类考察的是边界, 这类题目更加灵活, 可能会考察第K大的数, 第一个重复出现的数等等.</p>
+<p>结合了旋转数组之后, 就有了四道非常典型的题目, 他们是:</p>
+<ul>
+<li>LeetCode 33: 搜索旋转排序数组</li>
+<li>LeetCode 81: 搜索旋转排序数组 Ⅱ</li>
+<li>LeetCode 153: 寻找旋转排序数组中的最小值</li>
+<li>LeetCode 154: 寻找旋转排序数组中的最小值 Ⅱ</li>
+</ul>
+<p>总体而言分别考察了目标值和最小值, 只是按是否存在重复的数又各拓展出一道题. 下面分别来解决.</p>
+<hr>
+<h2 id="33-搜索旋转排序数组"><a href="#33-搜索旋转排序数组" class="headerlink" title="33.搜索旋转排序数组"></a>33.搜索旋转排序数组</h2><h3 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h3><p>假设按照升序排序的数组在预先未知的某个点上进行了旋转。</p>
+<p>( 例如，数组 [0,1,2,4,5,6,7] 可能变为 [4,5,6,7,0,1,2] )。</p>
+<p>搜索一个给定的目标值，如果数组中存在这个目标值，则返回它的索引，否则返回 -1 。</p>
+<p>你可以假设数组中不存在重复的元素。</p>
+<p>你的算法时间复杂度必须是 O(log n) 级别。</p>
+<p><strong>示例1</strong></p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">输入: nums &#x3D; [4,5,6,7,0,1,2], target &#x3D; 0</span><br><span class="line">输出: 4</span><br></pre></td></tr></table></figure>
+
+<p><strong>示例2</strong></p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">输入: nums &#x3D; [4,5,6,7,0,1,2], target &#x3D; 3</span><br><span class="line">输出: -1</span><br></pre></td></tr></table></figure>
+
+<h3 id="题解"><a href="#题解" class="headerlink" title="题解"></a>题解</h3><h4 id="二分查找"><a href="#二分查找" class="headerlink" title="二分查找"></a>二分查找</h4><p>首先，<code>mid</code>将数组分成前后两段：</p>
+<p>如果<code>nums[start]&lt;=nums[mid]</code>，则说明前半段是<strong>递增</strong>的</p>
+<ul>
+<li><p>如果<code>nums*[*start*]* &lt;= target &amp;&amp; target &lt; nums*[*mid*]</code>,目标值在前半段，使<code>end=mid-1</code>*</p>
+</li>
+<li><p>否则，目标值在后半段，使<code>start=mid+1</code>*</p>
+</li>
+</ul>
+<p>否则，说明后半段是<strong>递增</strong>的</p>
+<ul>
+<li><p>如果<code>nums[mid] &lt; target &amp;&amp; target &lt;= nums[end]</code>,目标值在后半段，使<code>start=mid+1</code></p>
+</li>
+<li><p>否则，目标值在前半段，使<code>end=mid-1</code></p>
+</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">search</span><span class="params">(<span class="keyword">int</span>[] nums, <span class="keyword">int</span> target)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (nums.length == <span class="number">0</span>)</span><br><span class="line">            <span class="keyword">return</span> -<span class="number">1</span>;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">int</span> left = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">int</span> right = nums.length - <span class="number">1</span>;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">while</span> (left &lt;= right) &#123;</span><br><span class="line">            <span class="keyword">int</span> mid = (left + right) / <span class="number">2</span>;</span><br><span class="line">            <span class="keyword">if</span> (nums[mid] == target)</span><br><span class="line">                <span class="keyword">return</span> mid;</span><br><span class="line">            <span class="keyword">if</span> (nums[mid] &gt;= nums[left]) &#123;</span><br><span class="line">                <span class="comment">// 说明数组在[0, mid]区间上是递增的</span></span><br><span class="line">                <span class="keyword">if</span> (nums[left] &lt;= target &amp;&amp; target &lt; nums[mid])</span><br><span class="line">                    <span class="comment">// 说明target在[left, mid-1]区间内</span></span><br><span class="line">                    right = mid - <span class="number">1</span>;</span><br><span class="line">                <span class="keyword">else</span></span><br><span class="line">                    <span class="comment">// 说明target在[mid+1, right]区间内</span></span><br><span class="line">                    left = mid + <span class="number">1</span>;</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                <span class="comment">// 说明数组在[mid, right]区间上是递增的</span></span><br><span class="line">                <span class="keyword">if</span> (nums[mid] &lt; target &amp;&amp; target &lt;= nums[right])</span><br><span class="line">                    <span class="comment">// 说明target在区间[mid+1, right]内</span></span><br><span class="line">                    left = mid + <span class="number">1</span>;</span><br><span class="line">                <span class="keyword">else</span></span><br><span class="line">                    <span class="comment">// 说明target在区间[left, mid-1]内</span></span><br><span class="line">                    right = mid - <span class="number">1</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> -<span class="number">1</span>;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="81-搜索旋转排序数组-Ⅱ"><a href="#81-搜索旋转排序数组-Ⅱ" class="headerlink" title="81: 搜索旋转排序数组 Ⅱ"></a>81: 搜索旋转排序数组 Ⅱ</h2><h3 id="题目描述-1"><a href="#题目描述-1" class="headerlink" title="题目描述"></a>题目描述</h3><p>假设按照升序排序的数组在预先未知的某个点上进行了旋转。</p>
+<p>( 例如，数组 [0,0,1,2,2,5,6] 可能变为 [2,5,6,0,0,1,2] )。</p>
+<p>编写一个函数来判断给定的目标值是否存在于数组中。若存在返回 true，否则返回 false</p>
+<p><strong>示例1</strong></p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">输入: nums &#x3D; [2,5,6,0,0,1,2], target &#x3D; 0</span><br><span class="line">输出: true</span><br></pre></td></tr></table></figure>
+
+<p><strong>示例2</strong></p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">输入: nums &#x3D; [2,5,6,0,0,1,2], target &#x3D; 3</span><br><span class="line">输出: false</span><br></pre></td></tr></table></figure>
+
+<h3 id="题解-1"><a href="#题解-1" class="headerlink" title="题解"></a>题解</h3><h4 id="二分查找-1"><a href="#二分查找-1" class="headerlink" title="二分查找"></a>二分查找</h4><p>因为存在重复的元素, 因此在33题中判断前后段升降时遇到了特殊情况. 在33题中是通过<code>nums[mid] &gt;= nums[left]</code> 来判断前半段是否为增, 若存在重复元素, 则无法通过该方法判断例如 <code>10111</code> 的数组. 有两种判断方法:</p>
+<ol>
+<li>出现这种情况时<code>nums[left]</code> 和<code>nums[right]</code> 一定是相等的.<code>left++</code> 即可</li>
+<li>将原来的判断条件分开来处理, 当<code>nums[mid] &gt; nums[left]</code>时, 还按33题的方法去做, 添加一个<code>nums[mid] = nums[left]</code>的处理方法: 也是<code>left++</code></li>
+</ol>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">search</span><span class="params">(<span class="keyword">int</span>[] nums, <span class="keyword">int</span> target)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (nums.length == <span class="number">0</span>)</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">        <span class="keyword">int</span> left = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">int</span> right = nums.length - <span class="number">1</span>;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">while</span> (left &lt;= right) &#123;</span><br><span class="line">            <span class="keyword">int</span> mid = (left + right) / <span class="number">2</span>;</span><br><span class="line">            <span class="keyword">if</span> (nums[mid] == target)</span><br><span class="line">                <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line"></span><br><span class="line">            <span class="keyword">if</span> (nums[right] == nums[mid]) &#123;</span><br><span class="line">                right--;</span><br><span class="line">                <span class="keyword">continue</span>;</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            <span class="keyword">if</span> (nums[left] &lt; nums[mid]) &#123;</span><br><span class="line">                <span class="keyword">if</span> (nums[left] &lt;= target &amp;&amp; target &lt; nums[mid])</span><br><span class="line">                    right = mid - <span class="number">1</span>;</span><br><span class="line">                <span class="keyword">else</span></span><br><span class="line">                    left = mid + <span class="number">1</span>;</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                <span class="keyword">if</span> (nums[mid] &lt; target &amp;&amp; target &lt;= nums[right])</span><br><span class="line">                    left = mid + <span class="number">1</span>;</span><br><span class="line">                <span class="keyword">else</span></span><br><span class="line">                    right = mid - <span class="number">1</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="153-搜索旋转排序数组中的最小值"><a href="#153-搜索旋转排序数组中的最小值" class="headerlink" title="153.搜索旋转排序数组中的最小值"></a>153.搜索旋转排序数组中的最小值</h2><h3 id="题目描述-2"><a href="#题目描述-2" class="headerlink" title="题目描述"></a>题目描述</h3><p>假设按照升序排序的数组在预先未知的某个点上进行了旋转。</p>
+<p>( 例如，数组 [0,1,2,4,5,6,7] 可能变为 [4,5,6,7,0,1,2] )。</p>
+<p>请找出其中最小的元素。</p>
+<p>你可以假设数组中不存在重复元素。</p>
+<p><strong>示例1</strong></p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">输入: [3,4,5,1,2]</span><br><span class="line">输出: 1</span><br></pre></td></tr></table></figure>
+
+<p><strong>示例2</strong></p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">输入: [4,5,6,7,0,1,2]</span><br><span class="line">输出: 0</span><br></pre></td></tr></table></figure>
+
+<h3 id="题解-2"><a href="#题解-2" class="headerlink" title="题解"></a>题解</h3><h4 id="二分查找-2"><a href="#二分查找-2" class="headerlink" title="二分查找"></a>二分查找</h4><p>因为不存在重复的数字, 所以只需要考虑大于和等于的情况, 比较对象为<code>nums[right]</code></p>
+<ol>
+<li><p>循环二分： 设置 <code>i</code>,<code>j</code> 指针分别指向<code>numbers</code> 数组左右两端，<code>m = (i + j) / 2</code> 为每次二分的中点（ “/“ 代表向下取整除法），可分为以下三种情况：</p>
+<ol>
+<li><p>当<code>numbers[m] &gt; numbers[j]</code>时： <code>m</code> 一定在 左排序数组 中，即旋转点 <code>x</code>一定在<code>[m + 1, j]</code>闭区间内，因此执行<code>i = m + 1</code>；</p>
+</li>
+<li><p>当 <code>numbers[m] &lt; numbers[j]</code>时： <code>m</code> 一定在 右排序数组 中，即旋转点 <code>x</code> 一定在<code>[i, m]</code> 闭区间内，因此执行<code>j = m</code>；</p>
+</li>
+</ol>
+</li>
+<li><p>返回值： 当<code>i = j</code>时跳出二分循环，并返回 <code>numbers[i]</code>即可。</p>
+</li>
+</ol>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">findMin</span><span class="params">(<span class="keyword">int</span>[] nums)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> left = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">int</span> right = nums.length - <span class="number">1</span>;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">while</span> (left &lt; right) &#123;</span><br><span class="line">            <span class="keyword">int</span> mid = (left + right) / <span class="number">2</span>;</span><br><span class="line">            <span class="keyword">if</span> (nums[mid] &lt; nums[right]) &#123;</span><br><span class="line">                right = mid;</span><br><span class="line">            &#125; <span class="keyword">else</span> <span class="keyword">if</span> (nums[mid] &gt; nums[right]) &#123;</span><br><span class="line">                left = mid + <span class="number">1</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> nums[left];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="154-搜索旋转排序数组中的最小值-Ⅱ"><a href="#154-搜索旋转排序数组中的最小值-Ⅱ" class="headerlink" title="154.搜索旋转排序数组中的最小值 Ⅱ"></a>154.搜索旋转排序数组中的最小值 Ⅱ</h2><h3 id="题目描述-3"><a href="#题目描述-3" class="headerlink" title="题目描述"></a>题目描述</h3><p>假设按照升序排序的数组在预先未知的某个点上进行了旋转。</p>
+<p>( 例如，数组 [0,1,2,4,5,6,7] 可能变为 [4,5,6,7,0,1,2] )。</p>
+<p>请找出其中最小的元素。</p>
+<p>注意数组中可能存在重复的元素。</p>
+<p><strong>示例1</strong></p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">输入: [1,3,5]</span><br><span class="line">输出: 1</span><br></pre></td></tr></table></figure>
+
+<p><strong>示例2</strong></p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">输入: [2,2,2,0,1]</span><br><span class="line">输出: 0</span><br></pre></td></tr></table></figure>
+
+<h3 id="题解-3"><a href="#题解-3" class="headerlink" title="题解"></a>题解</h3><h4 id="二分查找-3"><a href="#二分查找-3" class="headerlink" title="二分查找"></a>二分查找</h4><p>这道题与153题有着高度的相似,  依然是将<code>nums[mid]</code>与<code>nums[right]</code>相比较, 不过是多考虑一个等于的情况, 采取的措施是<code>right--</code>. </p>
+<p>如下图所示，寻找旋转数组的最小元素即为寻找 右排序数组 的首个元素 <code>numbers[x]</code> ，称 <code>x</code> 为 旋转点</p>
+<p><img src="http://qcxz71s06.bkt.clouddn.com/e4c293fbc50538a0af581f455a2d8ce4_2.png" alt=""></p>
+<ol>
+<li><p>循环二分： 设置 <code>i</code>,<code>j</code> 指针分别指向<code>numbers</code> 数组左右两端，<code>m = (i + j) / 2</code> 为每次二分的中点（ “/“ 代表向下取整除法），可分为以下三种情况：</p>
+<ol>
+<li><p>当<code>numbers[m] &gt; numbers[j]</code>时： <code>m</code> 一定在 左排序数组 中，即旋转点 <code>x</code>一定在<code>[m + 1, j]</code>闭区间内，因此执行<code>i = m + 1</code>；</p>
+</li>
+<li><p>当 <code>numbers[m] &lt; numbers[j]</code>时： <code>m</code> 一定在 右排序数组 中，即旋转点 <code>x</code> 一定在<code>[i, m]</code> 闭区间内，因此执行<code>j = m</code>；</p>
+</li>
+<li><p>当 <code>numbers[m] == numbers[j]</code>时： 无法判断 <code>m</code> 在哪个排序数组中，即无法判断旋转点<code>x</code> 在 <code>[i, m]</code> 还是 <code>[m + 1, j]</code> 区间中。解决方案： 执行<code>j = j - 1</code> 缩小判断范围.</p>
+</li>
+</ol>
+</li>
+<li><p>返回值： 当<code>i = j</code>时跳出二分循环，并返回 <code>numbers[i]</code>即可。</p>
+</li>
+</ol>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">findMin</span><span class="params">(<span class="keyword">int</span>[] numbers)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> i = <span class="number">0</span>, j = numbers.length - <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">while</span> (i &lt; j) &#123;</span><br><span class="line">            <span class="keyword">int</span> m = (i + j) / <span class="number">2</span>;</span><br><span class="line">            <span class="keyword">if</span> (numbers[m] &gt; numbers[j]) i = m + <span class="number">1</span>;</span><br><span class="line">            <span class="keyword">else</span> <span class="keyword">if</span> (numbers[m] &lt; numbers[j]) j = m;</span><br><span class="line">            <span class="keyword">else</span> j--;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> numbers[i];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>比较来看<strong>153题</strong>的代码:</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">findMin</span><span class="params">(<span class="keyword">int</span>[] nums)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> left = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">int</span> right = nums.length - <span class="number">1</span>;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">while</span> (left &lt; right) &#123;</span><br><span class="line">            <span class="keyword">int</span> mid = (left + right) / <span class="number">2</span>;</span><br><span class="line">            <span class="keyword">if</span> (nums[mid] &lt; nums[right]) &#123;</span><br><span class="line">                right = mid;</span><br><span class="line">            &#125; <span class="keyword">else</span> <span class="keyword">if</span> (nums[mid] &gt; nums[right]) &#123;</span><br><span class="line">                left = mid + <span class="number">1</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> nums[left];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+]]></content>
+      <categories>
+        <category>算法</category>
+      </categories>
+      <tags>
+        <tag>数组</tag>
+        <tag>二分查找</tag>
+        <tag>旋转排序数组</tag>
       </tags>
   </entry>
 </search>
