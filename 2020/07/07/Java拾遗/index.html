@@ -79,16 +79,16 @@
 
 
 
-<meta name="description" content="前言Java 语言基础中知识点繁多, 大多数只是在第一次学习时有印象, 但是因为长时间没有运用到会遗忘, 这篇博文就用来记录和总结遇到的生僻的知识点. 抽象类abstract 修饰符可以用来修饰方法, 也可以用来修饰类, 如果修饰方法, 那么该方法就是抽象方法; 如果修饰类, 那么该类就是抽象类.  不能new 抽象类, 只能靠子类去实现它 抽象类中可以写普通方法 抽象方法必须在抽象类中  接口">
+<meta name="description" content="前言Java 语言基础中知识点繁多, 大多数只是在第一次学习时有印象, 但是因为长时间没有运用到会遗忘, 这篇博文就用来记录和总结遇到的生僻的知识点.  抽象类abstract 修饰符可以用来修饰方法, 也可以用来修饰类, 如果修饰方法, 那么该方法就是抽象方法; 如果修饰类, 那么该类就是抽象类.  不能new 抽象类, 只能靠子类去实现它 抽象类中可以写普通方法 抽象方法必须在抽象类中   接">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Java拾遗">
 <meta property="og:url" content="http://yoursite.com/2020/07/07/Java%E6%8B%BE%E9%81%97/index.html">
 <meta property="og:site_name" content="LxbZone">
-<meta property="og:description" content="前言Java 语言基础中知识点繁多, 大多数只是在第一次学习时有印象, 但是因为长时间没有运用到会遗忘, 这篇博文就用来记录和总结遇到的生僻的知识点. 抽象类abstract 修饰符可以用来修饰方法, 也可以用来修饰类, 如果修饰方法, 那么该方法就是抽象方法; 如果修饰类, 那么该类就是抽象类.  不能new 抽象类, 只能靠子类去实现它 抽象类中可以写普通方法 抽象方法必须在抽象类中  接口">
+<meta property="og:description" content="前言Java 语言基础中知识点繁多, 大多数只是在第一次学习时有印象, 但是因为长时间没有运用到会遗忘, 这篇博文就用来记录和总结遇到的生僻的知识点.  抽象类abstract 修饰符可以用来修饰方法, 也可以用来修饰类, 如果修饰方法, 那么该方法就是抽象方法; 如果修饰类, 那么该类就是抽象类.  不能new 抽象类, 只能靠子类去实现它 抽象类中可以写普通方法 抽象方法必须在抽象类中   接">
 <meta property="og:image" content="http://qcxz71s06.bkt.clouddn.com/QQ%E6%88%AA%E5%9B%BE20200707193414.png">
 <meta property="og:image" content="http://qcxz71s06.bkt.clouddn.com/QQ%E6%88%AA%E5%9B%BE20200707200724.png">
 <meta property="article:published_time" content="2020-07-07T11:08:42.000Z">
-<meta property="article:modified_time" content="2020-07-07T12:43:24.021Z">
+<meta property="article:modified_time" content="2020-07-08T07:42:46.118Z">
 <meta property="article:author" content="lxb">
 <meta property="article:tag" content="抽象类">
 <meta property="article:tag" content="接口">
@@ -381,7 +381,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  714
+                  2.7k
                 </span>
               
 
@@ -397,7 +397,7 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  2
+                  10
                 </span>
               
             </div>
@@ -419,17 +419,20 @@
 
       
         <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>Java 语言基础中知识点繁多, 大多数只是在第一次学习时有印象, 但是因为长时间没有运用到会遗忘, 这篇博文就用来记录和总结遇到的生僻的知识点.</p>
+<hr>
 <h2 id="抽象类"><a href="#抽象类" class="headerlink" title="抽象类"></a>抽象类</h2><p><code>abstract</code> 修饰符可以用来修饰方法, 也可以用来修饰类, 如果修饰方法, 那么该方法就是抽象方法; 如果修饰类, 那么该类就是抽象类.</p>
 <ul>
 <li>不能<code>new</code> 抽象类, 只能靠子类去实现它</li>
 <li>抽象类中可以写普通方法</li>
 <li>抽象方法必须在抽象类中</li>
 </ul>
+<hr>
 <h2 id="接口"><a href="#接口" class="headerlink" title="接口"></a>接口</h2><ul>
 <li>在接口中定义的常量会默认加上修饰符 <code>public static final</code>, 在实现了该接口的类中可以直接拿来用</li>
 <li>在接口中定义的方法会默认加上修饰符 <code>pubilc abstract</code> </li>
 <li>接口中没有构造方法, 这是不能被实例化的原因</li>
 </ul>
+<hr>
 <h2 id="内部类"><a href="#内部类" class="headerlink" title="内部类"></a>内部类</h2><h3 id="成员内部类"><a href="#成员内部类" class="headerlink" title="成员内部类"></a>成员内部类</h3><p>定义以下的类:</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Outer</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">int</span> id;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">out</span><span class="params">()</span></span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"这是外部类的方法"</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="class"><span class="keyword">class</span> <span class="title">Inner</span></span>&#123;</span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">in</span><span class="params">()</span></span>&#123;</span><br><span class="line">            System.out.println(<span class="string">"这是内部类的方法"</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
@@ -451,11 +454,109 @@
 <h3 id="局部内部类"><a href="#局部内部类" class="headerlink" title="局部内部类"></a>局部内部类</h3><p>在外部类的方法中定义的类叫局部内部类.</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Outer</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">int</span> id = <span class="number">10</span>;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">method</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="class"><span class="keyword">class</span> <span class="title">Inner</span></span>&#123;</span><br><span class="line">            <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">in</span><span class="params">()</span></span>&#123;</span><br><span class="line">                System.out.println(<span class="string">"这是内部类的方法"</span>);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
+<hr>
 <h2 id="异常"><a href="#异常" class="headerlink" title="异常"></a>异常</h2><p><img src="http://qcxz71s06.bkt.clouddn.com/QQ%E6%88%AA%E5%9B%BE20200707200724.png" alt=""></p>
 <p><strong>Error</strong>:</p>
 <p>通常是灾难性的致命的错误, 是程序员无法控制和处理的, 当出现这些异常时, JVM一般会终止线程</p>
 <p><strong>Exception</strong>:</p>
 <p>通常情况下是可以被程序处理, 并且在程序中应该尽可能的去处理这些异常</p>
+<h3 id="抛出异常"><a href="#抛出异常" class="headerlink" title="抛出异常"></a>抛出异常</h3><p>主动抛出异常</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> a = <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">int</span> b = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">new</span> Demo01().test(a, b);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">test</span><span class="params">(<span class="keyword">int</span> a, <span class="keyword">int</span> b)</span></span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (b==<span class="number">0</span>)&#123;</span><br><span class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> ArithmeticException(); <span class="comment">// 主动抛出异常, 一般在方法中使用</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+<p>假设方法中处理不了这个异常, 直接在方法上抛出, 使用<code>throws</code> 关键字, 然后调用该方法时用<code>try-catch</code> 捕获处理</p>
+<h3 id="捕获异常"><a href="#捕获异常" class="headerlink" title="捕获异常"></a>捕获异常</h3><p>使用<code>try-catch</code>捕获异常并处理</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> a = <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">int</span> b = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            <span class="keyword">new</span> Demo01().test(a, b);</span><br><span class="line">        &#125; <span class="keyword">catch</span> (ArithmeticException e) &#123;</span><br><span class="line">            System.out.println(<span class="string">"运算失败, 除数为0"</span>);</span><br><span class="line">        &#125; <span class="keyword">finally</span> &#123;</span><br><span class="line">            System.out.println(<span class="string">"调用结束"</span>);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">test</span><span class="params">(<span class="keyword">int</span> a, <span class="keyword">int</span> b)</span> <span class="keyword">throws</span> ArithmeticException</span>&#123;</span><br><span class="line">        System.out.println(a/b);</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+<p>输出为:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">运算失败, 除数为0</span><br><span class="line">调用结束</span><br></pre></td></tr></table></figure>
+
+<h3 id="异常处理五个关键字"><a href="#异常处理五个关键字" class="headerlink" title="异常处理五个关键字"></a>异常处理五个关键字</h3><p><strong>try, catch, throw, throws, finally</strong></p>
+<p>先看<code>try</code> , <code>catch</code>, <code>finally</code> 关键字的常见用法</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> a = <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">int</span> b = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">try</span> &#123;   <span class="comment">// try监控区域</span></span><br><span class="line">        System.out.println(a / b);</span><br><span class="line">    &#125; <span class="keyword">catch</span> (Exception e) &#123; <span class="comment">// catch(想要捕获的异常类型)捕获异常</span></span><br><span class="line">        System.out.println(<span class="string">"程序出现异常, 变量b不能为0"</span>);</span><br><span class="line">    &#125; <span class="keyword">finally</span> &#123; <span class="comment">// 处理善后工作</span></span><br><span class="line">        System.out.println(<span class="string">"finally"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>输出结果为:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">程序出现异常, 变量b不能为0</span><br><span class="line">finally</span><br></pre></td></tr></table></figure>
+
+<p>这里需要注意的是<code>finally</code>, 不管是否能捕获到异常, 都会执行该代码块, 属于善后工作, 也可以不要</p>
+<p>可以写多个<code>catch</code> 进行捕获, 如果要写多个的话,小的异常写上面, 层层递进, 大的写上面就给覆盖掉了</p>
+<p><code>thow</code>和<code>throws</code> 的区别在于, 前者为方法中主动抛出异常, 后者是该方法中处理不了让调用该方法的方法通过<code>try-catch</code>处理.</p>
+<h3 id="自定义异常"><a href="#自定义异常" class="headerlink" title="自定义异常"></a>自定义异常</h3><p>创建自定义异常要继承<code>Exception</code> 类</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MyException</span> <span class="keyword">extends</span> <span class="title">Exception</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 传递数字 &gt; 10</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">int</span> detail;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">MyException</span><span class="params">(<span class="keyword">int</span> a)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.detail = a;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// toString: 异常的打印信息</span></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">toString</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="string">"MyException&#123;"</span> + detail + <span class="string">'&#125;'</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>然后使用该异常:</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MyExceptionTest</span> </span>&#123;</span><br><span class="line">    <span class="comment">// 可能会存在异常的方法</span></span><br><span class="line">    <span class="function"><span class="keyword">static</span> <span class="keyword">void</span> <span class="title">test</span><span class="params">(<span class="keyword">int</span> a)</span> <span class="keyword">throws</span> MyException </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"传递的参数为: "</span> + a);</span><br><span class="line">        <span class="keyword">if</span> (a&gt;<span class="number">10</span>)&#123;</span><br><span class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> MyException(a);</span><br><span class="line">        &#125;</span><br><span class="line">        System.out.println(<span class="string">"OK"</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            test(<span class="number">11</span>);</span><br><span class="line">        &#125; <span class="keyword">catch</span> (MyException e) &#123;</span><br><span class="line">            System.out.println(e);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>输出为:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">传递的参数为: 11</span><br><span class="line">MyException&#123;11&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<p>在这段代码中, 判断<code>a&gt;10</code> 的时候抛出我们所定义的异常, 这里有两种处理方式, 一是在该方法中<code>try-catch</code> 进行异常的处理, 或者在方法层面抛出, 让该方法的调用者去<code>try-catch</code> 去处理. 这里采用的是第二种处理方法.</p>
+<p>总之, 只要抛出了异常, 要么就地处理, 要么抛出去谁调用谁处理, 总是要还的.</p>
+<p>以下是就地处理的代码和结果:</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MyExceptionTest</span> </span>&#123;</span><br><span class="line">    <span class="comment">// 可能会存在异常的方法</span></span><br><span class="line">    <span class="function"><span class="keyword">static</span> <span class="keyword">void</span> <span class="title">test</span><span class="params">(<span class="keyword">int</span> a)</span>  </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"传递的参数为: "</span> + a);</span><br><span class="line">        <span class="keyword">if</span> (a&gt;<span class="number">10</span>)&#123;</span><br><span class="line">            <span class="keyword">try</span> &#123;</span><br><span class="line">                <span class="keyword">throw</span> <span class="keyword">new</span> MyException(a);</span><br><span class="line">            &#125; <span class="keyword">catch</span> (MyException e) &#123;</span><br><span class="line">                System.out.println(e);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        System.out.println(<span class="string">"OK"</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        test(<span class="number">11</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>输出为:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">传递的参数为: 11</span><br><span class="line">MyException&#123;11&#125;</span><br><span class="line">OK</span><br></pre></td></tr></table></figure>
+
+<p><strong>要注意输出的结果是不一样的!!</strong></p>
+<hr>
+<h2 id="类加载器与构造器的调用顺序"><a href="#类加载器与构造器的调用顺序" class="headerlink" title="类加载器与构造器的调用顺序"></a>类加载器与构造器的调用顺序</h2><p>今天遇到一个考察继承的题目, 牵涉到类加载器和构造器调用顺序的问题, 很有趣.</p>
+<p><strong>问</strong>: new一个C02对象, 会输出什么信息?</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">A02</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">int</span> n1 = getVal01();</span><br><span class="line">    <span class="keyword">static</span> &#123;</span><br><span class="line">        System.out.println(<span class="string">"A02的一个静态代码块.."</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    &#123;</span><br><span class="line">        System.out.println(<span class="string">"A02的第一个普通代码块.."</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">int</span> n3 = getVal02();</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">int</span> <span class="title">getVal01</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"getVal01"</span>);</span><br><span class="line">        <span class="keyword">return</span> <span class="number">10</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">getVal02</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"getVal02"</span>);</span><br><span class="line">        <span class="keyword">return</span> <span class="number">10</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">A02</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"A02的构造器"</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">B02</span> <span class="keyword">extends</span> <span class="title">A02</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">int</span> n3 = getVal03();</span><br><span class="line"></span><br><span class="line">    <span class="keyword">static</span> &#123;</span><br><span class="line">        System.out.println(<span class="string">"B02的一个静态代码块.."</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">int</span> n5 = getVal04();</span><br><span class="line">    &#123;</span><br><span class="line">        System.out.println(<span class="string">"B02的第一个普通代码块.."</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">int</span> <span class="title">getVal03</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"getVal03"</span>);</span><br><span class="line">        <span class="keyword">return</span> <span class="number">10</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">getVal04</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"getVal04"</span>);</span><br><span class="line">        <span class="keyword">return</span> <span class="number">10</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">B02</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"B02的构造器"</span>);</span><br><span class="line">        <span class="comment">// TODO Auto-generated constructor stub</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">C02</span> <span class="keyword">extends</span> <span class="title">B02</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">int</span> n6 = getVal06();</span><br><span class="line"></span><br><span class="line">    <span class="keyword">static</span> &#123;</span><br><span class="line">        System.out.println(<span class="string">"C02的一个静态代码块.."</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    &#123;</span><br><span class="line">        System.out.println(<span class="string">"C02的第一个普通代码块.."</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">int</span> n8 = getVal08();</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">int</span> <span class="title">getVal06</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"getVal06"</span>);</span><br><span class="line">        <span class="keyword">return</span> <span class="number">10</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">getVal08</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"getVal08"</span>);</span><br><span class="line">        <span class="keyword">return</span> <span class="number">10</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">C02</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"C02的构造器"</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        C02 c = <span class="keyword">new</span> C02();</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>分析</strong>:</p>
+<p>这里有三个类,<code>A02</code>是父类, <code>B02</code>继承<code>A02</code>, <code>C02</code>继承<code>B02</code>. 每个类都有各自的静态代码块和无参构造器. </p>
+<p>根据继承的特点可知, 当<code>new</code> 一个<code>C02</code>对象时, 会去调用<code>C02</code>的构造器, <code>C02</code>构造器第一行默认为<code>super()</code> , 即调用父类<code>B02</code>的构造器, 同理调用<code>A02</code> 的构造器, 然后顺序执行类<code>A02</code> 的代码 -&gt; <code>A02</code>构造器内的代码 -&gt; 顺序执行类<code>B02</code> 的代码 -&gt; <code>B02</code>构造器内的代码 -&gt; 顺序执行<code>C02</code> 的代码 -&gt; <code>C02</code> 构造器内的代码.</p>
+<p>然而加了类构造器之后该是什么顺序呢?  直接贴结果:</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">getVal01</span><br><span class="line">A02的一个静态代码块..</span><br><span class="line">getVal03</span><br><span class="line">B02的一个静态代码块..</span><br><span class="line">getVal06</span><br><span class="line">C02的一个静态代码块..</span><br><span class="line">A02的第一个普通代码块..</span><br><span class="line">getVal02</span><br><span class="line">A02的构造器</span><br><span class="line">getVal04</span><br><span class="line">B02的第一个普通代码块..</span><br><span class="line">B02的构造器</span><br><span class="line">C02的第一个普通代码块..</span><br><span class="line">getVal08</span><br><span class="line">C02的构造器</span><br></pre></td></tr></table></figure>
+
+<p>我们刚才分析的步骤是从第七行开始的, 后面全部严格按照分析的步骤打印信息, 所以可以得出结论: 类加载器工作的时间整体都在构造器之前.</p>
+<p>不难看出, 类加载器的调用顺序与构造器是类似的, 也是从子类一路到父类, 然后再到子类. 更加严谨的调用顺序如下所述:</p>
+<h3 id="类加载器调用顺序"><a href="#类加载器调用顺序" class="headerlink" title="类加载器调用顺序"></a>类加载器调用顺序</h3><p>JVM会用类加载器加载xxx.C02这个class文件</p>
+<p>加载(class){</p>
+<p>　　if(class有父类){</p>
+<p>　　　　加载(superclass);</p>
+<p>　　}</p>
+<p>　　1.静态域申明,默认初始化为0,false,null</p>
+<p>　　2.按照申明顺序(从上而下书写顺序)执行静态域(赋值)和静态代码块(执行代码块体),</p>
+<p>　　　　二者等价,因此不可在静态代码块中<strong>使用</strong>位于代码块之后申明的静态域,但是<strong>可以初始化</strong></p>
+<p>　　3.按照申明顺序加载静态方法</p>
+<p>}</p>
+<h3 id="构造器调用顺序"><a href="#构造器调用顺序" class="headerlink" title="构造器调用顺序"></a>构造器调用顺序</h3><ol>
+<li><p>所有实例域初始化为默认值0,false,null</p>
+</li>
+<li><p>按照申明顺序执行域初始化及块初始化</p>
+</li>
+<li><p><strong>如果构造器”第一行”调用了其他构造器,则执行</strong></p>
+</li>
+<li><p>执行构造器体</p>
+</li>
+</ol>
+<h3 id="方法调用顺序"><a href="#方法调用顺序" class="headerlink" title="方法调用顺序"></a>方法调用顺序</h3><ol>
+<li><p>编译器查看对象的<strong>申明</strong>类型,找到它所有与方法名相同的方法</p>
+</li>
+<li><p>根据参数类型,找到相应”最合适”的父类方法可能会出现类型转换(向上转型)</p>
+</li>
+<li><p>如果是private,static,final,构造器 方法,那么已经确定就是该方法(这四种类型的方法没有多态特征),</p>
+</li>
+</ol>
+<p>　　因为没有多态所以也叫静态绑定</p>
+<ol start="4">
+<li><p>如果是其他方式,采用动态绑定:JVM去寻找改类的实际类型中对应的最合适方法</p>
+</li>
+<li><p>执行调用</p>
+</li>
+</ol>
+<p><strong>结合理论表述, 本题的顺序总结来说就是:</strong></p>
+<ol>
+<li>父类的静态代码块和静态属性(优先级一样，按定义顺序执行)</li>
+<li>子类的静态代码块和静态属性(优先级一样，按定义顺序执行)</li>
+<li>父类的普通代码块和普通属性初始化(优先级一样，按定义顺序执行)</li>
+<li>父类的构造方法</li>
+<li>子类的普通代码块和普通属性初始化(优先级一样，按定义顺序执行)</li>
+<li>子类的构造方法</li>
+</ol>
 
       
     </div>
@@ -633,7 +734,7 @@
               
                 <a href="/archives/%7C%7C%20archive">
               
-                  <span class="site-state-item-count">8</span>
+                  <span class="site-state-item-count">13</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -655,7 +756,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">15</span>
+                  <span class="site-state-item-count">20</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -704,7 +805,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#抽象类"><span class="nav-number">2.</span> <span class="nav-text">抽象类</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#接口"><span class="nav-number">3.</span> <span class="nav-text">接口</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#内部类"><span class="nav-number">4.</span> <span class="nav-text">内部类</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#成员内部类"><span class="nav-number">4.1.</span> <span class="nav-text">成员内部类</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#静态内部类"><span class="nav-number">4.2.</span> <span class="nav-text">静态内部类</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#局部内部类"><span class="nav-number">4.3.</span> <span class="nav-text">局部内部类</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#异常"><span class="nav-number">5.</span> <span class="nav-text">异常</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#抽象类"><span class="nav-number">2.</span> <span class="nav-text">抽象类</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#接口"><span class="nav-number">3.</span> <span class="nav-text">接口</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#内部类"><span class="nav-number">4.</span> <span class="nav-text">内部类</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#成员内部类"><span class="nav-number">4.1.</span> <span class="nav-text">成员内部类</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#静态内部类"><span class="nav-number">4.2.</span> <span class="nav-text">静态内部类</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#局部内部类"><span class="nav-number">4.3.</span> <span class="nav-text">局部内部类</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#异常"><span class="nav-number">5.</span> <span class="nav-text">异常</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#抛出异常"><span class="nav-number">5.1.</span> <span class="nav-text">抛出异常</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#捕获异常"><span class="nav-number">5.2.</span> <span class="nav-text">捕获异常</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#异常处理五个关键字"><span class="nav-number">5.3.</span> <span class="nav-text">异常处理五个关键字</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#自定义异常"><span class="nav-number">5.4.</span> <span class="nav-text">自定义异常</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#类加载器与构造器的调用顺序"><span class="nav-number">6.</span> <span class="nav-text">类加载器与构造器的调用顺序</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#类加载器调用顺序"><span class="nav-number">6.1.</span> <span class="nav-text">类加载器调用顺序</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#构造器调用顺序"><span class="nav-number">6.2.</span> <span class="nav-text">构造器调用顺序</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#方法调用顺序"><span class="nav-number">6.3.</span> <span class="nav-text">方法调用顺序</span></a></li></ol></li></ol></div>
             
 
           </div>
@@ -738,7 +839,7 @@
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">8.9k</span>
+    <span title="Site words total count">15.6k</span>
   
 </div>
 

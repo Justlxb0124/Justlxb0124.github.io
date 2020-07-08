@@ -87,7 +87,7 @@
 <meta property="og:description" content="前言在刷关于二分查找的算法题目时, 有一块内容是绕不过去的, 那就是旋转排序数组的题目.  我们知道, 在查找排序数组时往往采用二分查找的方法, 但是旋转排序数组只保留了区域性的排序, 这就让人比较头疼.通常的二分查找题目有两类, 一类是目标值查找, 即从数组中查找目标值, 返回其下标; 另一类考察的是边界, 这类题目更加灵活, 可能会考察第K大的数, 第一个重复出现的数等等. 结合了旋转数组之后">
 <meta property="og:image" content="http://qcxz71s06.bkt.clouddn.com/e4c293fbc50538a0af581f455a2d8ce4_2.png">
 <meta property="article:published_time" content="2020-07-07T12:41:48.000Z">
-<meta property="article:modified_time" content="2020-07-07T14:31:26.069Z">
+<meta property="article:modified_time" content="2020-07-08T09:28:06.993Z">
 <meta property="article:author" content="lxb">
 <meta property="article:tag" content="数组">
 <meta property="article:tag" content="二分查找">
@@ -420,10 +420,10 @@
 <p>我们知道, 在查找排序数组时往往采用二分查找的方法, 但是旋转排序数组只保留了区域性的排序, 这就让人比较头疼.通常的二分查找题目有两类, 一类是目标值查找, 即从数组中查找目标值, 返回其下标; 另一类考察的是边界, 这类题目更加灵活, 可能会考察第K大的数, 第一个重复出现的数等等.</p>
 <p>结合了旋转数组之后, 就有了四道非常典型的题目, 他们是:</p>
 <ul>
-<li>LeetCode 33: 搜索旋转排序数组</li>
-<li>LeetCode 81: 搜索旋转排序数组 Ⅱ</li>
-<li>LeetCode 153: 寻找旋转排序数组中的最小值</li>
-<li>LeetCode 154: 寻找旋转排序数组中的最小值 Ⅱ</li>
+<li>LeetCode 33: <a href="https://leetcode-cn.com/problems/search-in-rotated-sorted-array/" target="_blank" rel="noopener">搜索旋转排序数组</a></li>
+<li>LeetCode 81: <a href="https://leetcode-cn.com/problems/search-in-rotated-sorted-array-ii/" target="_blank" rel="noopener">搜索旋转排序数组 Ⅱ</a></li>
+<li>LeetCode 153: <a href="https://leetcode-cn.com/problems/find-minimum-in-rotated-sorted-array/" target="_blank" rel="noopener">寻找旋转排序数组中的最小值</a></li>
+<li>LeetCode 154: <a href="https://leetcode-cn.com/problems/find-minimum-in-rotated-sorted-array-ii/" target="_blank" rel="noopener">寻找旋转排序数组中的最小值 Ⅱ</a></li>
 </ul>
 <p>总体而言分别考察了目标值和最小值, 只是按是否存在重复的数又各拓展出一道题. 下面分别来解决.</p>
 <hr>
@@ -470,7 +470,7 @@
 <li>出现这种情况时<code>nums[left]</code> 和<code>nums[right]</code> 一定是相等的.<code>left++</code> 即可</li>
 <li>将原来的判断条件分开来处理, 当<code>nums[mid] &gt; nums[left]</code>时, 还按33题的方法去做, 添加一个<code>nums[mid] = nums[left]</code>的处理方法: 也是<code>left++</code></li>
 </ol>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">search</span><span class="params">(<span class="keyword">int</span>[] nums, <span class="keyword">int</span> target)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (nums.length == <span class="number">0</span>)</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">        <span class="keyword">int</span> left = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">int</span> right = nums.length - <span class="number">1</span>;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">while</span> (left &lt;= right) &#123;</span><br><span class="line">            <span class="keyword">int</span> mid = (left + right) / <span class="number">2</span>;</span><br><span class="line">            <span class="keyword">if</span> (nums[mid] == target)</span><br><span class="line">                <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line"></span><br><span class="line">            <span class="keyword">if</span> (nums[right] == nums[mid]) &#123;</span><br><span class="line">                right--;</span><br><span class="line">                <span class="keyword">continue</span>;</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            <span class="keyword">if</span> (nums[left] &lt; nums[mid]) &#123;</span><br><span class="line">                <span class="keyword">if</span> (nums[left] &lt;= target &amp;&amp; target &lt; nums[mid])</span><br><span class="line">                    right = mid - <span class="number">1</span>;</span><br><span class="line">                <span class="keyword">else</span></span><br><span class="line">                    left = mid + <span class="number">1</span>;</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                <span class="keyword">if</span> (nums[mid] &lt; target &amp;&amp; target &lt;= nums[right])</span><br><span class="line">                    left = mid + <span class="number">1</span>;</span><br><span class="line">                <span class="keyword">else</span></span><br><span class="line">                    right = mid - <span class="number">1</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">search</span><span class="params">(<span class="keyword">int</span>[] nums, <span class="keyword">int</span> target)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (nums.length == <span class="number">0</span>)</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">        <span class="keyword">int</span> left = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">int</span> right = nums.length - <span class="number">1</span>;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">while</span> (left &lt;= right) &#123;</span><br><span class="line">            <span class="keyword">int</span> mid = (left + right) / <span class="number">2</span>;</span><br><span class="line">            <span class="keyword">if</span> (nums[mid] == target)</span><br><span class="line">                <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line"></span><br><span class="line">            <span class="keyword">if</span> (nums[left] == nums[mid]) &#123;</span><br><span class="line">                left++;</span><br><span class="line">                <span class="keyword">continue</span>;</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            <span class="keyword">if</span> (nums[left] &lt; nums[mid]) &#123;</span><br><span class="line">                <span class="keyword">if</span> (nums[left] &lt;= target &amp;&amp; target &lt; nums[mid])</span><br><span class="line">                    right = mid - <span class="number">1</span>;</span><br><span class="line">                <span class="keyword">else</span></span><br><span class="line">                    left = mid + <span class="number">1</span>;</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                <span class="keyword">if</span> (nums[mid] &lt; target &amp;&amp; target &lt;= nums[right])</span><br><span class="line">                    left = mid + <span class="number">1</span>;</span><br><span class="line">                <span class="keyword">else</span></span><br><span class="line">                    right = mid - <span class="number">1</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
 
 <hr>
 <h2 id="153-搜索旋转排序数组中的最小值"><a href="#153-搜索旋转排序数组中的最小值" class="headerlink" title="153.搜索旋转排序数组中的最小值"></a>153.搜索旋转排序数组中的最小值</h2><h3 id="题目描述-2"><a href="#题目描述-2" class="headerlink" title="题目描述"></a>题目描述</h3><p>假设按照升序排序的数组在预先未知的某个点上进行了旋转。</p>
@@ -614,6 +614,10 @@
 
           <div class="post-nav-prev post-nav-item">
             
+              <a href="/2020/07/08/String-StringBuffer-StringBuilder%E7%B1%BB%E6%B1%87%E6%80%BB/" rel="prev" title="String,StringBuffer,StringBuilder类汇总">
+                String,StringBuffer,StringBuilder类汇总 <i class="fa fa-chevron-right"></i>
+              </a>
+            
           </div>
         </div>
       
@@ -702,7 +706,7 @@
               
                 <a href="/archives/%7C%7C%20archive">
               
-                  <span class="site-state-item-count">8</span>
+                  <span class="site-state-item-count">13</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -724,7 +728,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">15</span>
+                  <span class="site-state-item-count">20</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -807,7 +811,7 @@
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">8.9k</span>
+    <span title="Site words total count">15.6k</span>
   
 </div>
 
