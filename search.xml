@@ -30,65 +30,6 @@
       </tags>
   </entry>
   <entry>
-    <title>315.计算右侧小于当前元素的个数</title>
-    <url>/2020/07/08/315-%E8%AE%A1%E7%AE%97%E5%8F%B3%E4%BE%A7%E5%B0%8F%E4%BA%8E%E5%BD%93%E5%89%8D%E5%85%83%E7%B4%A0%E7%9A%84%E4%B8%AA%E6%95%B0/</url>
-    <content><![CDATA[<h1 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h1><p>给定一个整数数组 nums，按要求返回一个新数组 counts。数组 counts 有该性质： counts[i] 的值是  nums[i] 右侧小于 nums[i] 的元素的数量。</p>
-<p><strong>示例一</strong>：</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">输入: [5,2,6,1]</span><br><span class="line">输出: [2,1,1,0] </span><br><span class="line">解释:</span><br><span class="line">5 的右侧有 2 个更小的元素 (2 和 1).</span><br><span class="line">2 的右侧仅有 1 个更小的元素 (1).</span><br><span class="line">6 的右侧有 1 个更小的元素 (1).</span><br><span class="line">1 的右侧有 0 个更小的元素.</span><br></pre></td></tr></table></figure>
-
-<h1 id="题解"><a href="#题解" class="headerlink" title="题解"></a>题解</h1><h2 id="二分查找"><a href="#二分查找" class="headerlink" title="二分查找"></a>二分查找</h2><p>这道题目要想到二分查找的一个性质: 在一个排序数组中, 可以通过二分查找目标值的左边界来表示数组中有多少个元素小于目标值</p>
-<p>比如一个数组为:<code>[1, 2, 2, 4, 5, 6]</code>, 查找数字<code>4</code>的返回值是<code>3</code>, 结果不言而喻.</p>
-<p>那么我们需要想办法创造出排序数组的条件.</p>
-<p>首先初始化一个空的列表用于存放遍历后的元素, 因为这道题目是考察右侧有多少个更小的元素, 所以要从右往左遍历, 这能保证每遍历到一个元素, 列表中的元素都位于它的右边, 只需要在它们之间查找即可.</p>
-<p>二分查找的结果即为元素右边有多少更小的值, 并将其插入到合适的位置使列表仍然是有序的.</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> List&lt;Integer&gt; <span class="title">countSmaller</span><span class="params">(<span class="keyword">int</span>[] nums)</span> </span>&#123;</span><br><span class="line">        LinkedList&lt;Integer&gt; res = <span class="keyword">new</span> LinkedList&lt;&gt;();</span><br><span class="line">        List&lt;Integer&gt; list = <span class="keyword">new</span> ArrayList&lt;&gt;();</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = nums.length - <span class="number">1</span>; i &gt;= <span class="number">0</span>; i--) &#123;</span><br><span class="line">            res.addFirst(binarySearch(list, nums[i]));</span><br><span class="line">            list.add(binarySearch(list, nums[i]), nums[i]);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> res;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">binarySearch</span><span class="params">(List&lt;Integer&gt; list, <span class="keyword">int</span> target)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> left = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">int</span> right = list.size() - <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">while</span> (left &lt;= right) &#123;</span><br><span class="line">            <span class="keyword">int</span> mid = (left + right) / <span class="number">2</span>;</span><br><span class="line">            <span class="keyword">if</span> (list.get(mid) &gt;= target) right = mid - <span class="number">1</span>;</span><br><span class="line">            <span class="keyword">else</span> <span class="keyword">if</span> (list.get(mid) &lt; target) left = mid + <span class="number">1</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> left;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
-
-<p>在做这道题时因为要用到向列表中某个位置插入元素, 找响应的<code>insert()</code> 方法, 怎么也找不到, 原来直接用<code>add()</code> 方法就好了, 如果只填一个元素, 默认为列表尾部添加元素, 如果在前面写上索引, 即为在指定位置插入元素, 剩余元素后移.</p>
-]]></content>
-      <categories>
-        <category>算法</category>
-      </categories>
-      <tags>
-        <tag>数组</tag>
-        <tag>二分查找</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>153.寻找旋转排序数组中的最小值</title>
-    <url>/2020/07/04/153-%E5%AF%BB%E6%89%BE%E6%97%8B%E8%BD%AC%E6%8E%92%E5%BA%8F%E6%95%B0%E7%BB%84%E4%B8%AD%E7%9A%84%E6%9C%80%E5%B0%8F%E5%80%BC/</url>
-    <content><![CDATA[<h1 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h1><p>假设按照升序排序的数组在预先未知的某个点上进行了旋转。</p>
-<p>( 例如，数组 [0,1,2,4,5,6,7] 可能变为 [4,5,6,7,0,1,2] )。</p>
-<p>请找出其中最小的元素。</p>
-<p>你可以假设数组中不存在重复元素。</p>
-<p><strong>示例一</strong>：</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">输入: [3,4,5,1,2]</span><br><span class="line">输出: 1</span><br></pre></td></tr></table></figure>
-
-<p><strong>示例二</strong>：</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">输入: [4,5,6,7,0,1,2]</span><br><span class="line">输出: 0</span><br></pre></td></tr></table></figure>
-
-<h3 id="题解"><a href="#题解" class="headerlink" title="题解"></a>题解</h3><h4 id="二分查找"><a href="#二分查找" class="headerlink" title="二分查找"></a>二分查找</h4><p>因为不存在重复的数字, 所以只需要考虑大于和等于的情况, 比较对象为<code>nums[right]</code></p>
-<ol>
-<li><p>循环二分： 设置 <code>i</code>,<code>j</code> 指针分别指向<code>numbers</code> 数组左右两端，<code>m = (i + j) / 2</code> 为每次二分的中点（ “/“ 代表向下取整除法），可分为以下三种情况：</p>
-<ol>
-<li><p>当<code>numbers[m] &gt; numbers[j]</code>时： <code>m</code> 一定在 左排序数组 中，即旋转点 <code>x</code>一定在<code>[m + 1, j]</code>闭区间内，因此执行<code>i = m + 1</code>；</p>
-</li>
-<li><p>当 <code>numbers[m] &lt; numbers[j]</code>时： <code>m</code> 一定在 右排序数组 中，即旋转点 <code>x</code> 一定在<code>[i, m]</code> 闭区间内，因此执行<code>j = m</code>；</p>
-</li>
-</ol>
-</li>
-<li><p>返回值： 当<code>i = j</code>时跳出二分循环，并返回 <code>numbers[i]</code>即可。</p>
-</li>
-</ol>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">findMin</span><span class="params">(<span class="keyword">int</span>[] nums)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> left = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">int</span> right = nums.length - <span class="number">1</span>;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">while</span> (left &lt; right) &#123;</span><br><span class="line">            <span class="keyword">int</span> mid = (left + right) / <span class="number">2</span>;</span><br><span class="line">            <span class="keyword">if</span> (nums[mid] &lt; nums[right]) &#123;</span><br><span class="line">                right = mid;</span><br><span class="line">            &#125; <span class="keyword">else</span> <span class="keyword">if</span> (nums[mid] &gt; nums[right]) &#123;</span><br><span class="line">                left = mid + <span class="number">1</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> nums[left];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
-      <categories>
-        <category>算法</category>
-      </categories>
-      <tags>
-        <tag>数组</tag>
-        <tag>二分查找</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>287.寻找重复数</title>
     <url>/2020/07/03/287-%E5%AF%BB%E6%89%BE%E9%87%8D%E5%A4%8D%E6%95%B0/</url>
     <content><![CDATA[<h1 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h1><p>给定一个包含 n + 1 个整数的数组 nums，其数字都在 1 到 n 之间（包括 1 和 n），可知至少存在一个重复的整数。假设只有一个重复的整数，找出这个重复的数。</p>
@@ -131,8 +72,106 @@
         <category>算法</category>
       </categories>
       <tags>
-        <tag>数组</tag>
         <tag>二分查找</tag>
+        <tag>数组</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>153.寻找旋转排序数组中的最小值</title>
+    <url>/2020/07/04/153-%E5%AF%BB%E6%89%BE%E6%97%8B%E8%BD%AC%E6%8E%92%E5%BA%8F%E6%95%B0%E7%BB%84%E4%B8%AD%E7%9A%84%E6%9C%80%E5%B0%8F%E5%80%BC/</url>
+    <content><![CDATA[<h1 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h1><p>假设按照升序排序的数组在预先未知的某个点上进行了旋转。</p>
+<p>( 例如，数组 [0,1,2,4,5,6,7] 可能变为 [4,5,6,7,0,1,2] )。</p>
+<p>请找出其中最小的元素。</p>
+<p>你可以假设数组中不存在重复元素。</p>
+<p><strong>示例一</strong>：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">输入: [3,4,5,1,2]</span><br><span class="line">输出: 1</span><br></pre></td></tr></table></figure>
+
+<p><strong>示例二</strong>：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">输入: [4,5,6,7,0,1,2]</span><br><span class="line">输出: 0</span><br></pre></td></tr></table></figure>
+
+<h3 id="题解"><a href="#题解" class="headerlink" title="题解"></a>题解</h3><h4 id="二分查找"><a href="#二分查找" class="headerlink" title="二分查找"></a>二分查找</h4><p>因为不存在重复的数字, 所以只需要考虑大于和等于的情况, 比较对象为<code>nums[right]</code></p>
+<ol>
+<li><p>循环二分： 设置 <code>i</code>,<code>j</code> 指针分别指向<code>numbers</code> 数组左右两端，<code>m = (i + j) / 2</code> 为每次二分的中点（ “/“ 代表向下取整除法），可分为以下三种情况：</p>
+<ol>
+<li><p>当<code>numbers[m] &gt; numbers[j]</code>时： <code>m</code> 一定在 左排序数组 中，即旋转点 <code>x</code>一定在<code>[m + 1, j]</code>闭区间内，因此执行<code>i = m + 1</code>；</p>
+</li>
+<li><p>当 <code>numbers[m] &lt; numbers[j]</code>时： <code>m</code> 一定在 右排序数组 中，即旋转点 <code>x</code> 一定在<code>[i, m]</code> 闭区间内，因此执行<code>j = m</code>；</p>
+</li>
+</ol>
+</li>
+<li><p>返回值： 当<code>i = j</code>时跳出二分循环，并返回 <code>numbers[i]</code>即可。</p>
+</li>
+</ol>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">findMin</span><span class="params">(<span class="keyword">int</span>[] nums)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> left = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">int</span> right = nums.length - <span class="number">1</span>;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">while</span> (left &lt; right) &#123;</span><br><span class="line">            <span class="keyword">int</span> mid = (left + right) / <span class="number">2</span>;</span><br><span class="line">            <span class="keyword">if</span> (nums[mid] &lt; nums[right]) &#123;</span><br><span class="line">                right = mid;</span><br><span class="line">            &#125; <span class="keyword">else</span> <span class="keyword">if</span> (nums[mid] &gt; nums[right]) &#123;</span><br><span class="line">                left = mid + <span class="number">1</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> nums[left];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
+      <categories>
+        <category>算法</category>
+      </categories>
+      <tags>
+        <tag>二分查找</tag>
+        <tag>数组</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>240.搜索二维矩阵Ⅱ</title>
+    <url>/2020/07/08/240-%E6%90%9C%E7%B4%A2%E4%BA%8C%E7%BB%B4%E7%9F%A9%E9%98%B5%E2%85%A1/</url>
+    <content><![CDATA[<h1 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h1><p>编写一个高效的算法来搜索 m x n 矩阵 matrix 中的一个目标值 target。该矩阵具有以下特性：</p>
+<p>每行的元素从左到右升序排列。<br>每列的元素从上到下升序排列。<br>示例:</p>
+<p>现有矩阵 matrix 如下：</p>
+<p>[<br>  [1,   4,  7, 11, 15],<br>  [2,   5,  8, 12, 19],<br>  [3,   6,  9, 16, 22],<br>  [10, 13, 14, 17, 24],<br>  [18, 21, 23, 26, 30]<br>]</p>
+<p><strong>示例一</strong>：</p>
+<p>给定 target = 5，返回 true。</p>
+<p><strong>示例二</strong>：</p>
+<p>给定 target = 20，返回 false。</p>
+<h1 id="题解"><a href="#题解" class="headerlink" title="题解"></a>题解</h1><h2 id="左下角出发遍历法"><a href="#左下角出发遍历法" class="headerlink" title="左下角出发遍历法"></a>左下角出发遍历法</h2><p>根据本文所描述的特征, 每一行从左到右递增, 每一列从上到下递增, 所以可以根据贪婪思想决定每一步怎么走, 即:</p>
+<ul>
+<li>当<code>matrix[i][j]&gt;target</code>, 则直接删除改行数组, <code>i--</code>, 因为只能往上走才能找到更小的数</li>
+<li>当<code>matrix[i][j]&lt;target</code>, 则直接删除该列数组, <code>j++</code>, 因为只能往右走才能找到更大的数</li>
+<li>若相等, 直接返回<code>true</code></li>
+</ul>
+<p>越界说明没找到, 返回<code>false</code></p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">searchMatrix</span><span class="params">(<span class="keyword">int</span>[][] matrix, <span class="keyword">int</span> target)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> i = matrix.length - <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">int</span> j = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">while</span> (i &gt;= <span class="number">0</span> &amp;&amp; j &lt;= matrix[<span class="number">0</span>].length - <span class="number">1</span>) &#123;</span><br><span class="line">            <span class="keyword">if</span> (matrix[i][j] &gt; target) i--;</span><br><span class="line">            <span class="keyword">else</span> <span class="keyword">if</span> (matrix[i][j] &lt; target) j++;</span><br><span class="line">            <span class="keyword">else</span> <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="二分查找-较慢"><a href="#二分查找-较慢" class="headerlink" title="二分查找(较慢)"></a>二分查找(较慢)</h2><p>因为矩阵已经排过序, 所以可采用二分查找的方法.</p>
+<p>思路是遍历每一行的数组进行查找, 每当遍历到新的一行, 如果该行第一个元素都比目标值大, 那么直接返回<code>false</code>, 因为这已经是目前还没有遍历的数中最小的了.</p>
+<p>如果该行数组最右的元素都比目标值小, 则直接开始遍历下一行, 因为这已经是这一行最大的数了, 没有查找的必要.</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">searchMatrix2</span><span class="params">(<span class="keyword">int</span>[][] matrix, <span class="keyword">int</span> target)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (matrix.length==<span class="number">0</span>||matrix[<span class="number">0</span>].length==<span class="number">0</span>)</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i =<span class="number">0</span>; i&lt;matrix.length;i++)&#123;</span><br><span class="line">            <span class="keyword">if</span> (matrix[i][<span class="number">0</span>]&gt;target)</span><br><span class="line">                <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">            <span class="keyword">if</span> (matrix[i][matrix[<span class="number">0</span>].length-<span class="number">1</span>]&lt;target)</span><br><span class="line">                <span class="keyword">continue</span>;</span><br><span class="line"></span><br><span class="line">            <span class="keyword">int</span> col = binarySearch1(matrix[i], target);</span><br><span class="line">            <span class="keyword">if</span> (col!=-<span class="number">1</span>)</span><br><span class="line">                <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">int</span> <span class="title">binarySearch1</span><span class="params">(<span class="keyword">int</span>[] matrix, <span class="keyword">int</span> target)</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">int</span> i = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">int</span> j = matrix.length-<span class="number">1</span>;</span><br><span class="line">        <span class="keyword">while</span> (i&lt;=j)&#123;</span><br><span class="line">            <span class="keyword">int</span> mid = (i+j)/<span class="number">2</span>;</span><br><span class="line">            <span class="keyword">if</span> (matrix[mid]&lt;target) i = mid+<span class="number">1</span>;</span><br><span class="line">            <span class="keyword">else</span> <span class="keyword">if</span> (matrix[mid]&gt;target) j = mid-<span class="number">1</span>;</span><br><span class="line">            <span class="keyword">else</span> <span class="keyword">return</span> mid;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> -<span class="number">1</span>;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+]]></content>
+      <categories>
+        <category>算法</category>
+      </categories>
+      <tags>
+        <tag>二分查找</tag>
+        <tag>数组</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>315.计算右侧小于当前元素的个数</title>
+    <url>/2020/07/08/315-%E8%AE%A1%E7%AE%97%E5%8F%B3%E4%BE%A7%E5%B0%8F%E4%BA%8E%E5%BD%93%E5%89%8D%E5%85%83%E7%B4%A0%E7%9A%84%E4%B8%AA%E6%95%B0/</url>
+    <content><![CDATA[<h1 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h1><p>给定一个整数数组 nums，按要求返回一个新数组 counts。数组 counts 有该性质： counts[i] 的值是  nums[i] 右侧小于 nums[i] 的元素的数量。</p>
+<p><strong>示例一</strong>：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">输入: [5,2,6,1]</span><br><span class="line">输出: [2,1,1,0] </span><br><span class="line">解释:</span><br><span class="line">5 的右侧有 2 个更小的元素 (2 和 1).</span><br><span class="line">2 的右侧仅有 1 个更小的元素 (1).</span><br><span class="line">6 的右侧有 1 个更小的元素 (1).</span><br><span class="line">1 的右侧有 0 个更小的元素.</span><br></pre></td></tr></table></figure>
+
+<h1 id="题解"><a href="#题解" class="headerlink" title="题解"></a>题解</h1><h2 id="二分查找"><a href="#二分查找" class="headerlink" title="二分查找"></a>二分查找</h2><p>这道题目要想到二分查找的一个性质: 在一个排序数组中, 可以通过二分查找目标值的左边界来表示数组中有多少个元素小于目标值</p>
+<p>比如一个数组为:<code>[1, 2, 2, 4, 5, 6]</code>, 查找数字<code>4</code>的返回值是<code>3</code>, 结果不言而喻.</p>
+<p>那么我们需要想办法创造出排序数组的条件.</p>
+<p>首先初始化一个空的列表用于存放遍历后的元素, 因为这道题目是考察右侧有多少个更小的元素, 所以要从右往左遍历, 这能保证每遍历到一个元素, 列表中的元素都位于它的右边, 只需要在它们之间查找即可.</p>
+<p>二分查找的结果即为元素右边有多少更小的值, 并将其插入到合适的位置使列表仍然是有序的.</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> List&lt;Integer&gt; <span class="title">countSmaller</span><span class="params">(<span class="keyword">int</span>[] nums)</span> </span>&#123;</span><br><span class="line">        LinkedList&lt;Integer&gt; res = <span class="keyword">new</span> LinkedList&lt;&gt;();</span><br><span class="line">        List&lt;Integer&gt; list = <span class="keyword">new</span> ArrayList&lt;&gt;();</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = nums.length - <span class="number">1</span>; i &gt;= <span class="number">0</span>; i--) &#123;</span><br><span class="line">            res.addFirst(binarySearch(list, nums[i]));</span><br><span class="line">            list.add(binarySearch(list, nums[i]), nums[i]);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> res;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">binarySearch</span><span class="params">(List&lt;Integer&gt; list, <span class="keyword">int</span> target)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> left = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">int</span> right = list.size() - <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">while</span> (left &lt;= right) &#123;</span><br><span class="line">            <span class="keyword">int</span> mid = (left + right) / <span class="number">2</span>;</span><br><span class="line">            <span class="keyword">if</span> (list.get(mid) &gt;= target) right = mid - <span class="number">1</span>;</span><br><span class="line">            <span class="keyword">else</span> <span class="keyword">if</span> (list.get(mid) &lt; target) left = mid + <span class="number">1</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> left;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+<p>在做这道题时因为要用到向列表中某个位置插入元素, 找响应的<code>insert()</code> 方法, 怎么也找不到, 原来直接用<code>add()</code> 方法就好了, 如果只填一个元素, 默认为列表尾部添加元素, 如果在前面写上索引, 即为在指定位置插入元素, 剩余元素后移.</p>
+]]></content>
+      <categories>
+        <category>算法</category>
+      </categories>
+      <tags>
+        <tag>二分查找</tag>
+        <tag>数组</tag>
       </tags>
   </entry>
   <entry>
@@ -177,63 +216,6 @@
       <tags>
         <tag>字符串</tag>
         <tag>栈</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Hello World</title>
-    <url>/2020/07/03/hello-world/</url>
-    <content><![CDATA[<p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/one-command-deployment.html" target="_blank" rel="noopener">Deployment</a></p>
-]]></content>
-  </entry>
-  <entry>
-    <title>240.搜索二维矩阵Ⅱ</title>
-    <url>/2020/07/08/240-%E6%90%9C%E7%B4%A2%E4%BA%8C%E7%BB%B4%E7%9F%A9%E9%98%B5%E2%85%A1/</url>
-    <content><![CDATA[<h1 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h1><p>编写一个高效的算法来搜索 m x n 矩阵 matrix 中的一个目标值 target。该矩阵具有以下特性：</p>
-<p>每行的元素从左到右升序排列。<br>每列的元素从上到下升序排列。<br>示例:</p>
-<p>现有矩阵 matrix 如下：</p>
-<p>[<br>  [1,   4,  7, 11, 15],<br>  [2,   5,  8, 12, 19],<br>  [3,   6,  9, 16, 22],<br>  [10, 13, 14, 17, 24],<br>  [18, 21, 23, 26, 30]<br>]</p>
-<p><strong>示例一</strong>：</p>
-<p>给定 target = 5，返回 true。</p>
-<p><strong>示例二</strong>：</p>
-<p>给定 target = 20，返回 false。</p>
-<h1 id="题解"><a href="#题解" class="headerlink" title="题解"></a>题解</h1><h2 id="左下角出发遍历法"><a href="#左下角出发遍历法" class="headerlink" title="左下角出发遍历法"></a>左下角出发遍历法</h2><p>根据本文所描述的特征, 每一行从左到右递增, 每一列从上到下递增, 所以可以根据贪婪思想决定每一步怎么走, 即:</p>
-<ul>
-<li>当<code>matrix[i][j]&gt;target</code>, 则直接删除改行数组, <code>i--</code>, 因为只能往上走才能找到更小的数</li>
-<li>当<code>matrix[i][j]&lt;target</code>, 则直接删除该列数组, <code>j++</code>, 因为只能往右走才能找到更大的数</li>
-<li>若相等, 直接返回<code>true</code></li>
-</ul>
-<p>越界说明没找到, 返回<code>false</code></p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">searchMatrix</span><span class="params">(<span class="keyword">int</span>[][] matrix, <span class="keyword">int</span> target)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> i = matrix.length - <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">int</span> j = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">while</span> (i &gt;= <span class="number">0</span> &amp;&amp; j &lt;= matrix[<span class="number">0</span>].length - <span class="number">1</span>) &#123;</span><br><span class="line">            <span class="keyword">if</span> (matrix[i][j] &gt; target) i--;</span><br><span class="line">            <span class="keyword">else</span> <span class="keyword">if</span> (matrix[i][j] &lt; target) j++;</span><br><span class="line">            <span class="keyword">else</span> <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<hr>
-<h2 id="二分查找-较慢"><a href="#二分查找-较慢" class="headerlink" title="二分查找(较慢)"></a>二分查找(较慢)</h2><p>因为矩阵已经排过序, 所以可采用二分查找的方法.</p>
-<p>思路是遍历每一行的数组进行查找, 每当遍历到新的一行, 如果该行第一个元素都比目标值大, 那么直接返回<code>false</code>, 因为这已经是目前还没有遍历的数中最小的了.</p>
-<p>如果该行数组最右的元素都比目标值小, 则直接开始遍历下一行, 因为这已经是这一行最大的数了, 没有查找的必要.</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">searchMatrix2</span><span class="params">(<span class="keyword">int</span>[][] matrix, <span class="keyword">int</span> target)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (matrix.length==<span class="number">0</span>||matrix[<span class="number">0</span>].length==<span class="number">0</span>)</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i =<span class="number">0</span>; i&lt;matrix.length;i++)&#123;</span><br><span class="line">            <span class="keyword">if</span> (matrix[i][<span class="number">0</span>]&gt;target)</span><br><span class="line">                <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">            <span class="keyword">if</span> (matrix[i][matrix[<span class="number">0</span>].length-<span class="number">1</span>]&lt;target)</span><br><span class="line">                <span class="keyword">continue</span>;</span><br><span class="line"></span><br><span class="line">            <span class="keyword">int</span> col = binarySearch1(matrix[i], target);</span><br><span class="line">            <span class="keyword">if</span> (col!=-<span class="number">1</span>)</span><br><span class="line">                <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">int</span> <span class="title">binarySearch1</span><span class="params">(<span class="keyword">int</span>[] matrix, <span class="keyword">int</span> target)</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">int</span> i = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">int</span> j = matrix.length-<span class="number">1</span>;</span><br><span class="line">        <span class="keyword">while</span> (i&lt;=j)&#123;</span><br><span class="line">            <span class="keyword">int</span> mid = (i+j)/<span class="number">2</span>;</span><br><span class="line">            <span class="keyword">if</span> (matrix[mid]&lt;target) i = mid+<span class="number">1</span>;</span><br><span class="line">            <span class="keyword">else</span> <span class="keyword">if</span> (matrix[mid]&gt;target) j = mid-<span class="number">1</span>;</span><br><span class="line">            <span class="keyword">else</span> <span class="keyword">return</span> mid;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> -<span class="number">1</span>;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
-
-
-
-
-
-]]></content>
-      <categories>
-        <category>算法</category>
-      </categories>
-      <tags>
-        <tag>数组</tag>
-        <tag>二分查找</tag>
       </tags>
   </entry>
   <entry>
@@ -668,64 +650,156 @@
       </tags>
   </entry>
   <entry>
-    <title>jz26.树的子结构</title>
-    <url>/2020/07/09/jz26-%E6%A0%91%E7%9A%84%E5%AD%90%E7%BB%93%E6%9E%84/</url>
-    <content><![CDATA[<h1 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h1><p>输入两棵二叉树A和B，判断B是不是A的子结构。(约定空树不是任意一个树的子结构)</p>
-<p>B是A的子结构， 即 A中有出现和B相同的结构和节点值。</p>
-<p>例如:<br>给定的树 A:<br>     3<br>    / <br>   4   5<br>  / <br> 1   2<br>给定的树 B：</p>
-<p>   4<br>  /<br> 1<br>返回 true，因为 B 与 A 的一个子树拥有相同的结构和节点值。</p>
-<p><strong>示例一</strong>：</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">输入：A &#x3D; [1,2,3], B &#x3D; [3,1]</span><br><span class="line">输出：false</span><br></pre></td></tr></table></figure>
+    <title>Java拾遗</title>
+    <url>/2020/07/07/Java%E6%8B%BE%E9%81%97/</url>
+    <content><![CDATA[<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>Java 语言基础中知识点繁多, 大多数只是在第一次学习时有印象, 但是因为长时间没有运用到会遗忘, 这篇博文就用来记录和总结遇到的生僻的知识点.</p>
+<hr>
+<h2 id="抽象类"><a href="#抽象类" class="headerlink" title="抽象类"></a>抽象类</h2><p><code>abstract</code> 修饰符可以用来修饰方法, 也可以用来修饰类, 如果修饰方法, 那么该方法就是抽象方法; 如果修饰类, 那么该类就是抽象类.</p>
+<ul>
+<li>不能<code>new</code> 抽象类, 只能靠子类去实现它</li>
+<li>抽象类中可以写普通方法</li>
+<li>抽象方法必须在抽象类中</li>
+</ul>
+<hr>
+<h2 id="接口"><a href="#接口" class="headerlink" title="接口"></a>接口</h2><ul>
+<li>在接口中定义的常量会默认加上修饰符 <code>public static final</code>, 在实现了该接口的类中可以直接拿来用</li>
+<li>在接口中定义的方法会默认加上修饰符 <code>pubilc abstract</code> </li>
+<li>接口中没有构造方法, 这是不能被实例化的原因</li>
+</ul>
+<hr>
+<h2 id="内部类"><a href="#内部类" class="headerlink" title="内部类"></a>内部类</h2><h3 id="成员内部类"><a href="#成员内部类" class="headerlink" title="成员内部类"></a>成员内部类</h3><p>定义以下的类:</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Outer</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">int</span> id;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">out</span><span class="params">()</span></span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"这是外部类的方法"</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="class"><span class="keyword">class</span> <span class="title">Inner</span></span>&#123;</span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">in</span><span class="params">()</span></span>&#123;</span><br><span class="line">            System.out.println(<span class="string">"这是内部类的方法"</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<p><strong>示例二</strong>：</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">输入：A &#x3D; [3,4,5,1,2], B &#x3D; [4,1]</span><br><span class="line">输出：true</span><br></pre></td></tr></table></figure>
+<p>两个类中分别定义了各自的方法. 然后实例化外部类的对象, 对该类进行测试.</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Application</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        Outer outer = <span class="keyword">new</span> Outer();</span><br><span class="line">        Outer.Inner inner = outer.<span class="keyword">new</span> Inner();</span><br><span class="line">        inner.in();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<h1 id="题解"><a href="#题解" class="headerlink" title="题解"></a>题解</h1><hr>
-<h2 id="递归方法"><a href="#递归方法" class="headerlink" title="递归方法"></a>递归方法</h2><p>看到这道题时经过分析可知需要两个递归过程:</p>
-<p>过程一是<code>判断当前节点为根节点的树与树B是否相同</code> || <code>当前节点的左子树与树B是否相同</code> || <code>当前节点的右子树与树B是否相同</code>,   写成<code>isSubStructure(A, B)</code> 方法:</p>
-<ol>
-<li><p><strong>特例:</strong><br>当 树<code>A</code> 为空 <strong>或</strong> 树 <code>B</code> 为空 时，直接返回 <code>false</code> </p>
-</li>
-<li><p><strong>返回值</strong>: 若树<code>B</code>是树 <code>A</code>的子结构，则必满足以下三种情况之一，因此用或 <code>||</code> 连接</p>
-<ol>
-<li>以 节点 <code>A</code>为根节点的子树 包含树 <code>B</code> ，对应 recur(A, B)；</li>
-<li>树 <code>B</code> 是 树 <code>A</code>左子树 的子结构，对应 isSubStructure(A.left, B)；</li>
-<li>树 <code>B</code>是 树 <code>A</code>右子树 的子结构，对应 isSubStructure(A.right, B)；</li>
-</ol>
-</li>
-</ol>
-<p>过程二是判断两个树是否相同, 要求是两节点的值相同, 左右子树也相同, 写成<code>recur()</code> 方法:</p>
-<ol>
-<li><p><strong>终止条件:</strong></p>
-<ol>
-<li>当节点<code>B</code> 为空：说明树 <code>B</code> 已匹配完成（越过叶子节点），因此返回<code>true</code> ；</li>
-<li>当节点<code>A</code>为空：说明已经越过树 <code>A</code>叶子节点，即匹配失败，返回<code>false</code> ；</li>
-<li>当节点<code>A</code> 和 <code>B</code>的值不同：说明匹配失败，返回 <code>false</code> ；</li>
-</ol>
-</li>
-<li><p><strong>返回值:</strong></p>
-<ol>
-<li>判断 <code>A</code> 和 <code>B</code> 的左子节点是否相等，即 recur(A.left, B.left) ；</li>
-<li>判断 <code>A</code> 和 <code>B</code> 的右子节点是否相等，即 recur(A.right, B.right) ；</li>
-</ol>
-</li>
-</ol>
-<p><img src="http://qcxz71s06.bkt.clouddn.com/0e15908809807327aa87c748c4cf1d850eeb63cc13df94c87439cbaffb535005-Picture2.png" alt=""></p>
-<p><img src="http://qcxz71s06.bkt.clouddn.com/5d9592ec644c6fc765d6e223d4beb3a74ecf46a32b703d9d02cdbeb9f88e9523-Picture3.png" alt=""></p>
-<p><img src="http://qcxz71s06.bkt.clouddn.com/76016cb01f7c051318761388eeadd774b334c6da3c5722754452fc82da87c04b-Picture4.png" alt=""></p>
-<p><img src="http://qcxz71s06.bkt.clouddn.com/efe061c2ae8ae6c75b4f36bfd766d60471b4bc985cb330cdae5805043b19f440-Picture5.png" alt=""></p>
-<p><img src="http://qcxz71s06.bkt.clouddn.com/987e1803a3600ef2b8e18320589e058e189888fb4d88389527f33499340f149a-Picture6.png" alt=""></p>
-<p><img src="http://qcxz71s06.bkt.clouddn.com/3850986482cd6344935ac823e8b396b52f02ae196b573cea1e7ebecb97eb063c-Picture7.png" alt=""></p>
-<p><img src="http://qcxz71s06.bkt.clouddn.com/cb14268630fd9efa872f077ee625f8066cd7c818f11df9fc9436fa371994de8a-Picture8.png" alt=""></p>
-<p><img src="http://qcxz71s06.bkt.clouddn.com/24d94f730e0a7fc091ab321349c4524dd51828db1fa6a9c1b6455561fa27708e-Picture9.png" alt=""></p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">jz26</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">isSubStructure</span><span class="params">(TreeNode A, TreeNode B)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> (A != <span class="keyword">null</span> &amp;&amp; B != <span class="keyword">null</span>) &amp;&amp; (recur(A, B) || isSubStructure(A.left, B) || isSubStructure(A.right, B));</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">boolean</span> <span class="title">recur</span><span class="params">(TreeNode A, TreeNode B)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (B == <span class="keyword">null</span>) <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">        <span class="keyword">if</span> (A == <span class="keyword">null</span> || A.val != B.val) <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">        <span class="keyword">return</span> recur(A.left, B.left) &amp;&amp; recur(A.right, B.right);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>这里就要注意 <code>new</code> 内部类对象时写法上的区别了.</p>
+<p>可以通过定义内部类的方法来获取外部类的私有属性, 修改外部类如下:</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Outer</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">int</span> id = <span class="number">10</span>;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">out</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"这是外部类的方法"</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="class"><span class="keyword">class</span> <span class="title">Inner</span> </span>&#123;</span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">in</span><span class="params">()</span> </span>&#123;</span><br><span class="line">            System.out.println(<span class="string">"这是内部类的方法"</span>);</span><br><span class="line"></span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">getId</span><span class="params">()</span> </span>&#123;</span><br><span class="line">            System.out.println(id);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
+<p>然后通过内部类的对象调用:</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Application</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        Outer outer = <span class="keyword">new</span> Outer();</span><br><span class="line">        Outer.Inner inner = outer.<span class="keyword">new</span> Inner();</span><br><span class="line">        inner.in();</span><br><span class="line">        inner.getId();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>输出为:</p>
+<p><img src="http://qcxz71s06.bkt.clouddn.com/QQ%E6%88%AA%E5%9B%BE20200707193414.png" alt=""></p>
+<h3 id="静态内部类"><a href="#静态内部类" class="headerlink" title="静态内部类"></a>静态内部类</h3><p>在定义内部类时添加 <code>statc</code> 关键字即可. </p>
+<p>因为创建内部类的方式与调用方法的步骤与成员内部类相同, 所以就不再赘述.</p>
+<p>但是需要注意的是, 静态内部类是随外部类加载时创建的, 所以<strong>不能调用成员变量</strong>.</p>
+<h3 id="局部内部类"><a href="#局部内部类" class="headerlink" title="局部内部类"></a>局部内部类</h3><p>在外部类的方法中定义的类叫局部内部类.</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Outer</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">int</span> id = <span class="number">10</span>;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">method</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="class"><span class="keyword">class</span> <span class="title">Inner</span></span>&#123;</span><br><span class="line">            <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">in</span><span class="params">()</span></span>&#123;</span><br><span class="line">                System.out.println(<span class="string">"这是内部类的方法"</span>);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="异常"><a href="#异常" class="headerlink" title="异常"></a>异常</h2><p><img src="http://qcxz71s06.bkt.clouddn.com/QQ%E6%88%AA%E5%9B%BE20200707200724.png" alt=""></p>
+<p><strong>Error</strong>:</p>
+<p>通常是灾难性的致命的错误, 是程序员无法控制和处理的, 当出现这些异常时, JVM一般会终止线程</p>
+<p><strong>Exception</strong>:</p>
+<p>通常情况下是可以被程序处理, 并且在程序中应该尽可能的去处理这些异常</p>
+<h3 id="抛出异常"><a href="#抛出异常" class="headerlink" title="抛出异常"></a>抛出异常</h3><p>主动抛出异常</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> a = <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">int</span> b = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">new</span> Demo01().test(a, b);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">test</span><span class="params">(<span class="keyword">int</span> a, <span class="keyword">int</span> b)</span></span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (b==<span class="number">0</span>)&#123;</span><br><span class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> ArithmeticException(); <span class="comment">// 主动抛出异常, 一般在方法中使用</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+<p>假设方法中处理不了这个异常, 直接在方法上抛出, 使用<code>throws</code> 关键字, 然后调用该方法时用<code>try-catch</code> 捕获处理</p>
+<h3 id="捕获异常"><a href="#捕获异常" class="headerlink" title="捕获异常"></a>捕获异常</h3><p>使用<code>try-catch</code>捕获异常并处理</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> a = <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">int</span> b = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            <span class="keyword">new</span> Demo01().test(a, b);</span><br><span class="line">        &#125; <span class="keyword">catch</span> (ArithmeticException e) &#123;</span><br><span class="line">            System.out.println(<span class="string">"运算失败, 除数为0"</span>);</span><br><span class="line">        &#125; <span class="keyword">finally</span> &#123;</span><br><span class="line">            System.out.println(<span class="string">"调用结束"</span>);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">test</span><span class="params">(<span class="keyword">int</span> a, <span class="keyword">int</span> b)</span> <span class="keyword">throws</span> ArithmeticException</span>&#123;</span><br><span class="line">        System.out.println(a/b);</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+<p>输出为:</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">运算失败, 除数为0</span><br><span class="line">调用结束</span><br></pre></td></tr></table></figure>
+
+<h3 id="异常处理五个关键字"><a href="#异常处理五个关键字" class="headerlink" title="异常处理五个关键字"></a>异常处理五个关键字</h3><p><strong>try, catch, throw, throws, finally</strong></p>
+<p>先看<code>try</code> , <code>catch</code>, <code>finally</code> 关键字的常见用法</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> a = <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">int</span> b = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">try</span> &#123;   <span class="comment">// try监控区域</span></span><br><span class="line">        System.out.println(a / b);</span><br><span class="line">    &#125; <span class="keyword">catch</span> (Exception e) &#123; <span class="comment">// catch(想要捕获的异常类型)捕获异常</span></span><br><span class="line">        System.out.println(<span class="string">"程序出现异常, 变量b不能为0"</span>);</span><br><span class="line">    &#125; <span class="keyword">finally</span> &#123; <span class="comment">// 处理善后工作</span></span><br><span class="line">        System.out.println(<span class="string">"finally"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>输出结果为:</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">程序出现异常, 变量b不能为0</span><br><span class="line">finally</span><br></pre></td></tr></table></figure>
+
+<p>这里需要注意的是<code>finally</code>, 不管是否能捕获到异常, 都会执行该代码块, 属于善后工作, 也可以不要</p>
+<p>可以写多个<code>catch</code> 进行捕获, 如果要写多个的话,小的异常写上面, 层层递进, 大的写上面就给覆盖掉了</p>
+<p><code>thow</code>和<code>throws</code> 的区别在于, 前者为方法中主动抛出异常, 后者是该方法中处理不了让调用该方法的方法通过<code>try-catch</code>处理.</p>
+<h3 id="自定义异常"><a href="#自定义异常" class="headerlink" title="自定义异常"></a>自定义异常</h3><p>创建自定义异常要继承<code>Exception</code> 类</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MyException</span> <span class="keyword">extends</span> <span class="title">Exception</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 传递数字 &gt; 10</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">int</span> detail;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">MyException</span><span class="params">(<span class="keyword">int</span> a)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.detail = a;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// toString: 异常的打印信息</span></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">toString</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="string">"MyException&#123;"</span> + detail + <span class="string">'&#125;'</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>然后使用该异常:</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MyExceptionTest</span> </span>&#123;</span><br><span class="line">    <span class="comment">// 可能会存在异常的方法</span></span><br><span class="line">    <span class="function"><span class="keyword">static</span> <span class="keyword">void</span> <span class="title">test</span><span class="params">(<span class="keyword">int</span> a)</span> <span class="keyword">throws</span> MyException </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"传递的参数为: "</span> + a);</span><br><span class="line">        <span class="keyword">if</span> (a&gt;<span class="number">10</span>)&#123;</span><br><span class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> MyException(a);</span><br><span class="line">        &#125;</span><br><span class="line">        System.out.println(<span class="string">"OK"</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            test(<span class="number">11</span>);</span><br><span class="line">        &#125; <span class="keyword">catch</span> (MyException e) &#123;</span><br><span class="line">            System.out.println(e);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>输出为:</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">传递的参数为: 11</span><br><span class="line">MyException&#123;11&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<p>在这段代码中, 判断<code>a&gt;10</code> 的时候抛出我们所定义的异常, 这里有两种处理方式, 一是在该方法中<code>try-catch</code> 进行异常的处理, 或者在方法层面抛出, 让该方法的调用者去<code>try-catch</code> 去处理. 这里采用的是第二种处理方法.</p>
+<p>总之, 只要抛出了异常, 要么就地处理, 要么抛出去谁调用谁处理, 总是要还的.</p>
+<p>以下是就地处理的代码和结果:</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MyExceptionTest</span> </span>&#123;</span><br><span class="line">    <span class="comment">// 可能会存在异常的方法</span></span><br><span class="line">    <span class="function"><span class="keyword">static</span> <span class="keyword">void</span> <span class="title">test</span><span class="params">(<span class="keyword">int</span> a)</span>  </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"传递的参数为: "</span> + a);</span><br><span class="line">        <span class="keyword">if</span> (a&gt;<span class="number">10</span>)&#123;</span><br><span class="line">            <span class="keyword">try</span> &#123;</span><br><span class="line">                <span class="keyword">throw</span> <span class="keyword">new</span> MyException(a);</span><br><span class="line">            &#125; <span class="keyword">catch</span> (MyException e) &#123;</span><br><span class="line">                System.out.println(e);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        System.out.println(<span class="string">"OK"</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        test(<span class="number">11</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>输出为:</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">传递的参数为: 11</span><br><span class="line">MyException&#123;11&#125;</span><br><span class="line">OK</span><br></pre></td></tr></table></figure>
+
+<p><strong>要注意输出的结果是不一样的!!</strong></p>
+<hr>
+<h2 id="类加载器与构造器的调用顺序"><a href="#类加载器与构造器的调用顺序" class="headerlink" title="类加载器与构造器的调用顺序"></a>类加载器与构造器的调用顺序</h2><p>今天遇到一个考察继承的题目, 牵涉到类加载器和构造器调用顺序的问题, 很有趣.</p>
+<p><strong>问</strong>: new一个C02对象, 会输出什么信息?</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">A02</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">int</span> n1 = getVal01();</span><br><span class="line">    <span class="keyword">static</span> &#123;</span><br><span class="line">        System.out.println(<span class="string">"A02的一个静态代码块.."</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    &#123;</span><br><span class="line">        System.out.println(<span class="string">"A02的第一个普通代码块.."</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">int</span> n3 = getVal02();</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">int</span> <span class="title">getVal01</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"getVal01"</span>);</span><br><span class="line">        <span class="keyword">return</span> <span class="number">10</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">getVal02</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"getVal02"</span>);</span><br><span class="line">        <span class="keyword">return</span> <span class="number">10</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">A02</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"A02的构造器"</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">B02</span> <span class="keyword">extends</span> <span class="title">A02</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">int</span> n3 = getVal03();</span><br><span class="line"></span><br><span class="line">    <span class="keyword">static</span> &#123;</span><br><span class="line">        System.out.println(<span class="string">"B02的一个静态代码块.."</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">int</span> n5 = getVal04();</span><br><span class="line">    &#123;</span><br><span class="line">        System.out.println(<span class="string">"B02的第一个普通代码块.."</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">int</span> <span class="title">getVal03</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"getVal03"</span>);</span><br><span class="line">        <span class="keyword">return</span> <span class="number">10</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">getVal04</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"getVal04"</span>);</span><br><span class="line">        <span class="keyword">return</span> <span class="number">10</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">B02</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"B02的构造器"</span>);</span><br><span class="line">        <span class="comment">// TODO Auto-generated constructor stub</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">C02</span> <span class="keyword">extends</span> <span class="title">B02</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">int</span> n6 = getVal06();</span><br><span class="line"></span><br><span class="line">    <span class="keyword">static</span> &#123;</span><br><span class="line">        System.out.println(<span class="string">"C02的一个静态代码块.."</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    &#123;</span><br><span class="line">        System.out.println(<span class="string">"C02的第一个普通代码块.."</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">int</span> n8 = getVal08();</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">int</span> <span class="title">getVal06</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"getVal06"</span>);</span><br><span class="line">        <span class="keyword">return</span> <span class="number">10</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">getVal08</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"getVal08"</span>);</span><br><span class="line">        <span class="keyword">return</span> <span class="number">10</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">C02</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"C02的构造器"</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        C02 c = <span class="keyword">new</span> C02();</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>分析</strong>:</p>
+<p>这里有三个类,<code>A02</code>是父类, <code>B02</code>继承<code>A02</code>, <code>C02</code>继承<code>B02</code>. 每个类都有各自的静态代码块和无参构造器. </p>
+<p>根据继承的特点可知, 当<code>new</code> 一个<code>C02</code>对象时, 会去调用<code>C02</code>的构造器, <code>C02</code>构造器第一行默认为<code>super()</code> , 即调用父类<code>B02</code>的构造器, 同理调用<code>A02</code> 的构造器, 然后顺序执行类<code>A02</code> 的代码 -&gt; <code>A02</code>构造器内的代码 -&gt; 顺序执行类<code>B02</code> 的代码 -&gt; <code>B02</code>构造器内的代码 -&gt; 顺序执行<code>C02</code> 的代码 -&gt; <code>C02</code> 构造器内的代码.</p>
+<p>然而加了类构造器之后该是什么顺序呢?  直接贴结果:</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">getVal01</span><br><span class="line">A02的一个静态代码块..</span><br><span class="line">getVal03</span><br><span class="line">B02的一个静态代码块..</span><br><span class="line">getVal06</span><br><span class="line">C02的一个静态代码块..</span><br><span class="line">A02的第一个普通代码块..</span><br><span class="line">getVal02</span><br><span class="line">A02的构造器</span><br><span class="line">getVal04</span><br><span class="line">B02的第一个普通代码块..</span><br><span class="line">B02的构造器</span><br><span class="line">C02的第一个普通代码块..</span><br><span class="line">getVal08</span><br><span class="line">C02的构造器</span><br></pre></td></tr></table></figure>
+
+<p>我们刚才分析的步骤是从第七行开始的, 后面全部严格按照分析的步骤打印信息, 所以可以得出结论: 类加载器工作的时间整体都在构造器之前.</p>
+<p>不难看出, 类加载器的调用顺序与构造器是类似的, 也是从子类一路到父类, 然后再到子类. 更加严谨的调用顺序如下所述:</p>
+<h3 id="类加载器调用顺序"><a href="#类加载器调用顺序" class="headerlink" title="类加载器调用顺序"></a>类加载器调用顺序</h3><p>JVM会用类加载器加载xxx.C02这个class文件</p>
+<p>加载(class){</p>
+<p>　　if(class有父类){</p>
+<p>　　　　加载(superclass);</p>
+<p>　　}</p>
+<p>　　1.静态域申明,默认初始化为0,false,null</p>
+<p>　　2.按照申明顺序(从上而下书写顺序)执行静态域(赋值)和静态代码块(执行代码块体),</p>
+<p>　　　　二者等价,因此不可在静态代码块中<strong>使用</strong>位于代码块之后申明的静态域,但是<strong>可以初始化</strong></p>
+<p>　　3.按照申明顺序加载静态方法</p>
+<p>}</p>
+<h3 id="构造器调用顺序"><a href="#构造器调用顺序" class="headerlink" title="构造器调用顺序"></a>构造器调用顺序</h3><ol>
+<li><p>所有实例域初始化为默认值0,false,null</p>
+</li>
+<li><p>按照申明顺序执行域初始化及块初始化</p>
+</li>
+<li><p><strong>如果构造器”第一行”调用了其他构造器,则执行</strong></p>
+</li>
+<li><p>执行构造器体</p>
+</li>
+</ol>
+<h3 id="方法调用顺序"><a href="#方法调用顺序" class="headerlink" title="方法调用顺序"></a>方法调用顺序</h3><ol>
+<li><p>编译器查看对象的<strong>申明</strong>类型,找到它所有与方法名相同的方法</p>
+</li>
+<li><p>根据参数类型,找到相应”最合适”的父类方法可能会出现类型转换(向上转型)</p>
+</li>
+<li><p>如果是private,static,final,构造器 方法,那么已经确定就是该方法(这四种类型的方法没有多态特征),</p>
+</li>
+</ol>
+<p>　　因为没有多态所以也叫静态绑定</p>
+<ol start="4">
+<li><p>如果是其他方式,采用动态绑定:JVM去寻找改类的实际类型中对应的最合适方法</p>
+</li>
+<li><p>执行调用</p>
+</li>
+</ol>
+<p><strong>结合理论表述, 本题的顺序总结来说就是:</strong></p>
+<ol>
+<li>父类的静态代码块和静态属性(优先级一样，按定义顺序执行)</li>
+<li>子类的静态代码块和静态属性(优先级一样，按定义顺序执行)</li>
+<li>父类的普通代码块和普通属性初始化(优先级一样，按定义顺序执行)</li>
+<li>父类的构造方法</li>
+<li>子类的普通代码块和普通属性初始化(优先级一样，按定义顺序执行)</li>
+<li>子类的构造方法</li>
+</ol>
 ]]></content>
       <categories>
-        <category>算法</category>
+        <category>Java</category>
       </categories>
       <tags>
-        <tag>BST</tag>
+        <tag>抽象类</tag>
+        <tag>接口</tag>
+        <tag>内部类</tag>
+        <tag>异常</tag>
       </tags>
   </entry>
   <entry>
@@ -916,248 +990,22 @@
       </tags>
   </entry>
   <entry>
-    <title>jz32-Ⅰ.从上到下打印二叉树</title>
-    <url>/2020/07/09/jz32-%E2%85%A0-%E4%BB%8E%E4%B8%8A%E5%88%B0%E4%B8%8B%E6%89%93%E5%8D%B0%E4%BA%8C%E5%8F%89%E6%A0%91/</url>
-    <content><![CDATA[<h1 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h1><p>从上到下打印出二叉树的每个节点，同一层的节点按照从左到右的顺序打印。</p>
-<p>例如:<br>给定二叉树: <code>[3,9,20,null,null,15,7]</code>,</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">  3</span><br><span class="line"> &#x2F; \</span><br><span class="line">9  20</span><br><span class="line">  &#x2F;  \</span><br><span class="line"> 15   7</span><br></pre></td></tr></table></figure>
+    <title>Hello World</title>
+    <url>/2020/07/03/hello-world/</url>
+    <content><![CDATA[<p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p>
+<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
 
-<p>返回:</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">[3,9,20,15,7]</span><br></pre></td></tr></table></figure>
+<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p>
+<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
 
-<h1 id="题解"><a href="#题解" class="headerlink" title="题解"></a>题解</h1><h2 id="队列"><a href="#队列" class="headerlink" title="队列"></a>队列</h2><p>题目要求的二叉树的 <strong>从上至下</strong> 打印（即按层打印），又称为二叉树的 <strong>广度优先搜索</strong>（BFS）。</p>
-<p>BFS 通常借助 <strong>队列</strong> 的先入先出特性来实现。</p>
-<p><img src="http://qcxz71s06.bkt.clouddn.com/f824fdd8052ae4ee657365c98633480caf03c60e42e4661797618e318baf8664-Picture0.png" alt=""></p>
-<p><strong>算法流程</strong>：</p>
-<ol>
-<li><p><strong>特例处理：</strong> 当树的根节点为空，则直接返回空列表 [] ；</p>
-</li>
-<li><p><strong>初始化：</strong> 打印结果列表 <code>res = []</code> ，包含根节点的队列 <code>queue = [root]</code> ；</p>
-</li>
-<li><p><strong>BFS 循环：</strong> 当队列 <code>queue</code> 为空时跳出；</p>
-<ol>
-<li><strong>出队：</strong> 队首元素出队，记为 <code>node</code>；</li>
-<li><strong>打印：</strong> 将 <code>node.val</code>添加至列表 <code>tmp</code>尾部；</li>
-<li><strong>添加子节点：</strong> 若 <code>node</code>的左（右）子节点不为空，则将左（右）子节点加入队列 <code>queue</code>；</li>
-</ol>
-</li>
-<li><p><strong>返回值：</strong> 返回打印结果列表<code>res</code>即可。</p>
-</li>
-</ol>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">jz32</span> </span>&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">int</span>[] levelOrder(TreeNode root) &#123;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (root == <span class="keyword">null</span>) <span class="keyword">return</span> <span class="keyword">new</span> <span class="keyword">int</span>[<span class="number">0</span>];</span><br><span class="line"></span><br><span class="line">        Queue&lt;TreeNode&gt; queue = <span class="keyword">new</span> LinkedList&lt;&gt;();</span><br><span class="line">        ArrayList&lt;Integer&gt; ans = <span class="keyword">new</span> ArrayList&lt;&gt;();</span><br><span class="line"></span><br><span class="line">        queue.add(root);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">while</span> (!queue.isEmpty()) &#123;</span><br><span class="line">            TreeNode temp = queue.poll();</span><br><span class="line">            ans.add(temp.val);</span><br><span class="line">            <span class="keyword">if</span> (temp.left != <span class="keyword">null</span>)</span><br><span class="line">                queue.add(temp.left);</span><br><span class="line">            <span class="keyword">if</span> (temp.right != <span class="keyword">null</span>)</span><br><span class="line">                queue.add(temp.right);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">int</span>[] res = <span class="keyword">new</span> <span class="keyword">int</span>[ans.size()];</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; ans.size(); i++) &#123;</span><br><span class="line">            res[i] = ans.get(i);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> res;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p>
+<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
 
+<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p>
+<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
 
-
-
-
+<p>More info: <a href="https://hexo.io/docs/one-command-deployment.html" target="_blank" rel="noopener">Deployment</a></p>
 ]]></content>
-      <categories>
-        <category>算法</category>
-      </categories>
-      <tags>
-        <tag>BST</tag>
-        <tag>BFS</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Java拾遗</title>
-    <url>/2020/07/07/Java%E6%8B%BE%E9%81%97/</url>
-    <content><![CDATA[<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>Java 语言基础中知识点繁多, 大多数只是在第一次学习时有印象, 但是因为长时间没有运用到会遗忘, 这篇博文就用来记录和总结遇到的生僻的知识点.</p>
-<hr>
-<h2 id="抽象类"><a href="#抽象类" class="headerlink" title="抽象类"></a>抽象类</h2><p><code>abstract</code> 修饰符可以用来修饰方法, 也可以用来修饰类, 如果修饰方法, 那么该方法就是抽象方法; 如果修饰类, 那么该类就是抽象类.</p>
-<ul>
-<li>不能<code>new</code> 抽象类, 只能靠子类去实现它</li>
-<li>抽象类中可以写普通方法</li>
-<li>抽象方法必须在抽象类中</li>
-</ul>
-<hr>
-<h2 id="接口"><a href="#接口" class="headerlink" title="接口"></a>接口</h2><ul>
-<li>在接口中定义的常量会默认加上修饰符 <code>public static final</code>, 在实现了该接口的类中可以直接拿来用</li>
-<li>在接口中定义的方法会默认加上修饰符 <code>pubilc abstract</code> </li>
-<li>接口中没有构造方法, 这是不能被实例化的原因</li>
-</ul>
-<hr>
-<h2 id="内部类"><a href="#内部类" class="headerlink" title="内部类"></a>内部类</h2><h3 id="成员内部类"><a href="#成员内部类" class="headerlink" title="成员内部类"></a>成员内部类</h3><p>定义以下的类:</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Outer</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">int</span> id;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">out</span><span class="params">()</span></span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"这是外部类的方法"</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="class"><span class="keyword">class</span> <span class="title">Inner</span></span>&#123;</span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">in</span><span class="params">()</span></span>&#123;</span><br><span class="line">            System.out.println(<span class="string">"这是内部类的方法"</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>两个类中分别定义了各自的方法. 然后实例化外部类的对象, 对该类进行测试.</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Application</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        Outer outer = <span class="keyword">new</span> Outer();</span><br><span class="line">        Outer.Inner inner = outer.<span class="keyword">new</span> Inner();</span><br><span class="line">        inner.in();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>这里就要注意 <code>new</code> 内部类对象时写法上的区别了.</p>
-<p>可以通过定义内部类的方法来获取外部类的私有属性, 修改外部类如下:</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Outer</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">int</span> id = <span class="number">10</span>;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">out</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"这是外部类的方法"</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="class"><span class="keyword">class</span> <span class="title">Inner</span> </span>&#123;</span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">in</span><span class="params">()</span> </span>&#123;</span><br><span class="line">            System.out.println(<span class="string">"这是内部类的方法"</span>);</span><br><span class="line"></span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">getId</span><span class="params">()</span> </span>&#123;</span><br><span class="line">            System.out.println(id);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>然后通过内部类的对象调用:</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Application</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        Outer outer = <span class="keyword">new</span> Outer();</span><br><span class="line">        Outer.Inner inner = outer.<span class="keyword">new</span> Inner();</span><br><span class="line">        inner.in();</span><br><span class="line">        inner.getId();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>输出为:</p>
-<p><img src="http://qcxz71s06.bkt.clouddn.com/QQ%E6%88%AA%E5%9B%BE20200707193414.png" alt=""></p>
-<h3 id="静态内部类"><a href="#静态内部类" class="headerlink" title="静态内部类"></a>静态内部类</h3><p>在定义内部类时添加 <code>statc</code> 关键字即可. </p>
-<p>因为创建内部类的方式与调用方法的步骤与成员内部类相同, 所以就不再赘述.</p>
-<p>但是需要注意的是, 静态内部类是随外部类加载时创建的, 所以<strong>不能调用成员变量</strong>.</p>
-<h3 id="局部内部类"><a href="#局部内部类" class="headerlink" title="局部内部类"></a>局部内部类</h3><p>在外部类的方法中定义的类叫局部内部类.</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Outer</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">int</span> id = <span class="number">10</span>;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">method</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="class"><span class="keyword">class</span> <span class="title">Inner</span></span>&#123;</span><br><span class="line">            <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">in</span><span class="params">()</span></span>&#123;</span><br><span class="line">                System.out.println(<span class="string">"这是内部类的方法"</span>);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<hr>
-<h2 id="异常"><a href="#异常" class="headerlink" title="异常"></a>异常</h2><p><img src="http://qcxz71s06.bkt.clouddn.com/QQ%E6%88%AA%E5%9B%BE20200707200724.png" alt=""></p>
-<p><strong>Error</strong>:</p>
-<p>通常是灾难性的致命的错误, 是程序员无法控制和处理的, 当出现这些异常时, JVM一般会终止线程</p>
-<p><strong>Exception</strong>:</p>
-<p>通常情况下是可以被程序处理, 并且在程序中应该尽可能的去处理这些异常</p>
-<h3 id="抛出异常"><a href="#抛出异常" class="headerlink" title="抛出异常"></a>抛出异常</h3><p>主动抛出异常</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> a = <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">int</span> b = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">new</span> Demo01().test(a, b);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">test</span><span class="params">(<span class="keyword">int</span> a, <span class="keyword">int</span> b)</span></span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (b==<span class="number">0</span>)&#123;</span><br><span class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> ArithmeticException(); <span class="comment">// 主动抛出异常, 一般在方法中使用</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
-
-<p>假设方法中处理不了这个异常, 直接在方法上抛出, 使用<code>throws</code> 关键字, 然后调用该方法时用<code>try-catch</code> 捕获处理</p>
-<h3 id="捕获异常"><a href="#捕获异常" class="headerlink" title="捕获异常"></a>捕获异常</h3><p>使用<code>try-catch</code>捕获异常并处理</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> a = <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">int</span> b = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            <span class="keyword">new</span> Demo01().test(a, b);</span><br><span class="line">        &#125; <span class="keyword">catch</span> (ArithmeticException e) &#123;</span><br><span class="line">            System.out.println(<span class="string">"运算失败, 除数为0"</span>);</span><br><span class="line">        &#125; <span class="keyword">finally</span> &#123;</span><br><span class="line">            System.out.println(<span class="string">"调用结束"</span>);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">test</span><span class="params">(<span class="keyword">int</span> a, <span class="keyword">int</span> b)</span> <span class="keyword">throws</span> ArithmeticException</span>&#123;</span><br><span class="line">        System.out.println(a/b);</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
-
-<p>输出为:</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">运算失败, 除数为0</span><br><span class="line">调用结束</span><br></pre></td></tr></table></figure>
-
-<h3 id="异常处理五个关键字"><a href="#异常处理五个关键字" class="headerlink" title="异常处理五个关键字"></a>异常处理五个关键字</h3><p><strong>try, catch, throw, throws, finally</strong></p>
-<p>先看<code>try</code> , <code>catch</code>, <code>finally</code> 关键字的常见用法</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> a = <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">int</span> b = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">try</span> &#123;   <span class="comment">// try监控区域</span></span><br><span class="line">        System.out.println(a / b);</span><br><span class="line">    &#125; <span class="keyword">catch</span> (Exception e) &#123; <span class="comment">// catch(想要捕获的异常类型)捕获异常</span></span><br><span class="line">        System.out.println(<span class="string">"程序出现异常, 变量b不能为0"</span>);</span><br><span class="line">    &#125; <span class="keyword">finally</span> &#123; <span class="comment">// 处理善后工作</span></span><br><span class="line">        System.out.println(<span class="string">"finally"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>输出结果为:</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">程序出现异常, 变量b不能为0</span><br><span class="line">finally</span><br></pre></td></tr></table></figure>
-
-<p>这里需要注意的是<code>finally</code>, 不管是否能捕获到异常, 都会执行该代码块, 属于善后工作, 也可以不要</p>
-<p>可以写多个<code>catch</code> 进行捕获, 如果要写多个的话,小的异常写上面, 层层递进, 大的写上面就给覆盖掉了</p>
-<p><code>thow</code>和<code>throws</code> 的区别在于, 前者为方法中主动抛出异常, 后者是该方法中处理不了让调用该方法的方法通过<code>try-catch</code>处理.</p>
-<h3 id="自定义异常"><a href="#自定义异常" class="headerlink" title="自定义异常"></a>自定义异常</h3><p>创建自定义异常要继承<code>Exception</code> 类</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MyException</span> <span class="keyword">extends</span> <span class="title">Exception</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 传递数字 &gt; 10</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">int</span> detail;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">MyException</span><span class="params">(<span class="keyword">int</span> a)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.detail = a;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// toString: 异常的打印信息</span></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">toString</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="string">"MyException&#123;"</span> + detail + <span class="string">'&#125;'</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>然后使用该异常:</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MyExceptionTest</span> </span>&#123;</span><br><span class="line">    <span class="comment">// 可能会存在异常的方法</span></span><br><span class="line">    <span class="function"><span class="keyword">static</span> <span class="keyword">void</span> <span class="title">test</span><span class="params">(<span class="keyword">int</span> a)</span> <span class="keyword">throws</span> MyException </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"传递的参数为: "</span> + a);</span><br><span class="line">        <span class="keyword">if</span> (a&gt;<span class="number">10</span>)&#123;</span><br><span class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> MyException(a);</span><br><span class="line">        &#125;</span><br><span class="line">        System.out.println(<span class="string">"OK"</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            test(<span class="number">11</span>);</span><br><span class="line">        &#125; <span class="keyword">catch</span> (MyException e) &#123;</span><br><span class="line">            System.out.println(e);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>输出为:</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">传递的参数为: 11</span><br><span class="line">MyException&#123;11&#125;</span><br></pre></td></tr></table></figure>
-
-
-
-<p>在这段代码中, 判断<code>a&gt;10</code> 的时候抛出我们所定义的异常, 这里有两种处理方式, 一是在该方法中<code>try-catch</code> 进行异常的处理, 或者在方法层面抛出, 让该方法的调用者去<code>try-catch</code> 去处理. 这里采用的是第二种处理方法.</p>
-<p>总之, 只要抛出了异常, 要么就地处理, 要么抛出去谁调用谁处理, 总是要还的.</p>
-<p>以下是就地处理的代码和结果:</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MyExceptionTest</span> </span>&#123;</span><br><span class="line">    <span class="comment">// 可能会存在异常的方法</span></span><br><span class="line">    <span class="function"><span class="keyword">static</span> <span class="keyword">void</span> <span class="title">test</span><span class="params">(<span class="keyword">int</span> a)</span>  </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"传递的参数为: "</span> + a);</span><br><span class="line">        <span class="keyword">if</span> (a&gt;<span class="number">10</span>)&#123;</span><br><span class="line">            <span class="keyword">try</span> &#123;</span><br><span class="line">                <span class="keyword">throw</span> <span class="keyword">new</span> MyException(a);</span><br><span class="line">            &#125; <span class="keyword">catch</span> (MyException e) &#123;</span><br><span class="line">                System.out.println(e);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        System.out.println(<span class="string">"OK"</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        test(<span class="number">11</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>输出为:</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">传递的参数为: 11</span><br><span class="line">MyException&#123;11&#125;</span><br><span class="line">OK</span><br></pre></td></tr></table></figure>
-
-<p><strong>要注意输出的结果是不一样的!!</strong></p>
-<hr>
-<h2 id="类加载器与构造器的调用顺序"><a href="#类加载器与构造器的调用顺序" class="headerlink" title="类加载器与构造器的调用顺序"></a>类加载器与构造器的调用顺序</h2><p>今天遇到一个考察继承的题目, 牵涉到类加载器和构造器调用顺序的问题, 很有趣.</p>
-<p><strong>问</strong>: new一个C02对象, 会输出什么信息?</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">A02</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">int</span> n1 = getVal01();</span><br><span class="line">    <span class="keyword">static</span> &#123;</span><br><span class="line">        System.out.println(<span class="string">"A02的一个静态代码块.."</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    &#123;</span><br><span class="line">        System.out.println(<span class="string">"A02的第一个普通代码块.."</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">int</span> n3 = getVal02();</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">int</span> <span class="title">getVal01</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"getVal01"</span>);</span><br><span class="line">        <span class="keyword">return</span> <span class="number">10</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">getVal02</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"getVal02"</span>);</span><br><span class="line">        <span class="keyword">return</span> <span class="number">10</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">A02</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"A02的构造器"</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">B02</span> <span class="keyword">extends</span> <span class="title">A02</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">int</span> n3 = getVal03();</span><br><span class="line"></span><br><span class="line">    <span class="keyword">static</span> &#123;</span><br><span class="line">        System.out.println(<span class="string">"B02的一个静态代码块.."</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">int</span> n5 = getVal04();</span><br><span class="line">    &#123;</span><br><span class="line">        System.out.println(<span class="string">"B02的第一个普通代码块.."</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">int</span> <span class="title">getVal03</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"getVal03"</span>);</span><br><span class="line">        <span class="keyword">return</span> <span class="number">10</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">getVal04</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"getVal04"</span>);</span><br><span class="line">        <span class="keyword">return</span> <span class="number">10</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">B02</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"B02的构造器"</span>);</span><br><span class="line">        <span class="comment">// TODO Auto-generated constructor stub</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">C02</span> <span class="keyword">extends</span> <span class="title">B02</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">int</span> n6 = getVal06();</span><br><span class="line"></span><br><span class="line">    <span class="keyword">static</span> &#123;</span><br><span class="line">        System.out.println(<span class="string">"C02的一个静态代码块.."</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    &#123;</span><br><span class="line">        System.out.println(<span class="string">"C02的第一个普通代码块.."</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">int</span> n8 = getVal08();</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">int</span> <span class="title">getVal06</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"getVal06"</span>);</span><br><span class="line">        <span class="keyword">return</span> <span class="number">10</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">getVal08</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"getVal08"</span>);</span><br><span class="line">        <span class="keyword">return</span> <span class="number">10</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">C02</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"C02的构造器"</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        C02 c = <span class="keyword">new</span> C02();</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p><strong>分析</strong>:</p>
-<p>这里有三个类,<code>A02</code>是父类, <code>B02</code>继承<code>A02</code>, <code>C02</code>继承<code>B02</code>. 每个类都有各自的静态代码块和无参构造器. </p>
-<p>根据继承的特点可知, 当<code>new</code> 一个<code>C02</code>对象时, 会去调用<code>C02</code>的构造器, <code>C02</code>构造器第一行默认为<code>super()</code> , 即调用父类<code>B02</code>的构造器, 同理调用<code>A02</code> 的构造器, 然后顺序执行类<code>A02</code> 的代码 -&gt; <code>A02</code>构造器内的代码 -&gt; 顺序执行类<code>B02</code> 的代码 -&gt; <code>B02</code>构造器内的代码 -&gt; 顺序执行<code>C02</code> 的代码 -&gt; <code>C02</code> 构造器内的代码.</p>
-<p>然而加了类构造器之后该是什么顺序呢?  直接贴结果:</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">getVal01</span><br><span class="line">A02的一个静态代码块..</span><br><span class="line">getVal03</span><br><span class="line">B02的一个静态代码块..</span><br><span class="line">getVal06</span><br><span class="line">C02的一个静态代码块..</span><br><span class="line">A02的第一个普通代码块..</span><br><span class="line">getVal02</span><br><span class="line">A02的构造器</span><br><span class="line">getVal04</span><br><span class="line">B02的第一个普通代码块..</span><br><span class="line">B02的构造器</span><br><span class="line">C02的第一个普通代码块..</span><br><span class="line">getVal08</span><br><span class="line">C02的构造器</span><br></pre></td></tr></table></figure>
-
-<p>我们刚才分析的步骤是从第七行开始的, 后面全部严格按照分析的步骤打印信息, 所以可以得出结论: 类加载器工作的时间整体都在构造器之前.</p>
-<p>不难看出, 类加载器的调用顺序与构造器是类似的, 也是从子类一路到父类, 然后再到子类. 更加严谨的调用顺序如下所述:</p>
-<h3 id="类加载器调用顺序"><a href="#类加载器调用顺序" class="headerlink" title="类加载器调用顺序"></a>类加载器调用顺序</h3><p>JVM会用类加载器加载xxx.C02这个class文件</p>
-<p>加载(class){</p>
-<p>　　if(class有父类){</p>
-<p>　　　　加载(superclass);</p>
-<p>　　}</p>
-<p>　　1.静态域申明,默认初始化为0,false,null</p>
-<p>　　2.按照申明顺序(从上而下书写顺序)执行静态域(赋值)和静态代码块(执行代码块体),</p>
-<p>　　　　二者等价,因此不可在静态代码块中<strong>使用</strong>位于代码块之后申明的静态域,但是<strong>可以初始化</strong></p>
-<p>　　3.按照申明顺序加载静态方法</p>
-<p>}</p>
-<h3 id="构造器调用顺序"><a href="#构造器调用顺序" class="headerlink" title="构造器调用顺序"></a>构造器调用顺序</h3><ol>
-<li><p>所有实例域初始化为默认值0,false,null</p>
-</li>
-<li><p>按照申明顺序执行域初始化及块初始化</p>
-</li>
-<li><p><strong>如果构造器”第一行”调用了其他构造器,则执行</strong></p>
-</li>
-<li><p>执行构造器体</p>
-</li>
-</ol>
-<h3 id="方法调用顺序"><a href="#方法调用顺序" class="headerlink" title="方法调用顺序"></a>方法调用顺序</h3><ol>
-<li><p>编译器查看对象的<strong>申明</strong>类型,找到它所有与方法名相同的方法</p>
-</li>
-<li><p>根据参数类型,找到相应”最合适”的父类方法可能会出现类型转换(向上转型)</p>
-</li>
-<li><p>如果是private,static,final,构造器 方法,那么已经确定就是该方法(这四种类型的方法没有多态特征),</p>
-</li>
-</ol>
-<p>　　因为没有多态所以也叫静态绑定</p>
-<ol start="4">
-<li><p>如果是其他方式,采用动态绑定:JVM去寻找改类的实际类型中对应的最合适方法</p>
-</li>
-<li><p>执行调用</p>
-</li>
-</ol>
-<p><strong>结合理论表述, 本题的顺序总结来说就是:</strong></p>
-<ol>
-<li>父类的静态代码块和静态属性(优先级一样，按定义顺序执行)</li>
-<li>子类的静态代码块和静态属性(优先级一样，按定义顺序执行)</li>
-<li>父类的普通代码块和普通属性初始化(优先级一样，按定义顺序执行)</li>
-<li>父类的构造方法</li>
-<li>子类的普通代码块和普通属性初始化(优先级一样，按定义顺序执行)</li>
-<li>子类的构造方法</li>
-</ol>
-]]></content>
-      <categories>
-        <category>Java</category>
-      </categories>
-      <tags>
-        <tag>抽象类</tag>
-        <tag>接口</tag>
-        <tag>内部类</tag>
-        <tag>异常</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>二叉树的前中后序遍历</title>
-    <url>/2020/07/08/%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%84%E5%89%8D%E4%B8%AD%E5%90%8E%E5%BA%8F%E9%81%8D%E5%8E%86/</url>
-    <content><![CDATA[<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>汇总二叉树的前, 中, 后序遍历.每种遍历都有经典的递归和迭代方法.</p>
-<h2 id="前序遍历"><a href="#前序遍历" class="headerlink" title="前序遍历"></a>前序遍历</h2><h3 id="递归方法"><a href="#递归方法" class="headerlink" title="递归方法"></a>递归方法</h3><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> List&lt;Integer&gt; <span class="title">preorderTraversal</span><span class="params">(TreeNode root)</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    List&lt;Integer&gt; res = <span class="keyword">new</span> ArrayList&lt;&gt;();</span><br><span class="line">    helper(root, res);</span><br><span class="line">    <span class="keyword">return</span> res;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">helper</span><span class="params">(TreeNode root, List&lt;Integer&gt; res)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (root != <span class="keyword">null</span>) &#123;</span><br><span class="line">        res.add(root.val);</span><br><span class="line">        <span class="keyword">if</span> (root.left != <span class="keyword">null</span>)</span><br><span class="line">            helper(root.left, res);</span><br><span class="line">        <span class="keyword">if</span> (root.right != <span class="keyword">null</span>)</span><br><span class="line">            helper(root.right, res);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h3 id="迭代方法"><a href="#迭代方法" class="headerlink" title="迭代方法"></a>迭代方法</h3><p><img src="http://qcxz71s06.bkt.clouddn.com/f1c189e18ab21142095be343b507a206_3.png" alt=""></p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> List&lt;Integer&gt; <span class="title">preorderTraversal</span><span class="params">(TreeNode root)</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    List&lt;Integer&gt; res = <span class="keyword">new</span> ArrayList&lt;&gt;();</span><br><span class="line">    Stack&lt;TreeNode&gt; stack = <span class="keyword">new</span> Stack&lt;&gt;();</span><br><span class="line">    <span class="keyword">if</span> (root == <span class="keyword">null</span>)</span><br><span class="line">        <span class="keyword">return</span> res;</span><br><span class="line"></span><br><span class="line">    TreeNode curNode = root;</span><br><span class="line">    stack.push(curNode);</span><br><span class="line">    <span class="keyword">while</span> (!stack.isEmpty()) &#123;</span><br><span class="line">        curNode = stack.pop();</span><br><span class="line">        res.add(curNode.val);</span><br><span class="line">        <span class="keyword">if</span> (curNode.right != <span class="keyword">null</span>)</span><br><span class="line">            stack.add(curNode.right);</span><br><span class="line">        <span class="keyword">if</span> (curNode.left != <span class="keyword">null</span>)</span><br><span class="line">            stack.add(curNode.left);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> res;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<hr>
-<h2 id="中序遍历"><a href="#中序遍历" class="headerlink" title="中序遍历"></a>中序遍历</h2><h3 id="递归方法-1"><a href="#递归方法-1" class="headerlink" title="递归方法"></a>递归方法</h3><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> List&lt;Integer&gt; <span class="title">inorderTraversal</span><span class="params">(TreeNode root)</span> </span>&#123;</span><br><span class="line">        List&lt;Integer&gt; res = <span class="keyword">new</span> ArrayList&lt;&gt;();</span><br><span class="line">        helper(root, res);</span><br><span class="line">        <span class="keyword">return</span> res;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">helper</span><span class="params">(TreeNode root, List&lt;Integer&gt; res)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (root != <span class="keyword">null</span>) &#123;</span><br><span class="line">            <span class="keyword">if</span> (root.left != <span class="keyword">null</span>) &#123;</span><br><span class="line">                helper(root.left, res);</span><br><span class="line">            &#125;</span><br><span class="line">            res.add(root.val);</span><br><span class="line">            <span class="keyword">if</span> (root.right != <span class="keyword">null</span>) &#123;</span><br><span class="line">                helper(root.right, res);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
-
-<h3 id="迭代方法-1"><a href="#迭代方法-1" class="headerlink" title="迭代方法"></a>迭代方法</h3><h4 id="图解"><a href="#图解" class="headerlink" title="图解"></a>图解</h4><p><img src="http://qcxz71s06.bkt.clouddn.com/f6e4510b7c3446075698d9fd10595f2d.png" alt=""></p>
-<p><img src="http://qcxz71s06.bkt.clouddn.com/55fc6e5a3a213807d281b9ed360e89f0.png" alt=""></p>
-<p><img src="http://qcxz71s06.bkt.clouddn.com/f9d089302bcccba69e83adf17ce98382.png" alt=""></p>
-<p><img src="http://qcxz71s06.bkt.clouddn.com/350a01b043f194dc409076b65bbbbb61.png" alt=""></p>
-<p><img src="http://qcxz71s06.bkt.clouddn.com/c1f7b568c46ace2815d7653b1a47e092.png" alt=""></p>
-<p><img src="http://qcxz71s06.bkt.clouddn.com/3fb26798163cecf6ed46ae823256809e.png" alt=""></p>
-<p><img src="http://qcxz71s06.bkt.clouddn.com/b564b85e0e54727ab791d94f63834209.png" alt=""></p>
-<p><img src="http://qcxz71s06.bkt.clouddn.com/9b3541ab2cefb2a16efe0929a2f173c3.png" alt=""></p>
-<p><img src="http://qcxz71s06.bkt.clouddn.com/6995c79bfc19b0fc7bdb6af3a2ede56d.png" alt=""></p>
-<p><img src="http://qcxz71s06.bkt.clouddn.com/27ae5a883182fbf7ed00897de3348f64.png" alt=""></p>
-<p><img src="http://qcxz71s06.bkt.clouddn.com/88de3e29515e65b31b1f6c776587163a.png" alt=""></p>
-<p><img src="http://qcxz71s06.bkt.clouddn.com/636fb34cd17e20b998b4e78c95a32066.png" alt=""></p>
-<p><img src="http://qcxz71s06.bkt.clouddn.com/14056baa203348c036a36cb2eddd217c.png" alt=""></p>
-<h4 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h4><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> List&lt;Integer&gt; <span class="title">inorderTraversal2</span><span class="params">(TreeNode root)</span> </span>&#123;</span><br><span class="line">    List&lt;Integer&gt; res = <span class="keyword">new</span> ArrayList&lt;&gt;();</span><br><span class="line">    Stack&lt;TreeNode&gt; stack = <span class="keyword">new</span> Stack&lt;&gt;();</span><br><span class="line">    TreeNode cur = root;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">while</span> (cur != <span class="keyword">null</span> || !stack.isEmpty()) &#123;</span><br><span class="line">        <span class="keyword">while</span> (cur != <span class="keyword">null</span>) &#123;</span><br><span class="line">            stack.push(cur);</span><br><span class="line">            cur = cur.left;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        cur = stack.pop();</span><br><span class="line">        res.add(cur.val);</span><br><span class="line">        cur = cur.right;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> res;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<hr>
-<h2 id="后序遍历"><a href="#后序遍历" class="headerlink" title="后序遍历"></a>后序遍历</h2><h3 id="递归方法-2"><a href="#递归方法-2" class="headerlink" title="递归方法"></a>递归方法</h3><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> List&lt;Integer&gt; <span class="title">postorderTraversal</span><span class="params">(TreeNode root)</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    List&lt;Integer&gt; res = <span class="keyword">new</span> ArrayList&lt;&gt;();</span><br><span class="line">    helper(root, res);</span><br><span class="line">    <span class="keyword">return</span> res;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">helper</span><span class="params">(TreeNode root, List&lt;Integer&gt; res)</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (root != <span class="keyword">null</span>) &#123;</span><br><span class="line">        <span class="keyword">if</span> (root.left != <span class="keyword">null</span>)</span><br><span class="line">            helper(root.left, res);</span><br><span class="line">        <span class="keyword">if</span> (root.right != <span class="keyword">null</span>)</span><br><span class="line">            helper(root.right, res);</span><br><span class="line">        res.add(root.val);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h3 id="迭代方法-2"><a href="#迭代方法-2" class="headerlink" title="迭代方法"></a>迭代方法</h3><ol>
-<li>前序遍历的过程是<code>中左右</code>。 <ul>
-<li>将其转化成<code>中右左</code>。也就是压栈的过程中优先压入左子树，再压入右子树。</li>
-</ul>
-</li>
-<li>然后将这个结果反过来，用<code>addFirst()</code>方法将元素输出到数组即可完成逆序。</li>
-</ol>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> List&lt;Integer&gt; <span class="title">postorderTraversal</span><span class="params">(TreeNode root)</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    LinkedList&lt;Integer&gt; res = <span class="keyword">new</span> LinkedList&lt;&gt;();</span><br><span class="line">    Stack&lt;TreeNode&gt; stack = <span class="keyword">new</span> Stack&lt;&gt;();</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (root == <span class="keyword">null</span>)</span><br><span class="line">        <span class="keyword">return</span> res;</span><br><span class="line">    stack.add(root);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">while</span> (!stack.isEmpty()) &#123;</span><br><span class="line">        TreeNode curNode = stack.pop();</span><br><span class="line">        res.addFirst(curNode.val);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (curNode.left != <span class="keyword">null</span>)</span><br><span class="line">            stack.add(curNode.left);</span><br><span class="line">        <span class="keyword">if</span> (curNode.right != <span class="keyword">null</span>)</span><br><span class="line">            stack.add(curNode.right);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> res;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-]]></content>
-      <categories>
-        <category>算法</category>
-      </categories>
-      <tags>
-        <tag>BST</tag>
-      </tags>
   </entry>
   <entry>
     <title>jz07.重建二叉树</title>
@@ -1165,9 +1013,9 @@
     <content><![CDATA[<h1 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h1><p>输入某二叉树的前序遍历和中序遍历的结果，请重建该二叉树。假设输入的前序遍历和中序遍历的结果中都不含重复的数字。</p>
 <p>例如，给出</p>
 <p>前序遍历 preorder = [3,9,20,15,7]<br>中序遍历 inorder = [9,3,15,20,7]<br>返回如下的二叉树：</p>
-<p>​    3</p>
-<p>   /  <br>  9   20<br>       /  <br>    15   7</p>
-<h1 id="题解"><a href="#题解" class="headerlink" title="题解"></a>题解</h1><h2 id="递归方法"><a href="#递归方法" class="headerlink" title="递归方法"></a>递归方法</h2><p>这道题要充分用到二叉树前序遍历与中序遍历的数量关系.</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">   3</span><br><span class="line"> &#x2F;  \</span><br><span class="line">9   20</span><br><span class="line">     &#x2F;  \</span><br><span class="line">    15   7</span><br></pre></td></tr></table></figure>
+
+<h2 id="递归方法"><a href="#递归方法" class="headerlink" title="递归方法"></a>递归方法</h2><p>这道题要充分用到二叉树前序遍历与中序遍历的数量关系.</p>
 <p>示例中两个数组的关系进行分析可知:</p>
 <blockquote>
 <p><strong>前序遍历特点：</strong> 节点按照 <code>[ 根节点 | 左子树 | 右子树 ]</code> 排序，以题目示例为例：<code>[ 3 | 9 | 20 15 7 ]</code></p>
@@ -1179,7 +1027,7 @@
 <ul>
 <li><p><strong>递归参数:</strong> 前序遍历中根节点的索引<code>pre_root</code>、中序遍历左边界<code>in_left</code>、中序遍历右边界<code>in_right</code></p>
 </li>
-<li><p><strong>终止条件：</strong> 当 <code>in_left &gt; in_right</code> ，子树中序遍历为空，说明已经越过叶子节点，此时返回 null</p>
+<li><p><strong>终止条件：</strong> 当 <code>in_left &gt; in_right</code> ，子树中序遍历为空，说明已经越过叶子节点，此时返回 <code>null</code></p>
 </li>
 <li><p><strong>递推工作：</strong></p>
 <ol>
@@ -1218,6 +1066,72 @@
       </tags>
   </entry>
   <entry>
+    <title>jz26.树的子结构</title>
+    <url>/2020/07/09/jz26-%E6%A0%91%E7%9A%84%E5%AD%90%E7%BB%93%E6%9E%84/</url>
+    <content><![CDATA[<h1 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h1><p>输入两棵二叉树A和B，判断B是不是A的子结构。(约定空树不是任意一个树的子结构)</p>
+<p>B是A的子结构， 即 A中有出现和B相同的结构和节点值。</p>
+<p>例如:<br>给定的树 A:</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">    3</span><br><span class="line">   &#x2F; \</span><br><span class="line">  4   5</span><br><span class="line"> &#x2F; \</span><br><span class="line">1   2</span><br></pre></td></tr></table></figure>
+
+<p>给定的树 B：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">  4 </span><br><span class="line"> &#x2F;</span><br><span class="line">1</span><br></pre></td></tr></table></figure>
+
+<p>返回 true，因为 B 与 A 的一个子树拥有相同的结构和节点值。</p>
+<p><strong>示例一</strong>：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">输入：A &#x3D; [1,2,3], B &#x3D; [3,1]</span><br><span class="line">输出：false</span><br></pre></td></tr></table></figure>
+
+<p><strong>示例二</strong>：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">输入：A &#x3D; [3,4,5,1,2], B &#x3D; [4,1]</span><br><span class="line">输出：true</span><br></pre></td></tr></table></figure>
+
+<h1 id="题解"><a href="#题解" class="headerlink" title="题解"></a>题解</h1><hr>
+<h2 id="递归方法"><a href="#递归方法" class="headerlink" title="递归方法"></a>递归方法</h2><p>看到这道题时经过分析可知需要两个递归过程:</p>
+<p>过程一是<code>判断当前节点为根节点的树与树B是否相同</code> || <code>当前节点的左子树与树B是否相同</code> || <code>当前节点的右子树与树B是否相同</code>,   写成<code>isSubStructure(A, B)</code> 方法:</p>
+<ol>
+<li><p><strong>特例:</strong><br>当 树<code>A</code> 为空 <strong>或</strong> 树 <code>B</code> 为空 时，直接返回 <code>false</code> </p>
+</li>
+<li><p><strong>返回值</strong>: 若树<code>B</code>是树 <code>A</code>的子结构，则必满足以下三种情况之一，因此用或 <code>||</code> 连接</p>
+<ol>
+<li>以 节点 <code>A</code>为根节点的子树 包含树 <code>B</code> ，对应 recur(A, B)；</li>
+<li>树 <code>B</code> 是 树 <code>A</code>左子树 的子结构，对应 isSubStructure(A.left, B)；</li>
+<li>树 <code>B</code>是 树 <code>A</code>右子树 的子结构，对应 isSubStructure(A.right, B)；</li>
+</ol>
+</li>
+</ol>
+<p>过程二是判断两个树是否相同, 要求是两节点的值相同, 左右子树也相同, 写成<code>recur()</code> 方法:</p>
+<ol>
+<li><p><strong>终止条件:</strong></p>
+<ol>
+<li>当节点<code>B</code> 为空：说明树 <code>B</code> 已匹配完成（越过叶子节点），因此返回<code>true</code> ；</li>
+<li>当节点<code>A</code>为空：说明已经越过树 <code>A</code>叶子节点，即匹配失败，返回<code>false</code> ；</li>
+<li>当节点<code>A</code> 和 <code>B</code>的值不同：说明匹配失败，返回 <code>false</code> ；</li>
+</ol>
+</li>
+<li><p><strong>返回值:</strong></p>
+<ol>
+<li>判断 <code>A</code> 和 <code>B</code> 的左子节点是否相等，即 recur(A.left, B.left) ；</li>
+<li>判断 <code>A</code> 和 <code>B</code> 的右子节点是否相等，即 recur(A.right, B.right) ；</li>
+</ol>
+</li>
+</ol>
+<p><img src="http://qcxz71s06.bkt.clouddn.com/0e15908809807327aa87c748c4cf1d850eeb63cc13df94c87439cbaffb535005-Picture2.png" alt=""></p>
+<p><img src="http://qcxz71s06.bkt.clouddn.com/5d9592ec644c6fc765d6e223d4beb3a74ecf46a32b703d9d02cdbeb9f88e9523-Picture3.png" alt=""></p>
+<p><img src="http://qcxz71s06.bkt.clouddn.com/76016cb01f7c051318761388eeadd774b334c6da3c5722754452fc82da87c04b-Picture4.png" alt=""></p>
+<p><img src="http://qcxz71s06.bkt.clouddn.com/efe061c2ae8ae6c75b4f36bfd766d60471b4bc985cb330cdae5805043b19f440-Picture5.png" alt=""></p>
+<p><img src="http://qcxz71s06.bkt.clouddn.com/987e1803a3600ef2b8e18320589e058e189888fb4d88389527f33499340f149a-Picture6.png" alt=""></p>
+<p><img src="http://qcxz71s06.bkt.clouddn.com/3850986482cd6344935ac823e8b396b52f02ae196b573cea1e7ebecb97eb063c-Picture7.png" alt=""></p>
+<p><img src="http://qcxz71s06.bkt.clouddn.com/cb14268630fd9efa872f077ee625f8066cd7c818f11df9fc9436fa371994de8a-Picture8.png" alt=""></p>
+<p><img src="http://qcxz71s06.bkt.clouddn.com/24d94f730e0a7fc091ab321349c4524dd51828db1fa6a9c1b6455561fa27708e-Picture9.png" alt=""></p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">jz26</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">isSubStructure</span><span class="params">(TreeNode A, TreeNode B)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> (A != <span class="keyword">null</span> &amp;&amp; B != <span class="keyword">null</span>) &amp;&amp; (recur(A, B) || isSubStructure(A.left, B) || isSubStructure(A.right, B));</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">boolean</span> <span class="title">recur</span><span class="params">(TreeNode A, TreeNode B)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (B == <span class="keyword">null</span>) <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">        <span class="keyword">if</span> (A == <span class="keyword">null</span> || A.val != B.val) <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">        <span class="keyword">return</span> recur(A.left, B.left) &amp;&amp; recur(A.right, B.right);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+]]></content>
+      <categories>
+        <category>算法</category>
+      </categories>
+      <tags>
+        <tag>BST</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>jz27.二叉树的镜像</title>
     <url>/2020/07/09/jz27-%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%84%E9%95%9C%E5%83%8F/</url>
     <content><![CDATA[<h1 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h1><p>请完成一个函数，输入一个二叉树，该函数输出它的镜像。</p>
@@ -1244,7 +1158,7 @@
 <li>令右儿子等于临时节点</li>
 </ol>
 </li>
-<li>*<em>返回值: *</em> 当前的节点<code>root</code></li>
+<li>*<em>返回值: *</em>当前的节点<code>root</code></li>
 </ol>
 <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">jz27</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> TreeNode <span class="title">mirrorTree</span><span class="params">(TreeNode root)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> recur(root);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">private</span> TreeNode <span class="title">recur</span><span class="params">(TreeNode root)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (root==<span class="keyword">null</span>) <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">        TreeNode temp = root.left;</span><br><span class="line">        root.left = root.right;</span><br><span class="line">        root.right = temp;</span><br><span class="line">        recur(root.left);</span><br><span class="line">        recur(root.right);</span><br><span class="line">        <span class="keyword">return</span> root;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
@@ -1307,6 +1221,97 @@
 <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">jz28</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">isSymmetric</span><span class="params">(TreeNode root)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> root == <span class="keyword">null</span> || recur(root.left, root.right);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">boolean</span> <span class="title">recur</span><span class="params">(TreeNode left, TreeNode right)</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (left == <span class="keyword">null</span> &amp;&amp; right == <span class="keyword">null</span>) <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">        <span class="keyword">if</span> (left == <span class="keyword">null</span> || right == <span class="keyword">null</span> || left.val != right.val) <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">        <span class="keyword">return</span> recur(left.left, right.right) &amp;&amp; recur(left.right, right.left);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 
+
+]]></content>
+      <categories>
+        <category>算法</category>
+      </categories>
+      <tags>
+        <tag>BST</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>jz32-Ⅰ.从上到下打印二叉树</title>
+    <url>/2020/07/09/jz32-%E2%85%A0-%E4%BB%8E%E4%B8%8A%E5%88%B0%E4%B8%8B%E6%89%93%E5%8D%B0%E4%BA%8C%E5%8F%89%E6%A0%91/</url>
+    <content><![CDATA[<h1 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h1><p>从上到下打印出二叉树的每个节点，同一层的节点按照从左到右的顺序打印。</p>
+<p>例如:<br>给定二叉树: <code>[3,9,20,null,null,15,7]</code>,</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">  3</span><br><span class="line"> &#x2F; \</span><br><span class="line">9  20</span><br><span class="line">  &#x2F;  \</span><br><span class="line"> 15   7</span><br></pre></td></tr></table></figure>
+
+<p>返回:</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">[3,9,20,15,7]</span><br></pre></td></tr></table></figure>
+
+<h1 id="题解"><a href="#题解" class="headerlink" title="题解"></a>题解</h1><h2 id="队列"><a href="#队列" class="headerlink" title="队列"></a>队列</h2><p>题目要求的二叉树的 <strong>从上至下</strong> 打印（即按层打印），又称为二叉树的 <strong>广度优先搜索</strong>（BFS）。</p>
+<p>BFS 通常借助 <strong>队列</strong> 的先入先出特性来实现。</p>
+<p><img src="http://qcxz71s06.bkt.clouddn.com/f824fdd8052ae4ee657365c98633480caf03c60e42e4661797618e318baf8664-Picture0.png" alt=""></p>
+<p><strong>算法流程</strong>：</p>
+<ol>
+<li><p><strong>特例处理：</strong> 当树的根节点为空，则直接返回空列表 [] ；</p>
+</li>
+<li><p><strong>初始化：</strong> 打印结果列表 <code>res = []</code> ，包含根节点的队列 <code>queue = [root]</code> ；</p>
+</li>
+<li><p><strong>BFS 循环：</strong> 当队列 <code>queue</code> 为空时跳出；</p>
+<ol>
+<li><strong>出队：</strong> 队首元素出队，记为 <code>node</code>；</li>
+<li><strong>打印：</strong> 将 <code>node.val</code>添加至列表 <code>tmp</code>尾部；</li>
+<li><strong>添加子节点：</strong> 若 <code>node</code>的左（右）子节点不为空，则将左（右）子节点加入队列 <code>queue</code>；</li>
+</ol>
+</li>
+<li><p><strong>返回值：</strong> 返回打印结果列表<code>res</code>即可。</p>
+</li>
+</ol>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">jz32</span> </span>&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">int</span>[] levelOrder(TreeNode root) &#123;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (root == <span class="keyword">null</span>) <span class="keyword">return</span> <span class="keyword">new</span> <span class="keyword">int</span>[<span class="number">0</span>];</span><br><span class="line"></span><br><span class="line">        Queue&lt;TreeNode&gt; queue = <span class="keyword">new</span> LinkedList&lt;&gt;();</span><br><span class="line">        ArrayList&lt;Integer&gt; ans = <span class="keyword">new</span> ArrayList&lt;&gt;();</span><br><span class="line"></span><br><span class="line">        queue.add(root);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">while</span> (!queue.isEmpty()) &#123;</span><br><span class="line">            TreeNode temp = queue.poll();</span><br><span class="line">            ans.add(temp.val);</span><br><span class="line">            <span class="keyword">if</span> (temp.left != <span class="keyword">null</span>)</span><br><span class="line">                queue.add(temp.left);</span><br><span class="line">            <span class="keyword">if</span> (temp.right != <span class="keyword">null</span>)</span><br><span class="line">                queue.add(temp.right);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">int</span>[] res = <span class="keyword">new</span> <span class="keyword">int</span>[ans.size()];</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; ans.size(); i++) &#123;</span><br><span class="line">            res[i] = ans.get(i);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> res;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+]]></content>
+      <categories>
+        <category>算法</category>
+      </categories>
+      <tags>
+        <tag>BST</tag>
+        <tag>BFS</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>二叉树的前中后序遍历</title>
+    <url>/2020/07/08/%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%84%E5%89%8D%E4%B8%AD%E5%90%8E%E5%BA%8F%E9%81%8D%E5%8E%86/</url>
+    <content><![CDATA[<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>汇总二叉树的前, 中, 后序遍历.每种遍历都有经典的递归和迭代方法.</p>
+<h2 id="前序遍历"><a href="#前序遍历" class="headerlink" title="前序遍历"></a>前序遍历</h2><h3 id="递归方法"><a href="#递归方法" class="headerlink" title="递归方法"></a>递归方法</h3><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> List&lt;Integer&gt; <span class="title">preorderTraversal</span><span class="params">(TreeNode root)</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    List&lt;Integer&gt; res = <span class="keyword">new</span> ArrayList&lt;&gt;();</span><br><span class="line">    helper(root, res);</span><br><span class="line">    <span class="keyword">return</span> res;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">helper</span><span class="params">(TreeNode root, List&lt;Integer&gt; res)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (root != <span class="keyword">null</span>) &#123;</span><br><span class="line">        res.add(root.val);</span><br><span class="line">        <span class="keyword">if</span> (root.left != <span class="keyword">null</span>)</span><br><span class="line">            helper(root.left, res);</span><br><span class="line">        <span class="keyword">if</span> (root.right != <span class="keyword">null</span>)</span><br><span class="line">            helper(root.right, res);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="迭代方法"><a href="#迭代方法" class="headerlink" title="迭代方法"></a>迭代方法</h3><p><img src="http://qcxz71s06.bkt.clouddn.com/f1c189e18ab21142095be343b507a206_3.png" alt=""></p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> List&lt;Integer&gt; <span class="title">preorderTraversal</span><span class="params">(TreeNode root)</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    List&lt;Integer&gt; res = <span class="keyword">new</span> ArrayList&lt;&gt;();</span><br><span class="line">    Stack&lt;TreeNode&gt; stack = <span class="keyword">new</span> Stack&lt;&gt;();</span><br><span class="line">    <span class="keyword">if</span> (root == <span class="keyword">null</span>)</span><br><span class="line">        <span class="keyword">return</span> res;</span><br><span class="line"></span><br><span class="line">    TreeNode curNode = root;</span><br><span class="line">    stack.push(curNode);</span><br><span class="line">    <span class="keyword">while</span> (!stack.isEmpty()) &#123;</span><br><span class="line">        curNode = stack.pop();</span><br><span class="line">        res.add(curNode.val);</span><br><span class="line">        <span class="keyword">if</span> (curNode.right != <span class="keyword">null</span>)</span><br><span class="line">            stack.add(curNode.right);</span><br><span class="line">        <span class="keyword">if</span> (curNode.left != <span class="keyword">null</span>)</span><br><span class="line">            stack.add(curNode.left);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> res;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="中序遍历"><a href="#中序遍历" class="headerlink" title="中序遍历"></a>中序遍历</h2><h3 id="递归方法-1"><a href="#递归方法-1" class="headerlink" title="递归方法"></a>递归方法</h3><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> List&lt;Integer&gt; <span class="title">inorderTraversal</span><span class="params">(TreeNode root)</span> </span>&#123;</span><br><span class="line">        List&lt;Integer&gt; res = <span class="keyword">new</span> ArrayList&lt;&gt;();</span><br><span class="line">        helper(root, res);</span><br><span class="line">        <span class="keyword">return</span> res;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">helper</span><span class="params">(TreeNode root, List&lt;Integer&gt; res)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (root != <span class="keyword">null</span>) &#123;</span><br><span class="line">            <span class="keyword">if</span> (root.left != <span class="keyword">null</span>) &#123;</span><br><span class="line">                helper(root.left, res);</span><br><span class="line">            &#125;</span><br><span class="line">            res.add(root.val);</span><br><span class="line">            <span class="keyword">if</span> (root.right != <span class="keyword">null</span>) &#123;</span><br><span class="line">                helper(root.right, res);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="迭代方法-1"><a href="#迭代方法-1" class="headerlink" title="迭代方法"></a>迭代方法</h3><h4 id="图解"><a href="#图解" class="headerlink" title="图解"></a>图解</h4><p><img src="http://qcxz71s06.bkt.clouddn.com/f6e4510b7c3446075698d9fd10595f2d.png" alt=""></p>
+<p><img src="http://qcxz71s06.bkt.clouddn.com/55fc6e5a3a213807d281b9ed360e89f0.png" alt=""></p>
+<p><img src="http://qcxz71s06.bkt.clouddn.com/f9d089302bcccba69e83adf17ce98382.png" alt=""></p>
+<p><img src="http://qcxz71s06.bkt.clouddn.com/350a01b043f194dc409076b65bbbbb61.png" alt=""></p>
+<p><img src="http://qcxz71s06.bkt.clouddn.com/c1f7b568c46ace2815d7653b1a47e092.png" alt=""></p>
+<p><img src="http://qcxz71s06.bkt.clouddn.com/3fb26798163cecf6ed46ae823256809e.png" alt=""></p>
+<p><img src="http://qcxz71s06.bkt.clouddn.com/b564b85e0e54727ab791d94f63834209.png" alt=""></p>
+<p><img src="http://qcxz71s06.bkt.clouddn.com/9b3541ab2cefb2a16efe0929a2f173c3.png" alt=""></p>
+<p><img src="http://qcxz71s06.bkt.clouddn.com/6995c79bfc19b0fc7bdb6af3a2ede56d.png" alt=""></p>
+<p><img src="http://qcxz71s06.bkt.clouddn.com/27ae5a883182fbf7ed00897de3348f64.png" alt=""></p>
+<p><img src="http://qcxz71s06.bkt.clouddn.com/88de3e29515e65b31b1f6c776587163a.png" alt=""></p>
+<p><img src="http://qcxz71s06.bkt.clouddn.com/636fb34cd17e20b998b4e78c95a32066.png" alt=""></p>
+<p><img src="http://qcxz71s06.bkt.clouddn.com/14056baa203348c036a36cb2eddd217c.png" alt=""></p>
+<h4 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h4><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> List&lt;Integer&gt; <span class="title">inorderTraversal2</span><span class="params">(TreeNode root)</span> </span>&#123;</span><br><span class="line">    List&lt;Integer&gt; res = <span class="keyword">new</span> ArrayList&lt;&gt;();</span><br><span class="line">    Stack&lt;TreeNode&gt; stack = <span class="keyword">new</span> Stack&lt;&gt;();</span><br><span class="line">    TreeNode cur = root;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">while</span> (cur != <span class="keyword">null</span> || !stack.isEmpty()) &#123;</span><br><span class="line">        <span class="keyword">while</span> (cur != <span class="keyword">null</span>) &#123;</span><br><span class="line">            stack.push(cur);</span><br><span class="line">            cur = cur.left;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        cur = stack.pop();</span><br><span class="line">        res.add(cur.val);</span><br><span class="line">        cur = cur.right;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> res;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="后序遍历"><a href="#后序遍历" class="headerlink" title="后序遍历"></a>后序遍历</h2><h3 id="递归方法-2"><a href="#递归方法-2" class="headerlink" title="递归方法"></a>递归方法</h3><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> List&lt;Integer&gt; <span class="title">postorderTraversal</span><span class="params">(TreeNode root)</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    List&lt;Integer&gt; res = <span class="keyword">new</span> ArrayList&lt;&gt;();</span><br><span class="line">    helper(root, res);</span><br><span class="line">    <span class="keyword">return</span> res;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">helper</span><span class="params">(TreeNode root, List&lt;Integer&gt; res)</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (root != <span class="keyword">null</span>) &#123;</span><br><span class="line">        <span class="keyword">if</span> (root.left != <span class="keyword">null</span>)</span><br><span class="line">            helper(root.left, res);</span><br><span class="line">        <span class="keyword">if</span> (root.right != <span class="keyword">null</span>)</span><br><span class="line">            helper(root.right, res);</span><br><span class="line">        res.add(root.val);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="迭代方法-2"><a href="#迭代方法-2" class="headerlink" title="迭代方法"></a>迭代方法</h3><ol>
+<li>前序遍历的过程是<code>中左右</code>。 <ul>
+<li>将其转化成<code>中右左</code>。也就是压栈的过程中优先压入左子树，再压入右子树。</li>
+</ul>
+</li>
+<li>然后将这个结果反过来，用<code>addFirst()</code>方法将元素输出到数组即可完成逆序。</li>
+</ol>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> List&lt;Integer&gt; <span class="title">postorderTraversal</span><span class="params">(TreeNode root)</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    LinkedList&lt;Integer&gt; res = <span class="keyword">new</span> LinkedList&lt;&gt;();</span><br><span class="line">    Stack&lt;TreeNode&gt; stack = <span class="keyword">new</span> Stack&lt;&gt;();</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (root == <span class="keyword">null</span>)</span><br><span class="line">        <span class="keyword">return</span> res;</span><br><span class="line">    stack.add(root);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">while</span> (!stack.isEmpty()) &#123;</span><br><span class="line">        TreeNode curNode = stack.pop();</span><br><span class="line">        res.addFirst(curNode.val);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (curNode.left != <span class="keyword">null</span>)</span><br><span class="line">            stack.add(curNode.left);</span><br><span class="line">        <span class="keyword">if</span> (curNode.right != <span class="keyword">null</span>)</span><br><span class="line">            stack.add(curNode.right);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> res;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 ]]></content>
       <categories>
@@ -1439,8 +1444,8 @@
         <category>算法</category>
       </categories>
       <tags>
-        <tag>数组</tag>
         <tag>二分查找</tag>
+        <tag>数组</tag>
         <tag>旋转排序数组</tag>
       </tags>
   </entry>
