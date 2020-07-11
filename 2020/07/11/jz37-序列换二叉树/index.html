@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="BST,BFS," />
 
 
 
@@ -79,12 +79,36 @@
 
 
 
-<meta property="og:type" content="website">
-<meta property="og:title" content="LxbZone">
-<meta property="og:url" content="http://yoursite.com/tags/DFS/index.html">
+<meta name="description" content="题目描述请实现两个函数，分别用来序列化和反序列化二叉树。 示例:  123456789你可以将以下二叉树：    1   &#x2F; \  2   3     &#x2F; \    4   5序列化为 &quot;[1,2,3,null,null,4,5]&quot;  题解BFS这道题要求实现两个方法, 一个是层序遍历将一个二叉树序列化, 还要根据已知的序列化字符串还原出原二叉树.  首先先">
+<meta property="og:type" content="article">
+<meta property="og:title" content="jz37.序列换二叉树">
+<meta property="og:url" content="http://yoursite.com/2020/07/11/jz37-%E5%BA%8F%E5%88%97%E6%8D%A2%E4%BA%8C%E5%8F%89%E6%A0%91/index.html">
 <meta property="og:site_name" content="LxbZone">
+<meta property="og:description" content="题目描述请实现两个函数，分别用来序列化和反序列化二叉树。 示例:  123456789你可以将以下二叉树：    1   &#x2F; \  2   3     &#x2F; \    4   5序列化为 &quot;[1,2,3,null,null,4,5]&quot;  题解BFS这道题要求实现两个方法, 一个是层序遍历将一个二叉树序列化, 还要根据已知的序列化字符串还原出原二叉树.  首先先">
+<meta property="og:image" content="http://qcxz71s06.bkt.clouddn.com/a372d9c99fecd301e82a34fbe417264c4c09629df2a75c9fea564653f2aa4d6c-Picture15.png">
+<meta property="og:image" content="http://qcxz71s06.bkt.clouddn.com/279936eb04ae459c9bc8e87e6dc967b21dca2603648b161a52a93510a3916c1a-Picture16.png">
+<meta property="og:image" content="http://qcxz71s06.bkt.clouddn.com/0d118b74490c624afbb18fbf82cd4fc844bce7aea4246efe6c599df9d1e005ca-Picture17.png">
+<meta property="og:image" content="http://qcxz71s06.bkt.clouddn.com/6762b541459782314176442011b699913085b7d34ab2598d6044374fe8ee9c6d-Picture18.png">
+<meta property="og:image" content="http://qcxz71s06.bkt.clouddn.com/ce3d8c2f587f6f384784b9915f301115ece35dcc8f18aa9c4120e40972e43594-Picture19.png">
+<meta property="og:image" content="http://qcxz71s06.bkt.clouddn.com/cb179bc30eab589fc4ce90f7ebdf4269a330e87e1bb5498f241c4634b00c0dc1-Picture20.png">
+<meta property="og:image" content="http://qcxz71s06.bkt.clouddn.com/00b3903a3e296ffdd91da6fce33ac9b81ee6d43a5171589cb43d15ba64d61dd8-Picture21.png">
+<meta property="og:image" content="http://qcxz71s06.bkt.clouddn.com/8180b8a750c32af66868f7550547effed37d77602c1d4347674bef4803270b82-Picture22.png">
+<meta property="og:image" content="http://qcxz71s06.bkt.clouddn.com/455c33478d9236a851313e402f1ef7453686001263ca1002c146923c9d0a1033-Picture23.png">
+<meta property="og:image" content="http://qcxz71s06.bkt.clouddn.com/8d207a75cf994e0762b2a420c593553355f1e31ab0b08eaa6245bb5b6a6697b4-Picture24.png">
+<meta property="og:image" content="http://qcxz71s06.bkt.clouddn.com/76fe0ddf83303622aa4d954fec53f663c9a5bad3187afbe9c586ec127fd0e8f0-Picture25.png">
+<meta property="og:image" content="http://qcxz71s06.bkt.clouddn.com/3180c5691fe13aa9d94f352fef42a1e14f931e9327f6041dadb8da3e450b6de1-Picture26.png">
+<meta property="og:image" content="http://qcxz71s06.bkt.clouddn.com/dc493c0a7f30e042ee563e13a16bc4c60964d7f4c9d6e52f14625b9b14672f67-Picture27.png">
+<meta property="og:image" content="http://qcxz71s06.bkt.clouddn.com/0351597bfa8ec0fa9e715d2182d5166498df3de35b53668fc121115e2478ffc8-Picture28.png">
+<meta property="og:image" content="http://qcxz71s06.bkt.clouddn.com/4abbdbb9ee212f3e89515c8909265df08b641dc389a076064ef71bfe8d9b53bd-Picture29.png">
+<meta property="og:image" content="http://qcxz71s06.bkt.clouddn.com/f3a8767a785cf7d384e0be4e607593f800fc8822cdfae0ce54290748a82f511b-Picture30.png">
+<meta property="og:image" content="http://qcxz71s06.bkt.clouddn.com/2dde0419c3d7a134e6fb8fcc38c85a5180df04b197f8b6cd37137d38da33e8f5-Picture31.png">
+<meta property="article:published_time" content="2020-07-11T13:02:32.000Z">
+<meta property="article:modified_time" content="2020-07-11T13:23:32.627Z">
 <meta property="article:author" content="lxb">
+<meta property="article:tag" content="BST">
+<meta property="article:tag" content="BFS">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://qcxz71s06.bkt.clouddn.com/a372d9c99fecd301e82a34fbe417264c4c09629df2a75c9fea564653f2aa4d6c-Picture15.png">
 
 
 
@@ -114,13 +138,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/tags/DFS/"/>
+  <link rel="canonical" href="http://yoursite.com/2020/07/11/jz37-序列换二叉树/"/>
 
 
 
 
 
-  <title>标签: DFS | LxbZone</title>
+  <title>jz37.序列换二叉树 | LxbZone</title>
   
 
 
@@ -139,7 +163,7 @@
     
   
 
-  <div class="container sidebar-position-left ">
+  <div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
     <a href="https://github.com/Justlxb0124" target="_blank" rel="noopener" class="github-corner" aria-label="View source on GitHub"><svg width="80" height="80" viewBox="0 0 250 250" style="fill:#151513; color:#fff; position: absolute; top: 0; border: 0; right: 0;" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a><style>.github-corner:hover .octo-arm{animation:octocat-wave 560ms ease-in-out}@keyframes octocat-wave{0%,100%{transform:rotate(0)}20%,60%{transform:rotate(-25deg)}40%,80%{transform:rotate(10deg)}}@media (max-width:500px){.github-corner:hover .octo-arm{animation:none}.github-corner .octo-arm{animation:octocat-wave 560ms ease-in-out}}</style>
 
@@ -268,110 +292,336 @@
           <div id="content" class="content">
             
 
+  <div id="posts" class="posts-expand">
+    
+
+  
+
   
   
   
-  <div class="post-block tag">
-
-    <div id="posts" class="posts-collapse">
-      <div class="collection-title">
-        <h1>DFS<small>标签</small>
-        </h1>
-      </div>
-
-      
-        
 
   <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/07/11/jz37-%E5%BA%8F%E5%88%97%E6%8D%A2%E4%BA%8C%E5%8F%89%E6%A0%91/">
 
-      <h2 class="post-title">
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="lxb">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avator.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="LxbZone">
+    </span>
+
+    
+      <header class="post-header">
+
         
-            <a class="post-title-link" href="/2020/07/11/jz55-%E2%85%A0-%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%84%E6%B7%B1%E5%BA%A6/" itemprop="url">
-              
-                <span itemprop="name">jz55--Ⅰ.二叉树的深度</span>
-              
-            </a>
         
-      </h2>
+          <h1 class="post-title" itemprop="name headline">jz37.序列换二叉树</h1>
+        
 
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2020-07-11T22:05:56+08:00"
-              content="2020-07-11" >
-          07-11
-        </time>
-      </div>
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-07-11T21:02:32+08:00">
+                2020-07-11
+              </time>
+            
 
-    </header>
-  </article>
+            
 
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E7%AE%97%E6%B3%95/" itemprop="url" rel="index">
+                    <span itemprop="name">算法</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv">本文总阅读量 <i class="fa fa-file-o"></i>
+            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>次
+            </span>
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  534
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  2
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
 
       
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2020/07/11/jz54-%E4%BA%8C%E5%8F%89%E6%90%9C%E7%B4%A2%E6%A0%91%E7%9A%84%E7%AC%ACK%E5%A4%A7%E8%8A%82%E7%82%B9/" itemprop="url">
-              
-                <span itemprop="name">jz54.二叉搜索树的第K大节点</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2020-07-11T21:34:30+08:00"
-              content="2020-07-11" >
-          07-11
-        </time>
-      </div>
-
-    </header>
-  </article>
-
+      
 
       
-        
+        <h1 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h1><p>请实现两个函数，分别用来序列化和反序列化二叉树。</p>
+<p><strong>示例:</strong> </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">你可以将以下二叉树：</span><br><span class="line"></span><br><span class="line">    1</span><br><span class="line">   &#x2F; \</span><br><span class="line">  2   3</span><br><span class="line">     &#x2F; \</span><br><span class="line">    4   5</span><br><span class="line"></span><br><span class="line">序列化为 &quot;[1,2,3,null,null,4,5]&quot;</span><br></pre></td></tr></table></figure>
 
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
+<h1 id="题解"><a href="#题解" class="headerlink" title="题解"></a>题解</h1><h2 id="BFS"><a href="#BFS" class="headerlink" title="BFS"></a>BFS</h2><p>这道题要求实现两个方法, 一个是层序遍历将一个二叉树序列化, 还要根据已知的序列化字符串还原出原二叉树. </p>
+<p>首先先来解决序列化问题:</p>
+<h3 id="序列化"><a href="#序列化" class="headerlink" title="序列化"></a>序列化</h3><p>这个序列化问题与之前的各种BFS问题一样, 无非就是需要把<code>null</code> 也打印出来, 并且最终结果生成字符串的形式. 字符串形式好说, 直接利用列表的<code>toString()</code> 方法即可. 下面主要来讨论如何把<code>null</code> 打印出来.</p>
+<p>之前的BFS过程中, 都有这么一个步骤:</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (temp.left != <span class="keyword">null</span>)</span><br><span class="line">    queue.add(temp.left);</span><br><span class="line"><span class="keyword">if</span> (temp.right != <span class="keyword">null</span>)</span><br><span class="line">    queue.add(temp.right);</span><br></pre></td></tr></table></figure>
 
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2020/07/10/jz34-%E4%BA%8C%E5%8F%89%E6%A0%91%E4%B8%AD%E5%92%8C%E4%B8%BA%E6%9F%90%E4%B8%80%E5%80%BC%E7%9A%84%E8%B7%AF%E5%BE%84/" itemprop="url">
-              
-                <span itemprop="name">jz34.二叉树中和为某一值的路径</span>
-              
-            </a>
-        
-      </h2>
+<p>这么写是为了不让<code>null</code> 入队, 而这道题我们需要将<code>null</code> 入队, 所以两个判断句省去.</p>
+<p>另外, 判断一下如果当前出队的节点为<code>null</code>, 则向列表中加入<code>null</code> , 不再考虑<code>null</code> 的左右子节点.</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Encodes a tree to a single string.</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">serialize</span><span class="params">(TreeNode root)</span> </span>&#123;</span><br><span class="line">        List&lt;Integer&gt; res = <span class="keyword">new</span> ArrayList&lt;&gt;();</span><br><span class="line">        <span class="keyword">if</span> (root == <span class="keyword">null</span>) &#123;</span><br><span class="line">            <span class="keyword">return</span> res.toString();</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        Queue&lt;TreeNode&gt; queue = <span class="keyword">new</span> LinkedList&lt;&gt;();</span><br><span class="line">        queue.add(root);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">while</span> (!queue.isEmpty()) &#123;</span><br><span class="line">            TreeNode temp = queue.poll();</span><br><span class="line">            <span class="keyword">if</span> (temp != <span class="keyword">null</span>) &#123;</span><br><span class="line">                res.add(temp.val);</span><br><span class="line">                queue.add(temp.left);</span><br><span class="line">                queue.add(temp.right);</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                res.add(<span class="keyword">null</span>);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> res.toString();</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
 
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2020-07-10T20:54:14+08:00"
-              content="2020-07-10" >
-          07-10
-        </time>
-      </div>
+<h3 id="反序列化"><a href="#反序列化" class="headerlink" title="反序列化"></a>反序列化</h3><p>给定一个包含<code>null</code> 的字符串, 将它还原成一个完整二叉树. 这就要分析层序遍历中各节点元素的顺序关系了</p>
+<p>直接看图解:</p>
+<p><img src="http://qcxz71s06.bkt.clouddn.com/a372d9c99fecd301e82a34fbe417264c4c09629df2a75c9fea564653f2aa4d6c-Picture15.png" alt=""></p>
+<p><img src="http://qcxz71s06.bkt.clouddn.com/279936eb04ae459c9bc8e87e6dc967b21dca2603648b161a52a93510a3916c1a-Picture16.png" alt=""></p>
+<p><img src="http://qcxz71s06.bkt.clouddn.com/0d118b74490c624afbb18fbf82cd4fc844bce7aea4246efe6c599df9d1e005ca-Picture17.png" alt=""></p>
+<p><img src="http://qcxz71s06.bkt.clouddn.com/6762b541459782314176442011b699913085b7d34ab2598d6044374fe8ee9c6d-Picture18.png" alt=""></p>
+<p><img src="http://qcxz71s06.bkt.clouddn.com/ce3d8c2f587f6f384784b9915f301115ece35dcc8f18aa9c4120e40972e43594-Picture19.png" alt=""></p>
+<p><img src="http://qcxz71s06.bkt.clouddn.com/cb179bc30eab589fc4ce90f7ebdf4269a330e87e1bb5498f241c4634b00c0dc1-Picture20.png" alt=""></p>
+<p><img src="http://qcxz71s06.bkt.clouddn.com/00b3903a3e296ffdd91da6fce33ac9b81ee6d43a5171589cb43d15ba64d61dd8-Picture21.png" alt=""></p>
+<p><img src="http://qcxz71s06.bkt.clouddn.com/8180b8a750c32af66868f7550547effed37d77602c1d4347674bef4803270b82-Picture22.png" alt=""></p>
+<p><img src="http://qcxz71s06.bkt.clouddn.com/455c33478d9236a851313e402f1ef7453686001263ca1002c146923c9d0a1033-Picture23.png" alt=""></p>
+<p><img src="http://qcxz71s06.bkt.clouddn.com/8d207a75cf994e0762b2a420c593553355f1e31ab0b08eaa6245bb5b6a6697b4-Picture24.png" alt=""></p>
+<p><img src="http://qcxz71s06.bkt.clouddn.com/76fe0ddf83303622aa4d954fec53f663c9a5bad3187afbe9c586ec127fd0e8f0-Picture25.png" alt=""></p>
+<p><img src="http://qcxz71s06.bkt.clouddn.com/3180c5691fe13aa9d94f352fef42a1e14f931e9327f6041dadb8da3e450b6de1-Picture26.png" alt=""></p>
+<p><img src="http://qcxz71s06.bkt.clouddn.com/dc493c0a7f30e042ee563e13a16bc4c60964d7f4c9d6e52f14625b9b14672f67-Picture27.png" alt=""></p>
+<p><img src="http://qcxz71s06.bkt.clouddn.com/0351597bfa8ec0fa9e715d2182d5166498df3de35b53668fc121115e2478ffc8-Picture28.png" alt=""></p>
+<p><img src="http://qcxz71s06.bkt.clouddn.com/4abbdbb9ee212f3e89515c8909265df08b641dc389a076064ef71bfe8d9b53bd-Picture29.png" alt=""></p>
+<p><img src="http://qcxz71s06.bkt.clouddn.com/f3a8767a785cf7d384e0be4e607593f800fc8822cdfae0ce54290748a82f511b-Picture30.png" alt=""></p>
+<p><img src="http://qcxz71s06.bkt.clouddn.com/2dde0419c3d7a134e6fb8fcc38c85a5180df04b197f8b6cd37137d38da33e8f5-Picture31.png" alt=""></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Decodes your encoded data to tree.</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> TreeNode <span class="title">deserialize</span><span class="params">(String data)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (data.equals(<span class="string">"[]"</span>)) <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">    String[] strings = data.substring(<span class="number">1</span>, data.length() - <span class="number">1</span>).split(<span class="string">", "</span>);</span><br><span class="line">    Queue&lt;TreeNode&gt; queue = <span class="keyword">new</span> LinkedList&lt;&gt;();</span><br><span class="line">    TreeNode root = <span class="keyword">new</span> TreeNode(Integer.parseInt(strings[<span class="number">0</span>]));</span><br><span class="line">    queue.add(root);</span><br><span class="line">    <span class="keyword">int</span> i = <span class="number">1</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">while</span> (!queue.isEmpty()) &#123;</span><br><span class="line">        TreeNode temp = queue.poll();</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (!strings[i].equals(<span class="string">"null"</span>)) &#123;</span><br><span class="line">            temp.left = <span class="keyword">new</span> TreeNode(Integer.parseInt(strings[i]));</span><br><span class="line">            queue.add(temp.left);</span><br><span class="line">        &#125;</span><br><span class="line">        i++;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (!strings[i].equals(<span class="string">"null"</span>)) &#123;</span><br><span class="line">            temp.right = <span class="keyword">new</span> TreeNode(Integer.parseInt(strings[i]));</span><br><span class="line">            queue.add(temp.right);</span><br><span class="line">        &#125;</span><br><span class="line">        i++;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> root;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-    </header>
-  </article>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
       
     </div>
+    
+    
+    
 
+    
+      <div>
+        <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">-------------本文结束<i class="fa fa-paw"></i>感谢您的阅读-------------</div>
+    
+</div>
+      </div>
+    
+
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>可以请我喝杯奶茶吗</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>打赏</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/wechatpay.png" alt="lxb 微信支付"/>
+        <p>微信支付</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="/images/alipay.jpg" alt="lxb 支付宝"/>
+        <p>支付宝</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/BST/" rel="tag"><i class="fa fa-tags" aria-hidden="true"></i> BST</a>
+          
+            <a href="/tags/BFS/" rel="tag"><i class="fa fa-tags" aria-hidden="true"></i> BFS</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2020/07/11/JUC%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B/" rel="next" title="JUC并发编程">
+                <i class="fa fa-chevron-left"></i> JUC并发编程
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2020/07/11/jz54-%E4%BA%8C%E5%8F%89%E6%90%9C%E7%B4%A2%E6%A0%91%E7%9A%84%E7%AC%ACK%E5%A4%A7%E8%8A%82%E7%82%B9/" rel="prev" title="jz54.二叉搜索树的第K大节点">
+                jz54.二叉搜索树的第K大节点 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
   </div>
   
   
   
+  </article>
 
-  
+
+
+    <div class="post-spread">
+      
+        
+<script>
+  with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='//bdimg.share.baidu.com/static/api/js/share.js?cdnversion='+~(-new Date()/36e5)];
+</script>
+
+      
+    </div>
+  </div>
 
 
           </div>
@@ -379,6 +629,13 @@
 
 
           
+
+  
+    <div class="comments" id="comments">
+    </div>
+  
+
+
 
         </div>
         
@@ -399,8 +656,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -480,6 +746,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#题目描述"><span class="nav-number">1.</span> <span class="nav-text">题目描述</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#题解"><span class="nav-number">2.</span> <span class="nav-text">题解</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#BFS"><span class="nav-number">2.1.</span> <span class="nav-text">BFS</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#序列化"><span class="nav-number">2.1.1.</span> <span class="nav-text">序列化</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#反序列化"><span class="nav-number">2.1.2.</span> <span class="nav-text">反序列化</span></a></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
@@ -650,6 +932,10 @@
 
 
   
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
 
   
 
