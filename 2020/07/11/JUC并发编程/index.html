@@ -79,16 +79,20 @@
 
 
 
+<meta name="description" content="定义什么是JUC所谓JUC并发编程, 就是利用到了JDK中以下的三个关于多线程的包进行开发:  简称为 J U C. 一些业务无法通过普通的线程代码完成, 比如基础阶段的 Thread Runnable : 没有返回值, 效率相较于Callable 相对较低 线程和进程在操作系统中运行的程序就是进程, 比如QQ, 播放器, 游戏等 一个进程可以有多个线程, 如视频中同时听到声音, 看到图像, 看弹">
 <meta property="og:type" content="article">
 <meta property="og:title" content="JUC并发编程">
 <meta property="og:url" content="http://yoursite.com/2020/07/11/JUC%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B/index.html">
 <meta property="og:site_name" content="LxbZone">
+<meta property="og:description" content="定义什么是JUC所谓JUC并发编程, 就是利用到了JDK中以下的三个关于多线程的包进行开发:  简称为 J U C. 一些业务无法通过普通的线程代码完成, 比如基础阶段的 Thread Runnable : 没有返回值, 效率相较于Callable 相对较低 线程和进程在操作系统中运行的程序就是进程, 比如QQ, 播放器, 游戏等 一个进程可以有多个线程, 如视频中同时听到声音, 看到图像, 看弹">
+<meta property="og:image" content="http://qcxz71s06.bkt.clouddn.com/QQ%E6%88%AA%E5%9B%BE20200712203137.png">
 <meta property="article:published_time" content="2020-07-11T09:17:24.000Z">
-<meta property="article:modified_time" content="2020-07-11T12:34:01.375Z">
+<meta property="article:modified_time" content="2020-07-12T12:49:37.676Z">
 <meta property="article:author" content="lxb">
 <meta property="article:tag" content="多线程">
 <meta property="article:tag" content="JUC">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://qcxz71s06.bkt.clouddn.com/QQ%E6%88%AA%E5%9B%BE20200712203137.png">
 
 
 
@@ -374,7 +378,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  0
+                  337
                 </span>
               
 
@@ -411,7 +415,25 @@
       
 
       
-        
+        <h1 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h1><h2 id="什么是JUC"><a href="#什么是JUC" class="headerlink" title="什么是JUC"></a>什么是JUC</h2><p>所谓JUC并发编程, 就是利用到了JDK中以下的三个关于多线程的包进行开发:</p>
+<p><img src="http://qcxz71s06.bkt.clouddn.com/QQ%E6%88%AA%E5%9B%BE20200712203137.png" alt=""></p>
+<p>简称为 J U C.</p>
+<p>一些业务无法通过普通的线程代码完成, 比如基础阶段的 <code>Thread</code></p>
+<p><strong>Runnable</strong> : 没有返回值, 效率相较于Callable 相对较低</p>
+<h2 id="线程和进程"><a href="#线程和进程" class="headerlink" title="线程和进程"></a>线程和进程</h2><p>在操作系统中运行的程序就是进程, 比如QQ, 播放器, 游戏等</p>
+<p>一个进程可以有多个线程, 如视频中同时听到声音, 看到图像, 看弹幕等等</p>
+<p>需要注意的是, <strong>程序</strong>是指令和数据的有序集合, 是一个静态的概念, 执行程序的一次执行过程叫做<strong>进程</strong>, 这才是动态的概念</p>
+<p>通常在一个进程中可以包含若干个线程, 线程是CPU调度和执行的单位</p>
+<p><strong>核心概念:</strong></p>
+<ul>
+<li>在程序执行时, 即使没有创建线程, 后台也会有多个线程, 如主线程, gc线程;</li>
+<li>main()称之为主线程, 为系统的入口, 用于执行整个程序</li>
+<li>对同一份资源操作时, 会存在资源抢夺的问题, 需要加入并发控制</li>
+<li>线程会带来额外的开销, 如CPU调度时间, 并发控制开销</li>
+</ul>
+<p><strong>java默认有几个线程?</strong></p>
+<p>两个: main, GC</p>
+
       
     </div>
     
@@ -555,8 +577,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -575,7 +606,7 @@
               
                 <a href="/archives/%7C%7C%20archive">
               
-                  <span class="site-state-item-count">26</span>
+                  <span class="site-state-item-count">33</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -597,7 +628,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">25</span>
+                  <span class="site-state-item-count">27</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -637,6 +668,22 @@
       </section>
 
       
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#定义"><span class="nav-number">1.</span> <span class="nav-text">定义</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#什么是JUC"><span class="nav-number">1.1.</span> <span class="nav-text">什么是JUC</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#线程和进程"><span class="nav-number">1.2.</span> <span class="nav-text">线程和进程</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
 
       
 
@@ -664,7 +711,7 @@
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">31.4k</span>
+    <span title="Site words total count">35.1k</span>
   
 </div>
 
