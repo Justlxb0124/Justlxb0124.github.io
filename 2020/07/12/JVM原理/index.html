@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="JVM," />
 
 
 
@@ -79,14 +79,24 @@
 
 
 
+<meta name="description" content="JVM探究 请你谈谈对JVM的理解? Java8虚拟机和之前的变化更新? 什么是OOM, 什么是栈溢出?怎么分析? JVM的常用调优参数有哪些? 内存快照如何抓取, 怎么分析Dump文件? 谈谈JVM中, 类加载器的认识?  JVM的位置 JVM的体系结构 所谓的JVM调优, 99%的情况下都是在方法区和堆中调的. 这之中绝大部分都是在调堆. 运行时数据区中的 栈, 本地方法栈, 程序计数器这三个">
 <meta property="og:type" content="article">
 <meta property="og:title" content="JVM原理">
 <meta property="og:url" content="http://yoursite.com/2020/07/12/JVM%E5%8E%9F%E7%90%86/index.html">
 <meta property="og:site_name" content="LxbZone">
+<meta property="og:description" content="JVM探究 请你谈谈对JVM的理解? Java8虚拟机和之前的变化更新? 什么是OOM, 什么是栈溢出?怎么分析? JVM的常用调优参数有哪些? 内存快照如何抓取, 怎么分析Dump文件? 谈谈JVM中, 类加载器的认识?  JVM的位置 JVM的体系结构 所谓的JVM调优, 99%的情况下都是在方法区和堆中调的. 这之中绝大部分都是在调堆. 运行时数据区中的 栈, 本地方法栈, 程序计数器这三个">
+<meta property="og:image" content="http://qcxz71s06.bkt.clouddn.com/QQ%E6%88%AA%E5%9B%BE20200712210530.png">
+<meta property="og:image" content="http://qcxz71s06.bkt.clouddn.com/jvm.png">
+<meta property="og:image" content="http://qcxz71s06.bkt.clouddn.com/QQ%E6%88%AA%E5%9B%BE20200712215554.png">
+<meta property="og:image" content="http://qcxz71s06.bkt.clouddn.com/QQ%E6%88%AA%E5%9B%BE20200712214851.png">
+<meta property="og:image" content="http://qcxz71s06.bkt.clouddn.com/1502173-20181029183937235-1542648599.png">
+<meta property="og:image" content="http://qcxz71s06.bkt.clouddn.com/QQ%E6%88%AA%E5%9B%BE20200713105125.png">
 <meta property="article:published_time" content="2020-07-12T12:49:25.000Z">
-<meta property="article:modified_time" content="2020-07-12T12:49:25.512Z">
+<meta property="article:modified_time" content="2020-07-13T10:20:20.493Z">
 <meta property="article:author" content="lxb">
+<meta property="article:tag" content="JVM">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://qcxz71s06.bkt.clouddn.com/QQ%E6%88%AA%E5%9B%BE20200712210530.png">
 
 
 
@@ -324,6 +334,28 @@
           </span>
 
           
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Java/" itemprop="url" rel="index">
+                    <span itemprop="name">Java</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
 
           
             
@@ -350,7 +382,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  0
+                  1.6k
                 </span>
               
 
@@ -366,7 +398,7 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  1
+                  5
                 </span>
               
             </div>
@@ -387,7 +419,114 @@
       
 
       
-        
+        <h1 id="JVM探究"><a href="#JVM探究" class="headerlink" title="JVM探究"></a>JVM探究</h1><ul>
+<li>请你谈谈对JVM的理解? Java8虚拟机和之前的变化更新?</li>
+<li>什么是OOM, 什么是栈溢出?怎么分析?</li>
+<li>JVM的常用调优参数有哪些?</li>
+<li>内存快照如何抓取, 怎么分析Dump文件?</li>
+<li>谈谈JVM中, 类加载器的认识?</li>
+</ul>
+<h1 id="JVM的位置"><a href="#JVM的位置" class="headerlink" title="JVM的位置"></a>JVM的位置</h1><p><img src="http://qcxz71s06.bkt.clouddn.com/QQ%E6%88%AA%E5%9B%BE20200712210530.png" alt=""></p>
+<h1 id="JVM的体系结构"><a href="#JVM的体系结构" class="headerlink" title="JVM的体系结构"></a>JVM的体系结构</h1><p><img src="http://qcxz71s06.bkt.clouddn.com/jvm.png" alt=""></p>
+<p>所谓的JVM调优, 99%的情况下都是在<strong>方法区</strong>和<strong>堆</strong>中调的. 这之中绝大部分都是在调堆.</p>
+<p>运行时数据区中的 <strong>栈, 本地方法栈, 程序计数器</strong>这三个部分不可能有垃圾</p>
+<h1 id="类加载器"><a href="#类加载器" class="headerlink" title="类加载器"></a>类加载器</h1><p>加载Class文件: new Student();</p>
+<p>引用是在栈里, 具体的实例放在堆中</p>
+<p>实例化一个Car类的过程：</p>
+<p><img src="http://qcxz71s06.bkt.clouddn.com/QQ%E6%88%AA%E5%9B%BE20200712215554.png" alt=""></p>
+<p>生成的实例对象包括各种属性放在堆中, 名字也就是地址放在栈中. 引用时根据栈中的地址去堆中引用</p>
+<p><img src="http://qcxz71s06.bkt.clouddn.com/QQ%E6%88%AA%E5%9B%BE20200712214851.png" alt=""></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Car</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        Car car1 = <span class="keyword">new</span> Car();</span><br><span class="line">        Car car2 = <span class="keyword">new</span> Car();</span><br><span class="line">        Car car3 = <span class="keyword">new</span> Car();</span><br><span class="line"></span><br><span class="line">        Class&lt;? extends Car&gt; aClass1 = car1.getClass();</span><br><span class="line">        Class&lt;? extends Car&gt; aClass2 = car2.getClass();</span><br><span class="line">        Class&lt;? extends Car&gt; aClass3 = car3.getClass();</span><br><span class="line"></span><br><span class="line">        System.out.println(aClass1);</span><br><span class="line">        System.out.println(aClass2);</span><br><span class="line">        System.out.println(aClass3);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>输出结果为:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">class Car</span><br><span class="line">class Car</span><br><span class="line">class Car</span><br></pre></td></tr></table></figure>
+
+<p><strong>类加载器的分类:</strong></p>
+<ol>
+<li>虚拟机自带的加载器</li>
+<li>启动类(根)加载器: 负责加载%JAVA_HOME%\bin目录下的所有jar包，或者是-Xbootclasspath参数指定的路径；</li>
+<li>扩展类加载器: 负责加载%JAVA_HOME%\bin\ext目录下的所有jar包，或者是java.ext.dirs参数指定的路径；</li>
+<li>应用程序加载器: 负责加载用户类路径上所指定的类库，如果应用程序中没有自定义加载器，那么次加载器就为默认加载器。</li>
+</ol>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Car</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        Car car1 = <span class="keyword">new</span> Car();</span><br><span class="line">        Car car2 = <span class="keyword">new</span> Car();</span><br><span class="line">        Car car3 = <span class="keyword">new</span> Car();</span><br><span class="line"></span><br><span class="line">        Class&lt;? extends Car&gt; aClass1 = car1.getClass();</span><br><span class="line"></span><br><span class="line">        ClassLoader classLoader = aClass1.getClassLoader();</span><br><span class="line">        ClassLoader parent = classLoader.getParent();</span><br><span class="line">        ClassLoader parent1 = parent.getParent();</span><br><span class="line">        System.out.println(classLoader);</span><br><span class="line">        System.out.println(parent);</span><br><span class="line">        System.out.println(parent1);</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>输出为:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">jdk.internal.loader.ClassLoaders$AppClassLoader@3fee733d</span><br><span class="line">jdk.internal.loader.ClassLoaders$PlatformClassLoader@723279cf</span><br><span class="line">null</span><br></pre></td></tr></table></figure>
+
+<h1 id="双亲委派机制"><a href="#双亲委派机制" class="headerlink" title="双亲委派机制"></a>双亲委派机制</h1><ol>
+<li>类加载器收到类加载的请求</li>
+<li>将这个请求向上委托给父类加载器去完成, 一直向上委托, 直到启动类加载器</li>
+<li>启动类加载器检查是否能够加载当前这个类, 能加载就结束, 使用当前加载器, 否则, 抛出异常, 通知子加载器进行加载</li>
+</ol>
+<p><img src="http://qcxz71s06.bkt.clouddn.com/1502173-20181029183937235-1542648599.png" alt=""></p>
+<p>接下来举个例子：</p>
+<p>大家所熟知的Object类，直接告诉大家，Object默认情况下是启动类加载器进行加载的。假设我也自定义一个Object，并且制定加载器为自定义加载器。现在你会发现自定义的Object可以正常编译，但是永远无法被加载运行。</p>
+<p>这是因为申请自定义Object加载时，总是启动类加载器，而不是自定义加载器，也不会是其他的加载器。</p>
+<h1 id="沙箱安全机制"><a href="#沙箱安全机制" class="headerlink" title="沙箱安全机制"></a>沙箱安全机制</h1><p>Java安全模型的核心就是Java沙箱, 沙箱是一个限制程序运行的环境. 沙箱机制就是将Java代码限定在虚拟机特定的运行范围中, 并且严格限制代码对本地系统资源访问, 通过这样的措施来保证对代码的有效隔离, 防止对本地系统造成破坏. 沙箱主要 <strong>限制系统的资源访问</strong> , CPU, 内存, 文件系统, 网络. 不同级别的沙箱对这些资源访问的限制也可以不一样</p>
+<h1 id="Native"><a href="#Native" class="headerlink" title="Native"></a>Native</h1><p>在Java 的<code>Thread</code> 类中, 有这样的方法:</p>
+<p><img src="http://qcxz71s06.bkt.clouddn.com/QQ%E6%88%AA%E5%9B%BE20200713105125.png" alt=""></p>
+<p>凡是带了<code>native</code> 关键字的, 说明java的作用范围达不到了, 会去调用底层c语言的库</p>
+<p>会进入本地方法栈, 然后它会调用JNI(本地方法接口), 继而调用本地方法库</p>
+<p>JNI的作用: 扩展Java的使用, 融合不同的编程语言为Java所用</p>
+<h1 id="PC寄存器"><a href="#PC寄存器" class="headerlink" title="PC寄存器"></a>PC寄存器</h1><p>程序计数器: Program Counter Register</p>
+<p>每个线程都有一个程序计数器, 是线程私有的, 就是一个指针, 指向方法区中的方法字节码(用来存储指向一条指令的地址, 也即将要执行的指令代码), 在执行引擎读取下一条指令, 是一个非常小的内存空间, 几乎可以忽略不计.</p>
+<h1 id="方法区"><a href="#方法区" class="headerlink" title="方法区"></a>方法区</h1><p>方法区是被所有线程共享, 所有字段和方法字节码, 以及一些特殊方法, 如构造函数, 接口代码也在此定义, 简单说, 所有定义的方法的信息都保存在该区域, <strong>该区域属于共享区间</strong>;</p>
+<p><strong>静态变量, 常量, 类信息(构造方法, 接口定义), 运行时的常量池存在方法区中, 但是实例变量存在堆内存中, 和方法区无关.</strong></p>
+<h1 id="栈"><a href="#栈" class="headerlink" title="栈"></a>栈</h1><p>栈内存, 主管程序的运行, 生命周期和线程同步</p>
+<p>线程结束, 栈内存也就释放, 对于栈来说, 不存在垃圾回收问题</p>
+<p>一旦线程结束, 栈就Over</p>
+<p>存放: 8大基本类型 + 对象引用 + 实例的方法</p>
+<p>对象的实例化过程视频解析:</p>
+<p><a href="https://www.bilibili.com/video/BV1HE411E7kY?from=search&amp;seid=7388971973574996958" target="_blank" rel="noopener">https://www.bilibili.com/video/BV1HE411E7kY?from=search&amp;seid=7388971973574996958</a></p>
+<h1 id="三种JVM"><a href="#三种JVM" class="headerlink" title="三种JVM"></a>三种JVM</h1><ul>
+<li>Sun公司: HotSpot</li>
+<li>BEA:  JRockit</li>
+<li>IBM: J9VM</li>
+</ul>
+<h1 id="堆"><a href="#堆" class="headerlink" title="堆"></a>堆</h1><p>Heap, 一个JVM只有一个堆内存, 堆内存的大小是可以调节的.</p>
+<p>类加载器读取了类文件后, 一般会把什么东西放到堆中? 类, 方法, 常量, 变量</p>
+<p>堆内存中还要细分为三个区域:</p>
+<ul>
+<li>新生区(伊甸园区)</li>
+<li>养老区</li>
+<li>永久区</li>
+</ul>
+<h2 id="新生区"><a href="#新生区" class="headerlink" title="新生区"></a>新生区</h2><p>类诞生, 成长的地方, 甚至死亡</p>
+<p>伊甸园区, 所有的对象都是在 伊甸园 区</p>
+<h2 id="永久区"><a href="#永久区" class="headerlink" title="永久区"></a>永久区</h2><p>这个区域常驻内存的, 用来存放JDK自身携带的Class对象, Interface元数据, 存储的是Java运行时的一些环境或类信息</p>
+<ul>
+<li>1.6之前 : 永久代, 常量池实在方法区</li>
+<li>1.7: 永久代, 但是慢慢退化了, “去永久代”, 常量池在堆中</li>
+<li>1.8之后 : 无永久代, 常量池在元空间</li>
+</ul>
+<p>默认情况下, JVM分配的总内存是电脑内存的1/4, 而初始化的内存为: 1/64</p>
+<ol>
+<li>JVM的体系结构</li>
+<li>类加载器</li>
+<li>双亲委派机制</li>
+<li>沙箱安全机制</li>
+<li>Native</li>
+<li>PC寄存器</li>
+<li>方法区</li>
+<li>栈</li>
+<li>三种JVM</li>
+<li>堆</li>
+<li>新生区</li>
+<li>老年区</li>
+<li>永久区</li>
+<li>堆内存调优</li>
+<li>GC<ol>
+<li>常用算法</li>
+</ol>
+</li>
+<li>JMM</li>
+<li>总结</li>
+</ol>
+<ol>
+<li>百度</li>
+<li>思维导图</li>
+</ol>
+
       
     </div>
     
@@ -441,6 +580,12 @@
 
     <footer class="post-footer">
       
+        <div class="post-tags">
+          
+            <a href="/tags/JVM/" rel="tag"><i class="fa fa-tags" aria-hidden="true"></i> JVM</a>
+          
+        </div>
+      
 
       
       
@@ -459,6 +604,10 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2020/07/13/Mybatis/" rel="prev" title="Mybatis">
+                Mybatis <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -519,8 +668,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -539,7 +697,7 @@
               
                 <a href="/archives/%7C%7C%20archive">
               
-                  <span class="site-state-item-count">33</span>
+                  <span class="site-state-item-count">36</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -550,7 +708,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">3</span>
+                  <span class="site-state-item-count">4</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -561,7 +719,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">27</span>
+                  <span class="site-state-item-count">30</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -601,6 +759,22 @@
       </section>
 
       
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#JVM探究"><span class="nav-number">1.</span> <span class="nav-text">JVM探究</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#JVM的位置"><span class="nav-number">2.</span> <span class="nav-text">JVM的位置</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#JVM的体系结构"><span class="nav-number">3.</span> <span class="nav-text">JVM的体系结构</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#类加载器"><span class="nav-number">4.</span> <span class="nav-text">类加载器</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#双亲委派机制"><span class="nav-number">5.</span> <span class="nav-text">双亲委派机制</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#沙箱安全机制"><span class="nav-number">6.</span> <span class="nav-text">沙箱安全机制</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Native"><span class="nav-number">7.</span> <span class="nav-text">Native</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#PC寄存器"><span class="nav-number">8.</span> <span class="nav-text">PC寄存器</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#方法区"><span class="nav-number">9.</span> <span class="nav-text">方法区</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#栈"><span class="nav-number">10.</span> <span class="nav-text">栈</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#三种JVM"><span class="nav-number">11.</span> <span class="nav-text">三种JVM</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#堆"><span class="nav-number">12.</span> <span class="nav-text">堆</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#新生区"><span class="nav-number">12.1.</span> <span class="nav-text">新生区</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#永久区"><span class="nav-number">12.2.</span> <span class="nav-text">永久区</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
 
       
 
@@ -628,7 +802,7 @@
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">35.1k</span>
+    <span title="Site words total count">37.6k</span>
   
 </div>
 
