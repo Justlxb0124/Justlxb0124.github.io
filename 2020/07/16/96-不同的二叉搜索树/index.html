@@ -89,7 +89,7 @@
 <meta property="og:image" content="http://qcxz71s06.bkt.clouddn.com/96bb714d079c7aef72465216b1f205cbf78865f6bcc3cf69691f7d46096196e0-frame_00010.png">
 <meta property="og:image" content="http://qcxz71s06.bkt.clouddn.com/69509ce7a83c6c57bc6fb611db21ef1a83c552cc4237e75fb338162c8e128c12-frame_00016.png">
 <meta property="article:published_time" content="2020-07-16T13:21:27.000Z">
-<meta property="article:modified_time" content="2020-07-16T13:36:42.535Z">
+<meta property="article:modified_time" content="2020-07-17T12:56:17.189Z">
 <meta property="article:author" content="lxb">
 <meta property="article:tag" content="BST">
 <meta property="article:tag" content="DP">
@@ -380,7 +380,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  385
+                  386
                 </span>
               
 
@@ -430,7 +430,7 @@
 <p>其中</p>
 <p><strong><em>f</em>(<em>i</em>)=<em>G</em>(<em>i</em>−1)∗<em>G</em>(<em>n</em>−<em>i</em>)</strong></p>
 <p>综合两个公式可以得到 <code>卡特兰数</code>公式</p>
-<p><strong><em>G(n) = G(0)G(n-1)+G(1)(n-2)+…+G(n-1)*G(0)G(n)=G(0)∗G(n−1)+G(1)∗(n−2)+…+G(n−1)∗G(0)</em></strong></p>
+<p><strong><em>G(n) = G(0)G(n-1)+G(1)(n-2)+…+G(n-1)G(0)G(n)=G(0)G(n−1)+G(1)G(n−2)+…+G(n−1)G(0)</em></strong></p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">lc96</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">numTrees</span><span class="params">(<span class="keyword">int</span> n)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span>[] dp = <span class="keyword">new</span> <span class="keyword">int</span>[n + <span class="number">1</span>];</span><br><span class="line">        dp[<span class="number">0</span>] = <span class="number">1</span>;</span><br><span class="line">        dp[<span class="number">1</span>] = <span class="number">1</span>;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">2</span>; i &lt; n + <span class="number">1</span>; i++) &#123;</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">1</span>; j &lt; i + <span class="number">1</span>; j++) &#123;</span><br><span class="line">                dp[i] += dp[j - <span class="number">1</span>] * dp[i - j];</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> dp[n];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 
@@ -606,7 +606,7 @@
               
                 <a href="/archives/%7C%7C%20archive">
               
-                  <span class="site-state-item-count">41</span>
+                  <span class="site-state-item-count">44</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -617,7 +617,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">6</span>
+                  <span class="site-state-item-count">7</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -711,7 +711,7 @@
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">40k</span>
+    <span title="Site words total count">42.3k</span>
   
 </div>
 
