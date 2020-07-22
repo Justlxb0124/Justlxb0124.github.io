@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="BST,DFS," />
+  <meta name="keywords" content="DFS,BST," />
 
 
 
@@ -86,10 +86,10 @@
 <meta property="og:site_name" content="LxbZone">
 <meta property="og:description" content="题目描述二叉树数据结构TreeNode可用来表示单向链表（其中left置空，right为下一个链表节点）。实现一个方法，把二叉搜索树转换为单向链表，要求依然符合二叉搜索树的性质，转换操作应是原址的，也就是在原始的二叉搜索树上直接修改。 返回转换后的单向链表的头节点。 注意：本题相对原题稍作改动 示例: 12输入： [4,2,5,1,3,null,6,0]输出： [0,null,1,null,2,n">
 <meta property="article:published_time" content="2020-07-15T12:20:04.000Z">
-<meta property="article:modified_time" content="2020-07-15T12:40:50.218Z">
+<meta property="article:modified_time" content="2020-07-22T01:42:01.684Z">
 <meta property="article:author" content="lxb">
-<meta property="article:tag" content="BST">
 <meta property="article:tag" content="DFS">
+<meta property="article:tag" content="BST">
 <meta name="twitter:card" content="summary">
 
 
@@ -431,7 +431,7 @@
 
 <hr>
 <h2 id="中序遍历递归"><a href="#中序遍历递归" class="headerlink" title="中序遍历递归"></a>中序遍历递归</h2><p>思路跟迭代法一样, 都是在遍历到当前节点时进行操作</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> TreeNode <span class="title">convertBiNode</span><span class="params">(TreeNode root)</span> </span>&#123;</span><br><span class="line">        TreeNode head = <span class="keyword">new</span> TreeNode(<span class="number">0</span>);</span><br><span class="line">        inorder(root, head);</span><br><span class="line">        <span class="keyword">return</span> head.right;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">private</span> TreeNode <span class="title">inorder</span><span class="params">(TreeNode root, TreeNode prev)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (root!= <span class="keyword">null</span>)&#123;</span><br><span class="line">            prev = inorder(root.left, prev);</span><br><span class="line">            root.left = <span class="keyword">null</span>;</span><br><span class="line">            prev.right = root;</span><br><span class="line">            prev = root;</span><br><span class="line">            prev = inorder(root.right, prev);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> prev;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> TreeNode <span class="title">convertBiNode</span><span class="params">(TreeNode root)</span> </span>&#123;</span><br><span class="line">    TreeNode head = <span class="keyword">new</span> TreeNode(<span class="number">0</span>);</span><br><span class="line">    inorder(root, head);</span><br><span class="line">    <span class="keyword">return</span> head.right;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">private</span> TreeNode <span class="title">inorder</span><span class="params">(TreeNode root, TreeNode prev)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (root!= <span class="keyword">null</span>)&#123;</span><br><span class="line">        prev = inorder(root.left, prev);</span><br><span class="line">        root.left = <span class="keyword">null</span>;</span><br><span class="line">        prev.right = root;</span><br><span class="line">        prev = root;</span><br><span class="line">        prev = inorder(root.right, prev);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> prev;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
       
     </div>
     
@@ -487,9 +487,9 @@
       
         <div class="post-tags">
           
-            <a href="/tags/BST/" rel="tag"><i class="fa fa-tags" aria-hidden="true"></i> BST</a>
-          
             <a href="/tags/DFS/" rel="tag"><i class="fa fa-tags" aria-hidden="true"></i> DFS</a>
+          
+            <a href="/tags/BST/" rel="tag"><i class="fa fa-tags" aria-hidden="true"></i> BST</a>
           
         </div>
       
@@ -604,7 +604,7 @@
               
                 <a href="/archives/%7C%7C%20archive">
               
-                  <span class="site-state-item-count">62</span>
+                  <span class="site-state-item-count">69</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -709,7 +709,7 @@
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">57.4k</span>
+    <span title="Site words total count">59.8k</span>
   
 </div>
 
