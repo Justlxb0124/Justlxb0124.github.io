@@ -90,8 +90,9 @@
 <meta property="og:image" content="http://qcxz71s06.bkt.clouddn.com/QQ%E6%88%AA%E5%9B%BE20200722171858.png">
 <meta property="og:image" content="http://qcxz71s06.bkt.clouddn.com/QQ%E6%88%AA%E5%9B%BE20200722192339.png">
 <meta property="og:image" content="http://qcxz71s06.bkt.clouddn.com/QQ%E6%88%AA%E5%9B%BE20200722201548.png">
+<meta property="og:image" content="http://qcxz71s06.bkt.clouddn.com/QQ%E6%88%AA%E5%9B%BE20200723150902.png">
 <meta property="article:published_time" content="2020-07-22T07:05:13.000Z">
-<meta property="article:modified_time" content="2020-07-22T12:51:30.775Z">
+<meta property="article:modified_time" content="2020-07-23T07:34:27.362Z">
 <meta property="article:author" content="lxb">
 <meta property="article:tag" content="Mybatis">
 <meta name="twitter:card" content="summary">
@@ -381,7 +382,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  765
+                  1.2k
                 </span>
               
 
@@ -397,7 +398,7 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  3
+                  5
                 </span>
               
             </div>
@@ -488,6 +489,51 @@
 <p><img src="http://qcxz71s06.bkt.clouddn.com/QQ%E6%88%AA%E5%9B%BE20200722201548.png" alt=""></p>
 </li>
 </ol>
+<h1 id="一对多处理"><a href="#一对多处理" class="headerlink" title="一对多处理"></a>一对多处理</h1><p>比如一个老师拥有多个学生</p>
+<p>对于老师而言就是一对多的关系</p>
+<ol>
+<li><p>环境搭建</p>
+<p>实体类修改, 因为主体变成老师, 所以每个学生的属性中的Teacher对象换为老师的id即可, 然后每个老师要有一个学生列表的属性</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Student</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">int</span> id;</span><br><span class="line">    <span class="keyword">private</span> String name;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 学生需要关联一个老师</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">int</span> tid;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Teacher</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">int</span> id;</span><br><span class="line">    <span class="keyword">private</span> String name;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> List&lt;Student&gt; students;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>编写接口函数</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">Teacher <span class="title">getTeacher</span><span class="params">(@Param(<span class="string">"tid"</span>)</span> <span class="keyword">int</span> id)</span>;</span><br></pre></td></tr></table></figure>
+
+<p>功能为根据老师的id号, 查询该老师信息以及他所有的学生</p>
+</li>
+<li><p>Mapper映射</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">resultMap</span> <span class="attr">id</span>=<span class="string">"TeacherStudent"</span> <span class="attr">type</span>=<span class="string">"Teacher"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">result</span> <span class="attr">property</span>=<span class="string">"id"</span> <span class="attr">column</span>=<span class="string">"tid"</span>/&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">result</span> <span class="attr">property</span>=<span class="string">"name"</span> <span class="attr">column</span>=<span class="string">"tname"</span>/&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">collection</span> <span class="attr">property</span>=<span class="string">"students"</span> <span class="attr">ofType</span>=<span class="string">"Student"</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">result</span> <span class="attr">property</span>=<span class="string">"id"</span> <span class="attr">column</span>=<span class="string">"sid"</span>/&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">result</span> <span class="attr">property</span>=<span class="string">"name"</span> <span class="attr">column</span>=<span class="string">"sname"</span>/&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">result</span> <span class="attr">property</span>=<span class="string">"tid"</span> <span class="attr">column</span>=<span class="string">"tid"</span>/&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">collection</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">resultMap</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">select</span> <span class="attr">id</span>=<span class="string">"getTeacher"</span> <span class="attr">resultMap</span>=<span class="string">"TeacherStudent"</span>&gt;</span></span><br><span class="line">    select s.id sid, s.name sname, t.name tname, t.id tid</span><br><span class="line">    from mybatis.teacher t,</span><br><span class="line">    mybatis.student s</span><br><span class="line">    where s.tid = t.id</span><br><span class="line">    and t.id = #&#123;tid&#125;;</span><br><span class="line"><span class="tag">&lt;/<span class="name">select</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>要注意, 因为其中一个属性是集合, 所以要用关键字<code>collection</code>, 并且要找出集合中的对象类型, 用关键字<code>ofType</code></strong></p>
+</li>
+<li><pre><code class="java"><span class="meta">@Test</span>
+<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">test02</span><span class="params">()</span> </span>{
+    SqlSession sqlSession = MybtisUtils.getSqlSession();
+
+    TeacherMapper mapper = sqlSession.getMapper(TeacherMapper<span class="class">.<span class="keyword">class</span>)</span>;
+    Teacher teacher = mapper.getTeacher(<span class="number">1</span>);
+    System.out.println(teacher);
+
+    sqlSession.close();
+}</code></pre>
+<p>结果为</p>
+<p><img src="http://qcxz71s06.bkt.clouddn.com/QQ%E6%88%AA%E5%9B%BE20200723150902.png" alt=""></p>
+</li>
+</ol>
+<h1 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h1><ul>
+<li>关联- association    <strong>多对一</strong></li>
+<li>集合- collection       <strong>一对多</strong></li>
+<li>javaType: 用来指定实体类中属性的类型</li>
+<li>ofType: 用来指定映射到List或者集合中的POJO类型, 泛型中的约束类型</li>
+</ul>
+<p><strong>注意点:</strong></p>
+<ul>
+<li>保证SQL的可读性, 尽量保证通俗易懂</li>
+<li>注意一对多和多对一中, 属性名和字段的问题</li>
+<li>如果问题不好排查, 可以使用日志</li>
+</ul>
 
       
     </div>
@@ -659,7 +705,7 @@
               
                 <a href="/archives/%7C%7C%20archive">
               
-                  <span class="site-state-item-count">69</span>
+                  <span class="site-state-item-count">77</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -681,7 +727,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">33</span>
+                  <span class="site-state-item-count">35</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -730,7 +776,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#复杂查询环境搭建"><span class="nav-number">1.</span> <span class="nav-text">复杂查询环境搭建</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#多对一处理"><span class="nav-number">2.</span> <span class="nav-text">多对一处理</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#按照查询嵌套处理"><span class="nav-number">2.1.</span> <span class="nav-text">按照查询嵌套处理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#按照结果嵌套处理"><span class="nav-number">2.2.</span> <span class="nav-text">按照结果嵌套处理</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#复杂查询环境搭建"><span class="nav-number">1.</span> <span class="nav-text">复杂查询环境搭建</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#多对一处理"><span class="nav-number">2.</span> <span class="nav-text">多对一处理</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#按照查询嵌套处理"><span class="nav-number">2.1.</span> <span class="nav-text">按照查询嵌套处理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#按照结果嵌套处理"><span class="nav-number">2.2.</span> <span class="nav-text">按照结果嵌套处理</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#一对多处理"><span class="nav-number">3.</span> <span class="nav-text">一对多处理</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#小结"><span class="nav-number">4.</span> <span class="nav-text">小结</span></a></li></ol></div>
             
 
           </div>
@@ -764,7 +810,7 @@
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">59.8k</span>
+    <span title="Site words total count">68k</span>
   
 </div>
 
