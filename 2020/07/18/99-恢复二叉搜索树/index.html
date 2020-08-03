@@ -85,14 +85,14 @@
 <meta property="og:url" content="http://yoursite.com/2020/07/18/99-%E6%81%A2%E5%A4%8D%E4%BA%8C%E5%8F%89%E6%90%9C%E7%B4%A2%E6%A0%91/index.html">
 <meta property="og:site_name" content="LxbZone">
 <meta property="og:description" content="题目描述二叉搜索树中的两个节点被错误地交换。 请在不改变其结构的情况下，恢复这棵树。 示例 1: 123456789101112131415输入: [1,3,null,null,2]   1  &#x2F; 3  \   2输出: [3,1,null,null,2]   3  &#x2F; 1  \   2  示例 2: 123456789101112131415输入: [3,1,4,null,n">
-<meta property="og:image" content="http://qcxz71s06.bkt.clouddn.com/b4ee2fcef6391b0756e5d0e84540b448b9ac122a0efabc9ff505e4fdcdd3bc3c-1561339663404.png">
+<meta property="og:image" content="https://justlxb-pic.oss-cn-shanghai.aliyuncs.com/b4ee2fcef6391b0756e5d0e84540b448b9ac122a0efabc9ff505e4fdcdd3bc3c-1561339663404.png">
 <meta property="article:published_time" content="2020-07-18T12:38:00.000Z">
-<meta property="article:modified_time" content="2020-07-18T12:59:33.388Z">
+<meta property="article:modified_time" content="2020-08-03T01:23:36.757Z">
 <meta property="article:author" content="lxb">
 <meta property="article:tag" content="BST">
 <meta property="article:tag" content="DFS">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http://qcxz71s06.bkt.clouddn.com/b4ee2fcef6391b0756e5d0e84540b448b9ac122a0efabc9ff505e4fdcdd3bc3c-1561339663404.png">
+<meta name="twitter:image" content="https://justlxb-pic.oss-cn-shanghai.aliyuncs.com/b4ee2fcef6391b0756e5d0e84540b448b9ac122a0efabc9ff505e4fdcdd3bc3c-1561339663404.png">
 
 
 
@@ -429,7 +429,7 @@
 <p>这里我们有个规律发现这两个节点:</p>
 <p>第一个节点,是第一个按照中序遍历时候前一个节点大于后一个节点,我们选取前一个节点,这里指节点4;</p>
 <p>第二个节点,是在第一个节点找到之后, 后面出现前一个节点大于后一个节点,我们选择后一个节点,这里指节点1;</p>
-<p><img src="http://qcxz71s06.bkt.clouddn.com/b4ee2fcef6391b0756e5d0e84540b448b9ac122a0efabc9ff505e4fdcdd3bc3c-1561339663404.png" alt=""></p>
+<p><img src="https://justlxb-pic.oss-cn-shanghai.aliyuncs.com/b4ee2fcef6391b0756e5d0e84540b448b9ac122a0efabc9ff505e4fdcdd3bc3c-1561339663404.png" alt=""></p>
 <p>只要找到了这两个节点, 交换其数值即可, 不需要动结构.</p>
 <h2 id="迭代"><a href="#迭代" class="headerlink" title="迭代"></a>迭代</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">recoverTree</span><span class="params">(TreeNode root)</span> </span>&#123;</span><br><span class="line">    Stack&lt;TreeNode&gt; stack = <span class="keyword">new</span> Stack&lt;&gt;();</span><br><span class="line">    TreeNode firstNode = <span class="keyword">null</span>;</span><br><span class="line">    TreeNode secondNode = <span class="keyword">null</span>;</span><br><span class="line">    TreeNode preNode = <span class="keyword">new</span> TreeNode(Integer.MIN_VALUE);</span><br><span class="line">    TreeNode cur = root;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">while</span> (cur!=<span class="keyword">null</span>||!stack.isEmpty())&#123;</span><br><span class="line">        <span class="keyword">while</span> (cur!=<span class="keyword">null</span>)&#123;</span><br><span class="line">            stack.push(cur);</span><br><span class="line">            cur = cur.left;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        cur=stack.pop();</span><br><span class="line">        <span class="keyword">if</span> (firstNode==<span class="keyword">null</span>&amp;&amp;cur.val&lt;preNode.val) firstNode = preNode;</span><br><span class="line">        <span class="keyword">if</span> (firstNode!=<span class="keyword">null</span>&amp;&amp;cur.val&lt;preNode.val) secondNode = cur;</span><br><span class="line">        preNode = cur;</span><br><span class="line">        cur = cur.right;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">int</span> temp = firstNode.val;</span><br><span class="line">    firstNode.val = secondNode.val;</span><br><span class="line">    secondNode.val = temp;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
@@ -610,7 +610,7 @@
               
                 <a href="/archives/%7C%7C%20archive">
               
-                  <span class="site-state-item-count">106</span>
+                  <span class="site-state-item-count">105</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>

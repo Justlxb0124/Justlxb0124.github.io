@@ -85,17 +85,17 @@
 <meta property="og:url" content="http://yoursite.com/2020/07/19/Mybatis%E7%9A%84%E5%A2%9E%E5%88%A0%E6%94%B9%E6%9F%A5%E6%93%8D%E4%BD%9C/index.html">
 <meta property="og:site_name" content="LxbZone">
 <meta property="og:description" content="查询语句selcet, 选择, 查询语句 对以下代码分析: 123456&lt;mapper namespace&#x3D;&quot;com.lxb.dao.UserMapper&quot;&gt;    &lt;select id&#x3D;&quot;getUserList&quot; resultType&#x3D;&quot;com.lxb.pojo.User&quot;&gt;        select * from mybatis.user;    &lt;&#x2F;selec">
-<meta property="og:image" content="http://qcxz71s06.bkt.clouddn.com/QQ%E6%88%AA%E5%9B%BE20200719190734.png">
-<meta property="og:image" content="http://qcxz71s06.bkt.clouddn.com/QQ%E6%88%AA%E5%9B%BE20200719192012.png">
-<meta property="og:image" content="http://qcxz71s06.bkt.clouddn.com/QQ%E6%88%AA%E5%9B%BE20200719193210.png">
-<meta property="og:image" content="http://qcxz71s06.bkt.clouddn.com/QQ%E6%88%AA%E5%9B%BE20200719193951.png">
-<meta property="og:image" content="http://qcxz71s06.bkt.clouddn.com/QQ%E6%88%AA%E5%9B%BE20200720101611.png">
+<meta property="og:image" content="https://justlxb-pic.oss-cn-shanghai.aliyuncs.com/QQ%E6%88%AA%E5%9B%BE20200719190734.png">
+<meta property="og:image" content="https://justlxb-pic.oss-cn-shanghai.aliyuncs.com/QQ%E6%88%AA%E5%9B%BE20200719192012.png">
+<meta property="og:image" content="https://justlxb-pic.oss-cn-shanghai.aliyuncs.com/QQ%E6%88%AA%E5%9B%BE20200719193210.png">
+<meta property="og:image" content="https://justlxb-pic.oss-cn-shanghai.aliyuncs.com/QQ%E6%88%AA%E5%9B%BE20200719193951.png">
+<meta property="og:image" content="https://justlxb-pic.oss-cn-shanghai.aliyuncs.com/QQ%E6%88%AA%E5%9B%BE20200720101611.png">
 <meta property="article:published_time" content="2020-07-19T10:39:58.000Z">
-<meta property="article:modified_time" content="2020-07-22T03:52:29.793Z">
+<meta property="article:modified_time" content="2020-08-03T01:22:01.306Z">
 <meta property="article:author" content="lxb">
 <meta property="article:tag" content="Mybatis">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http://qcxz71s06.bkt.clouddn.com/QQ%E6%88%AA%E5%9B%BE20200719190734.png">
+<meta name="twitter:image" content="https://justlxb-pic.oss-cn-shanghai.aliyuncs.com/QQ%E6%88%AA%E5%9B%BE20200719190734.png">
 
 
 
@@ -442,7 +442,7 @@
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Test</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">getUserById</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="comment">// 获取SqlSession对象</span></span><br><span class="line">    SqlSession sqlSession = MybtisUtils.getSqlSession();</span><br><span class="line"></span><br><span class="line">    UserMapper mapper = sqlSession.getMapper(UserMapper<span class="class">.<span class="keyword">class</span>)</span>;</span><br><span class="line">    User user = mapper.getUserById(<span class="number">2</span>);</span><br><span class="line">    System.out.println(user);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 关闭SqlSession</span></span><br><span class="line">    sqlSession.close();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 </li>
 <li><p>输出为:</p>
-<p><img src="http://qcxz71s06.bkt.clouddn.com/QQ%E6%88%AA%E5%9B%BE20200719190734.png" alt=""></p>
+<p><img src="https://justlxb-pic.oss-cn-shanghai.aliyuncs.com/QQ%E6%88%AA%E5%9B%BE20200719190734.png" alt=""></p>
 <p>比之前方便太多了!!</p>
 </li>
 </ol>
@@ -457,7 +457,7 @@
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Test</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">addUser</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="comment">// 获取SqlSession对象</span></span><br><span class="line">    SqlSession sqlSession = MybtisUtils.getSqlSession();</span><br><span class="line"></span><br><span class="line">    UserMapper mapper = sqlSession.getMapper(UserMapper<span class="class">.<span class="keyword">class</span>)</span>;</span><br><span class="line">    mapper.addUser(<span class="keyword">new</span> User(<span class="number">4</span>, <span class="string">"啦啦啦"</span>, <span class="string">"89746"</span>));</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 关闭SqlSession</span></span><br><span class="line">    sqlSession.close();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <p>但是结果并没有添加成功：</p>
-<p><img src="http://qcxz71s06.bkt.clouddn.com/QQ%E6%88%AA%E5%9B%BE20200719192012.png" alt=""></p>
+<p><img src="https://justlxb-pic.oss-cn-shanghai.aliyuncs.com/QQ%E6%88%AA%E5%9B%BE20200719192012.png" alt=""></p>
 <p><strong>这是因为增删改必须要提交事物</strong></p>
 </li>
 <li><p>添加提交事务的语句</p>
@@ -477,7 +477,7 @@
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Test</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">updateUser</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="comment">// 获取SqlSession对象</span></span><br><span class="line">    SqlSession sqlSession = MybtisUtils.getSqlSession();</span><br><span class="line"></span><br><span class="line">    UserMapper mapper = sqlSession.getMapper(UserMapper<span class="class">.<span class="keyword">class</span>)</span>;</span><br><span class="line">    mapper.updateUser(<span class="keyword">new</span> User(<span class="number">4</span>, <span class="string">"呵呵呵"</span>, <span class="string">"74155"</span>));</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 提交事物</span></span><br><span class="line">    sqlSession.commit();</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 关闭SqlSession</span></span><br><span class="line">    sqlSession.close();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 </li>
 <li><p>结果为:</p>
-<p><img src="http://qcxz71s06.bkt.clouddn.com/QQ%E6%88%AA%E5%9B%BE20200719193210.png" alt=""></p>
+<p><img src="https://justlxb-pic.oss-cn-shanghai.aliyuncs.com/QQ%E6%88%AA%E5%9B%BE20200719193210.png" alt=""></p>
 </li>
 </ol>
 <h1 id="删除操作"><a href="#删除操作" class="headerlink" title="删除操作"></a>删除操作</h1><ol>
@@ -491,7 +491,7 @@
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Test</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">deleteUser</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="comment">// 获取SqlSession对象</span></span><br><span class="line">    SqlSession sqlSession = MybtisUtils.getSqlSession();</span><br><span class="line"></span><br><span class="line">    UserMapper mapper = sqlSession.getMapper(UserMapper<span class="class">.<span class="keyword">class</span>)</span>;</span><br><span class="line">    mapper.deleteUser(<span class="number">2</span>);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 提交事物</span></span><br><span class="line">    sqlSession.commit();</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 关闭SqlSession</span></span><br><span class="line">    sqlSession.close();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 </li>
 <li><p>结果为：</p>
-<p><img src="http://qcxz71s06.bkt.clouddn.com/QQ%E6%88%AA%E5%9B%BE20200719193951.png" alt=""></p>
+<p><img src="https://justlxb-pic.oss-cn-shanghai.aliyuncs.com/QQ%E6%88%AA%E5%9B%BE20200719193951.png" alt=""></p>
 </li>
 </ol>
 <h1 id="自动提交事物"><a href="#自动提交事物" class="headerlink" title="自动提交事物"></a>自动提交事物</h1><p>在使用openSession() 方法时, 可以传入一个布尔值, 来控制是否开启自动提交事物, 源码如下:</p>
@@ -532,7 +532,7 @@
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Test</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">getUserLike</span><span class="params">()</span></span>&#123;</span><br><span class="line">    SqlSession sqlSession = MybtisUtils.getSqlSession();</span><br><span class="line"></span><br><span class="line">    UserMapper mapper = sqlSession.getMapper(UserMapper<span class="class">.<span class="keyword">class</span>)</span>;</span><br><span class="line">    List&lt;User&gt; users = mapper.getUserLike(<span class="string">"J%"</span>);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> (User user : users) &#123;</span><br><span class="line">        System.out.println(user);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    sqlSession.close();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 </li>
 <li><p>输出为</p>
-<p><img src="http://qcxz71s06.bkt.clouddn.com/QQ%E6%88%AA%E5%9B%BE20200720101611.png" alt=""></p>
+<p><img src="https://justlxb-pic.oss-cn-shanghai.aliyuncs.com/QQ%E6%88%AA%E5%9B%BE20200720101611.png" alt=""></p>
 </li>
 </ol>
 <p><strong>注意传入参数要加通配符</strong></p>
@@ -750,7 +750,7 @@
               
                 <a href="/archives/%7C%7C%20archive">
               
-                  <span class="site-state-item-count">106</span>
+                  <span class="site-state-item-count">105</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>

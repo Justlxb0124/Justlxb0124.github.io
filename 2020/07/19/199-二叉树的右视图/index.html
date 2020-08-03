@@ -85,14 +85,14 @@
 <meta property="og:url" content="http://yoursite.com/2020/07/19/199-%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%84%E5%8F%B3%E8%A7%86%E5%9B%BE/index.html">
 <meta property="og:site_name" content="LxbZone">
 <meta property="og:description" content="题目描述给定一棵二叉树，想象自己站在它的右侧，按照从顶部到底部的顺序，返回从右侧所能看到的节点值。 示例: 123456789输入: [1,2,3,null,5,null,4]输出: [1, 3, 4]解释:   1            &lt;--- &#x2F;   \2     3         &lt;--- \     \  5     4       &lt;---  题解BFS">
-<meta property="og:image" content="http://qcxz71s06.bkt.clouddn.com/199_fig1.png">
+<meta property="og:image" content="https://justlxb-pic.oss-cn-shanghai.aliyuncs.com/199_fig1.png">
 <meta property="article:published_time" content="2020-07-19T10:03:05.000Z">
-<meta property="article:modified_time" content="2020-07-19T10:32:09.370Z">
+<meta property="article:modified_time" content="2020-08-03T01:24:16.811Z">
 <meta property="article:author" content="lxb">
 <meta property="article:tag" content="DFS">
 <meta property="article:tag" content="BFS">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http://qcxz71s06.bkt.clouddn.com/199_fig1.png">
+<meta name="twitter:image" content="https://justlxb-pic.oss-cn-shanghai.aliyuncs.com/199_fig1.png">
 
 
 
@@ -425,7 +425,7 @@
 
 <h2 id="DFS"><a href="#DFS" class="headerlink" title="DFS"></a>DFS</h2><p>思路： 我们按照 「根结点 -&gt; 右子树 -&gt; 左子树」 的顺序访问，就可以保证每层都是最先访问最右边的节点的。</p>
 <p>（与先序遍历 「根结点 -&gt; 左子树 -&gt; 右子树」 正好相反，先序遍历每层最先访问的是最左边的节点）</p>
-<p><img src="http://qcxz71s06.bkt.clouddn.com/199_fig1.png" alt=""></p>
+<p><img src="https://justlxb-pic.oss-cn-shanghai.aliyuncs.com/199_fig1.png" alt=""></p>
 <p>对于这张图中的情况, 节点8之后并不会直接遍历到节点9, 而是会遍历到节点2, 但是此时递归传递的<code>depth</code> 是1, 而<code>res.size()</code>为4, 所以不会加入到结果列表中, 直到遍历至节点9</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    List&lt;Integer&gt; res = <span class="keyword">new</span> ArrayList&lt;&gt;();</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> List&lt;Integer&gt; <span class="title">rightSideView</span><span class="params">(TreeNode root)</span> </span>&#123;</span><br><span class="line">        dfs(root, <span class="number">0</span>); <span class="comment">// 从根节点开始访问，根节点深度是0</span></span><br><span class="line">        <span class="keyword">return</span> res;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">dfs</span><span class="params">(TreeNode root, <span class="keyword">int</span> depth)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (root == <span class="keyword">null</span>) &#123;</span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">// 先访问 当前节点，再递归地访问 右子树 和 左子树。</span></span><br><span class="line">        <span class="keyword">if</span> (depth == res.size()) &#123;   <span class="comment">// 如果当前节点所在深度还没有出现在res里，说明在该深度下当前节点是第一个被访问的节点，因此将当前节点加入res中。</span></span><br><span class="line">            res.add(root.val);</span><br><span class="line">        &#125;</span><br><span class="line">        depth++;</span><br><span class="line">        dfs(root.right, depth);</span><br><span class="line">        dfs(root.left, depth);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
@@ -602,7 +602,7 @@
               
                 <a href="/archives/%7C%7C%20archive">
               
-                  <span class="site-state-item-count">106</span>
+                  <span class="site-state-item-count">105</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>

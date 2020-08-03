@@ -85,16 +85,16 @@
 <meta property="og:url" content="http://yoursite.com/2020/07/18/IDEA%E4%B8%AD%E9%85%8D%E7%BD%AEMysql%E5%87%BA%E7%8E%B0%E6%97%B6%E5%8C%BA%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3%E6%96%B9%E6%B3%95/index.html">
 <meta property="og:site_name" content="LxbZone">
 <meta property="og:description" content="原因首先，出现该问题的原因是MySQL驱动jar中的默认时区是UTC。 UTC代表的是全球标准时间 ，但是我们使用的时间是北京时区也就是东八区，领先UTC八个小时。  解决办法方法一 进入命令窗口（Win + R），连接数据库 mysql -hlocalhost -uroot -p，回车，输入密码，回车，如图：   继续输入 show variables like’%time_zone’;  （注">
-<meta property="og:image" content="http://qcxz71s06.bkt.clouddn.com/20191009101648442.png">
-<meta property="og:image" content="http://qcxz71s06.bkt.clouddn.com/20191009102949109.png">
-<meta property="og:image" content="http://qcxz71s06.bkt.clouddn.com/20191009103216457.png">
-<meta property="og:image" content="http://qcxz71s06.bkt.clouddn.com/20191009103329355.png">
-<meta property="og:image" content="http://qcxz71s06.bkt.clouddn.com/20190907165021112.png">
+<meta property="og:image" content="https://justlxb-pic.oss-cn-shanghai.aliyuncs.com/20191009101648442.png">
+<meta property="og:image" content="https://justlxb-pic.oss-cn-shanghai.aliyuncs.com/20191009102949109.png">
+<meta property="og:image" content="https://justlxb-pic.oss-cn-shanghai.aliyuncs.com/20191009103216457.png">
+<meta property="og:image" content="https://justlxb-pic.oss-cn-shanghai.aliyuncs.com/20191009103329355.png">
+<meta property="og:image" content="https://justlxb-pic.oss-cn-shanghai.aliyuncs.com/20190907165021112.png">
 <meta property="article:published_time" content="2020-07-18T06:26:16.000Z">
-<meta property="article:modified_time" content="2020-07-18T10:10:39.844Z">
+<meta property="article:modified_time" content="2020-08-03T01:18:12.567Z">
 <meta property="article:author" content="lxb">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http://qcxz71s06.bkt.clouddn.com/20191009101648442.png">
+<meta name="twitter:image" content="https://justlxb-pic.oss-cn-shanghai.aliyuncs.com/20191009101648442.png">
 
 
 
@@ -419,22 +419,22 @@
       
         <h1 id="原因"><a href="#原因" class="headerlink" title="原因"></a>原因</h1><p>首先，出现该问题的原因是MySQL驱动jar中的默认时区是UTC。</p>
 <p>UTC代表的是全球标准时间 ，但是我们使用的时间是北京时区也就是东八区，领先UTC八个小时。</p>
-<p><img src="http://qcxz71s06.bkt.clouddn.com/20191009101648442.png" alt=""></p>
+<p><img src="https://justlxb-pic.oss-cn-shanghai.aliyuncs.com/20191009101648442.png" alt=""></p>
 <h1 id="解决办法"><a href="#解决办法" class="headerlink" title="解决办法"></a>解决办法</h1><h2 id="方法一"><a href="#方法一" class="headerlink" title="方法一"></a>方法一</h2><ol>
 <li><p>进入命令窗口（Win + R），连接数据库 mysql -hlocalhost -uroot -p，回车，输入密码，回车，如图：</p>
-<p><img src="http://qcxz71s06.bkt.clouddn.com/20191009102949109.png" alt=""></p>
+<p><img src="https://justlxb-pic.oss-cn-shanghai.aliyuncs.com/20191009102949109.png" alt=""></p>
 </li>
 <li><p>继续输入 show variables like’%time_zone’;  （注意不要漏掉后面的分号），回车，如图：</p>
-<p><img src="http://qcxz71s06.bkt.clouddn.com/20191009103216457.png" alt=""></p>
+<p><img src="https://justlxb-pic.oss-cn-shanghai.aliyuncs.com/20191009103216457.png" alt=""></p>
 <p>显示 SYSTEM 就是没有设置时区啦。</p>
 </li>
 <li><p>现在我们来设置时区。</p>
 <p>输入set global time_zone = ‘+8:00’; 注意不要漏掉后面的分号），回车，如图：</p>
-<p><img src="http://qcxz71s06.bkt.clouddn.com/20191009103329355.png" alt=""></p>
+<p><img src="https://justlxb-pic.oss-cn-shanghai.aliyuncs.com/20191009103329355.png" alt=""></p>
 <p>这便是设置成功啦！重连即可</p>
 </li>
 </ol>
-<h2 id="方法二"><a href="#方法二" class="headerlink" title="方法二"></a>方法二</h2><p>因为时区不一致，所以提示Server returns invalid timezone. Go to ‘Advanced’ tab and set ‘serverTimezone’ property manually<br>服务器返回了无效的时区，去“高级”标签中手工设置“serverTimezon”属性值。<br><img src="http://qcxz71s06.bkt.clouddn.com/20190907165021112.png" alt=""></p>
+<h2 id="方法二"><a href="#方法二" class="headerlink" title="方法二"></a>方法二</h2><p>因为时区不一致，所以提示Server returns invalid timezone. Go to ‘Advanced’ tab and set ‘serverTimezone’ property manually<br>服务器返回了无效的时区，去“高级”标签中手工设置“serverTimezon”属性值。<br><img src="https://justlxb-pic.oss-cn-shanghai.aliyuncs.com/20190907165021112.png" alt=""></p>
 
       
     </div>
@@ -600,7 +600,7 @@
               
                 <a href="/archives/%7C%7C%20archive">
               
-                  <span class="site-state-item-count">106</span>
+                  <span class="site-state-item-count">105</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>

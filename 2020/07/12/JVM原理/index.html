@@ -85,18 +85,18 @@
 <meta property="og:url" content="http://yoursite.com/2020/07/12/JVM%E5%8E%9F%E7%90%86/index.html">
 <meta property="og:site_name" content="LxbZone">
 <meta property="og:description" content="JVM探究 请你谈谈对JVM的理解? Java8虚拟机和之前的变化更新? 什么是OOM, 什么是栈溢出?怎么分析? JVM的常用调优参数有哪些? 内存快照如何抓取, 怎么分析Dump文件? 谈谈JVM中, 类加载器的认识?  JVM的位置 JVM的体系结构 所谓的JVM调优, 99%的情况下都是在方法区和堆中调的. 这之中绝大部分都是在调堆. 运行时数据区中的 栈, 本地方法栈, 程序计数器这三个">
-<meta property="og:image" content="http://qcxz71s06.bkt.clouddn.com/QQ%E6%88%AA%E5%9B%BE20200712210530.png">
-<meta property="og:image" content="http://qcxz71s06.bkt.clouddn.com/jvm.png">
-<meta property="og:image" content="http://qcxz71s06.bkt.clouddn.com/QQ%E6%88%AA%E5%9B%BE20200712215554.png">
-<meta property="og:image" content="http://qcxz71s06.bkt.clouddn.com/QQ%E6%88%AA%E5%9B%BE20200712214851.png">
-<meta property="og:image" content="http://qcxz71s06.bkt.clouddn.com/1502173-20181029183937235-1542648599.png">
-<meta property="og:image" content="http://qcxz71s06.bkt.clouddn.com/QQ%E6%88%AA%E5%9B%BE20200713105125.png">
+<meta property="og:image" content="https://justlxb-pic.oss-cn-shanghai.aliyuncs.com/QQ%E6%88%AA%E5%9B%BE20200712210530.png">
+<meta property="og:image" content="https://justlxb-pic.oss-cn-shanghai.aliyuncs.com/jvm.png">
+<meta property="og:image" content="https://justlxb-pic.oss-cn-shanghai.aliyuncs.com/QQ%E6%88%AA%E5%9B%BE20200712215554.png">
+<meta property="og:image" content="https://justlxb-pic.oss-cn-shanghai.aliyuncs.com/QQ%E6%88%AA%E5%9B%BE20200712214851.png">
+<meta property="og:image" content="https://justlxb-pic.oss-cn-shanghai.aliyuncs.com/1502173-20181029183937235-1542648599.png">
+<meta property="og:image" content="https://justlxb-pic.oss-cn-shanghai.aliyuncs.com/QQ%E6%88%AA%E5%9B%BE20200713105125.png">
 <meta property="article:published_time" content="2020-07-12T12:49:25.000Z">
-<meta property="article:modified_time" content="2020-07-13T10:20:20.493Z">
+<meta property="article:modified_time" content="2020-08-03T01:19:44.629Z">
 <meta property="article:author" content="lxb">
 <meta property="article:tag" content="JVM">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http://qcxz71s06.bkt.clouddn.com/QQ%E6%88%AA%E5%9B%BE20200712210530.png">
+<meta name="twitter:image" content="https://justlxb-pic.oss-cn-shanghai.aliyuncs.com/QQ%E6%88%AA%E5%9B%BE20200712210530.png">
 
 
 
@@ -426,16 +426,16 @@
 <li>内存快照如何抓取, 怎么分析Dump文件?</li>
 <li>谈谈JVM中, 类加载器的认识?</li>
 </ul>
-<h1 id="JVM的位置"><a href="#JVM的位置" class="headerlink" title="JVM的位置"></a>JVM的位置</h1><p><img src="http://qcxz71s06.bkt.clouddn.com/QQ%E6%88%AA%E5%9B%BE20200712210530.png" alt=""></p>
-<h1 id="JVM的体系结构"><a href="#JVM的体系结构" class="headerlink" title="JVM的体系结构"></a>JVM的体系结构</h1><p><img src="http://qcxz71s06.bkt.clouddn.com/jvm.png" alt=""></p>
+<h1 id="JVM的位置"><a href="#JVM的位置" class="headerlink" title="JVM的位置"></a>JVM的位置</h1><p><img src="https://justlxb-pic.oss-cn-shanghai.aliyuncs.com/QQ%E6%88%AA%E5%9B%BE20200712210530.png" alt=""></p>
+<h1 id="JVM的体系结构"><a href="#JVM的体系结构" class="headerlink" title="JVM的体系结构"></a>JVM的体系结构</h1><p><img src="https://justlxb-pic.oss-cn-shanghai.aliyuncs.com/jvm.png" alt=""></p>
 <p>所谓的JVM调优, 99%的情况下都是在<strong>方法区</strong>和<strong>堆</strong>中调的. 这之中绝大部分都是在调堆.</p>
 <p>运行时数据区中的 <strong>栈, 本地方法栈, 程序计数器</strong>这三个部分不可能有垃圾</p>
 <h1 id="类加载器"><a href="#类加载器" class="headerlink" title="类加载器"></a>类加载器</h1><p>加载Class文件: new Student();</p>
 <p>引用是在栈里, 具体的实例放在堆中</p>
 <p>实例化一个Car类的过程：</p>
-<p><img src="http://qcxz71s06.bkt.clouddn.com/QQ%E6%88%AA%E5%9B%BE20200712215554.png" alt=""></p>
+<p><img src="https://justlxb-pic.oss-cn-shanghai.aliyuncs.com/QQ%E6%88%AA%E5%9B%BE20200712215554.png" alt=""></p>
 <p>生成的实例对象包括各种属性放在堆中, 名字也就是地址放在栈中. 引用时根据栈中的地址去堆中引用</p>
-<p><img src="http://qcxz71s06.bkt.clouddn.com/QQ%E6%88%AA%E5%9B%BE20200712214851.png" alt=""></p>
+<p><img src="https://justlxb-pic.oss-cn-shanghai.aliyuncs.com/QQ%E6%88%AA%E5%9B%BE20200712214851.png" alt=""></p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Car</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        Car car1 = <span class="keyword">new</span> Car();</span><br><span class="line">        Car car2 = <span class="keyword">new</span> Car();</span><br><span class="line">        Car car3 = <span class="keyword">new</span> Car();</span><br><span class="line"></span><br><span class="line">        Class&lt;? extends Car&gt; aClass1 = car1.getClass();</span><br><span class="line">        Class&lt;? extends Car&gt; aClass2 = car2.getClass();</span><br><span class="line">        Class&lt;? extends Car&gt; aClass3 = car3.getClass();</span><br><span class="line"></span><br><span class="line">        System.out.println(aClass1);</span><br><span class="line">        System.out.println(aClass2);</span><br><span class="line">        System.out.println(aClass3);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <p>输出结果为:</p>
@@ -458,13 +458,13 @@
 <li>将这个请求向上委托给父类加载器去完成, 一直向上委托, 直到启动类加载器</li>
 <li>启动类加载器检查是否能够加载当前这个类, 能加载就结束, 使用当前加载器, 否则, 抛出异常, 通知子加载器进行加载</li>
 </ol>
-<p><img src="http://qcxz71s06.bkt.clouddn.com/1502173-20181029183937235-1542648599.png" alt=""></p>
+<p><img src="https://justlxb-pic.oss-cn-shanghai.aliyuncs.com/1502173-20181029183937235-1542648599.png" alt=""></p>
 <p>接下来举个例子：</p>
 <p>大家所熟知的Object类，直接告诉大家，Object默认情况下是启动类加载器进行加载的。假设我也自定义一个Object，并且制定加载器为自定义加载器。现在你会发现自定义的Object可以正常编译，但是永远无法被加载运行。</p>
 <p>这是因为申请自定义Object加载时，总是启动类加载器，而不是自定义加载器，也不会是其他的加载器。</p>
 <h1 id="沙箱安全机制"><a href="#沙箱安全机制" class="headerlink" title="沙箱安全机制"></a>沙箱安全机制</h1><p>Java安全模型的核心就是Java沙箱, 沙箱是一个限制程序运行的环境. 沙箱机制就是将Java代码限定在虚拟机特定的运行范围中, 并且严格限制代码对本地系统资源访问, 通过这样的措施来保证对代码的有效隔离, 防止对本地系统造成破坏. 沙箱主要 <strong>限制系统的资源访问</strong> , CPU, 内存, 文件系统, 网络. 不同级别的沙箱对这些资源访问的限制也可以不一样</p>
 <h1 id="Native"><a href="#Native" class="headerlink" title="Native"></a>Native</h1><p>在Java 的<code>Thread</code> 类中, 有这样的方法:</p>
-<p><img src="http://qcxz71s06.bkt.clouddn.com/QQ%E6%88%AA%E5%9B%BE20200713105125.png" alt=""></p>
+<p><img src="https://justlxb-pic.oss-cn-shanghai.aliyuncs.com/QQ%E6%88%AA%E5%9B%BE20200713105125.png" alt=""></p>
 <p>凡是带了<code>native</code> 关键字的, 说明java的作用范围达不到了, 会去调用底层c语言的库</p>
 <p>会进入本地方法栈, 然后它会调用JNI(本地方法接口), 继而调用本地方法库</p>
 <p>JNI的作用: 扩展Java的使用, 融合不同的编程语言为Java所用</p>
@@ -697,7 +697,7 @@
               
                 <a href="/archives/%7C%7C%20archive">
               
-                  <span class="site-state-item-count">106</span>
+                  <span class="site-state-item-count">105</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
