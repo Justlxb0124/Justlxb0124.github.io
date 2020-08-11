@@ -97,8 +97,10 @@
 <meta property="og:image" content="https://justlxb-pic.oss-cn-shanghai.aliyuncs.com/QQ%E6%88%AA%E5%9B%BE20200809122627.png">
 <meta property="og:image" content="https://justlxb-pic.oss-cn-shanghai.aliyuncs.com/QQ%E6%88%AA%E5%9B%BE20200809152709.png">
 <meta property="og:image" content="https://justlxb-pic.oss-cn-shanghai.aliyuncs.com/QQ%E6%88%AA%E5%9B%BE20200809153118.png">
+<meta property="og:image" content="https://justlxb-pic.oss-cn-shanghai.aliyuncs.com/QQ%E6%88%AA%E5%9B%BE20200810212517.png">
+<meta property="og:image" content="https://justlxb-pic.oss-cn-shanghai.aliyuncs.com/QQ%E6%88%AA%E5%9B%BE20200810212630.png">
 <meta property="article:published_time" content="2020-08-08T13:50:32.000Z">
-<meta property="article:modified_time" content="2020-08-09T13:43:07.362Z">
+<meta property="article:modified_time" content="2020-08-11T12:17:33.664Z">
 <meta property="article:author" content="lxb">
 <meta property="article:tag" content="SpringBoot">
 <meta name="twitter:card" content="summary">
@@ -388,7 +390,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  1.4k
+                  1.7k
                 </span>
               
 
@@ -404,7 +406,7 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  6
+                  7
                 </span>
               
             </div>
@@ -536,6 +538,33 @@
 </ol>
 </li>
 </ol>
+<h2 id="多环境配置"><a href="#多环境配置" class="headerlink" title="多环境配置"></a>多环境配置</h2><p>可以创建多个同级的配置文件, 分别为不同的场景使用, 比如测试环境, 开发环境等等, 为这些环境配置不同的端口或其他属性</p>
+<p>在没有申明的情况下, 默认走application.properties中的配置, 如果需要使用其他配置, 可以设置<code>spring.profiles.active=xxx</code>, 可以选择激活哪一个配置文件</p>
+<p>下面直接演示yaml配置文件</p>
+<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">server:</span></span><br><span class="line">  <span class="attr">port:</span> <span class="number">8081</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="meta">---</span></span><br><span class="line"><span class="attr">server:</span></span><br><span class="line">  <span class="attr">port:</span> <span class="number">8082</span></span><br><span class="line"><span class="attr">spring:</span></span><br><span class="line">  <span class="attr">profiles:</span> <span class="string">dev</span></span><br><span class="line"><span class="meta">---</span></span><br><span class="line"><span class="attr">server:</span></span><br><span class="line">  <span class="attr">port:</span> <span class="number">8083</span></span><br><span class="line"><span class="attr">spring:</span></span><br><span class="line">  <span class="attr">profiles:</span> <span class="string">test</span></span><br></pre></td></tr></table></figure>
+
+<p>启动服务后, 输出为:</p>
+<p><img src="https://justlxb-pic.oss-cn-shanghai.aliyuncs.com/QQ%E6%88%AA%E5%9B%BE20200810212517.png" alt=""></p>
+<p>激活dev版本:</p>
+<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">server:</span></span><br><span class="line">  <span class="attr">port:</span> <span class="number">8081</span></span><br><span class="line"><span class="attr">spring:</span></span><br><span class="line">  <span class="attr">profiles:</span></span><br><span class="line">    <span class="attr">active:</span> <span class="string">dev</span></span><br><span class="line"><span class="meta">---</span></span><br><span class="line"><span class="attr">server:</span></span><br><span class="line">  <span class="attr">port:</span> <span class="number">8082</span></span><br><span class="line"><span class="attr">spring:</span></span><br><span class="line">  <span class="attr">profiles:</span> <span class="string">dev</span></span><br><span class="line"><span class="meta">---</span></span><br><span class="line"><span class="attr">server:</span></span><br><span class="line">  <span class="attr">port:</span> <span class="number">8083</span></span><br><span class="line"><span class="attr">spring:</span></span><br><span class="line">  <span class="attr">profiles:</span> <span class="string">test</span></span><br></pre></td></tr></table></figure>
+
+<p>输出为:</p>
+<p><img src="https://justlxb-pic.oss-cn-shanghai.aliyuncs.com/QQ%E6%88%AA%E5%9B%BE20200810212630.png" alt=""></p>
+<p><strong>如果使用.properties文件进行配置, 需要多个同级文件才能实现这样的效果</strong></p>
+<p>可以通过debug: true来查看, 哪些自动配置类生效, 哪些没有生效</p>
+<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">debug:</span> <span class="literal">true</span></span><br></pre></td></tr></table></figure>
+
+<h1 id="Web开发"><a href="#Web开发" class="headerlink" title="Web开发"></a>Web开发</h1><ul>
+<li>xxxAutoConfiguration: 向容器中自动配置组件</li>
+<li>xxxProperties: 自动配置类, 装配配置文件中自定义的一些内容</li>
+</ul>
+<h2 id="静态资源引入"><a href="#静态资源引入" class="headerlink" title="静态资源引入"></a>静态资源引入</h2><ol>
+<li>通过webjars    <code>localhost:8080/webjars/</code></li>
+<li>public, static, /**, resources 目录下都可以检测到     <code>localhost:8080/</code></li>
+</ol>
+<p>优先级为:</p>
+<p>​    resource &gt; static(默认)&gt;public</p>
+<p>在默认的资源目录下, 创建一个<code>index.html</code>页面, 系统会将它视作工程的首页.</p>
 
       
     </div>
@@ -614,6 +643,10 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2020/08/10/122-%E4%B9%B0%E5%8D%96%E8%82%A1%E7%A5%A8%E7%9A%84%E6%9C%80%E4%BD%B3%E6%97%B6%E6%9C%BA%E2%85%A1/" rel="prev" title="122.买卖股票的最佳时机Ⅱ">
+                122.买卖股票的最佳时机Ⅱ <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -703,7 +736,7 @@
               
                 <a href="/archives/%7C%7C%20archive">
               
-                  <span class="site-state-item-count">119</span>
+                  <span class="site-state-item-count">124</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -725,7 +758,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">47</span>
+                  <span class="site-state-item-count">48</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -792,7 +825,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#第一个SpringBoot程序"><span class="nav-number">1.</span> <span class="nav-text">第一个SpringBoot程序</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#原理初探"><span class="nav-number">2.</span> <span class="nav-text">原理初探</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#自动装配"><span class="nav-number">2.1.</span> <span class="nav-text">自动装配</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#配置文件"><span class="nav-number">3.</span> <span class="nav-text">配置文件</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#第一个SpringBoot程序"><span class="nav-number">1.</span> <span class="nav-text">第一个SpringBoot程序</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#原理初探"><span class="nav-number">2.</span> <span class="nav-text">原理初探</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#自动装配"><span class="nav-number">2.1.</span> <span class="nav-text">自动装配</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#配置文件"><span class="nav-number">3.</span> <span class="nav-text">配置文件</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#多环境配置"><span class="nav-number">3.1.</span> <span class="nav-text">多环境配置</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Web开发"><span class="nav-number">4.</span> <span class="nav-text">Web开发</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#静态资源引入"><span class="nav-number">4.1.</span> <span class="nav-text">静态资源引入</span></a></li></ol></li></ol></div>
             
 
           </div>
@@ -826,7 +859,7 @@
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">105.3k</span>
+    <span title="Site words total count">107.6k</span>
   
 </div>
 
