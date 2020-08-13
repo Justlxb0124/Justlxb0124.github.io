@@ -99,8 +99,14 @@
 <meta property="og:image" content="https://justlxb-pic.oss-cn-shanghai.aliyuncs.com/QQ%E6%88%AA%E5%9B%BE20200809153118.png">
 <meta property="og:image" content="https://justlxb-pic.oss-cn-shanghai.aliyuncs.com/QQ%E6%88%AA%E5%9B%BE20200810212517.png">
 <meta property="og:image" content="https://justlxb-pic.oss-cn-shanghai.aliyuncs.com/QQ%E6%88%AA%E5%9B%BE20200810212630.png">
+<meta property="og:image" content="https://justlxb-pic.oss-cn-shanghai.aliyuncs.com/QQ%E6%88%AA%E5%9B%BE20200813164606.png">
+<meta property="og:image" content="https://justlxb-pic.oss-cn-shanghai.aliyuncs.com/QQ%E6%88%AA%E5%9B%BE20200813164633.png">
+<meta property="og:image" content="https://justlxb-pic.oss-cn-shanghai.aliyuncs.com/QQ%E6%88%AA%E5%9B%BE20200813164750.png">
+<meta property="og:image" content="https://justlxb-pic.oss-cn-shanghai.aliyuncs.com/QQ%E6%88%AA%E5%9B%BE20200813164858.png">
+<meta property="og:image" content="https://justlxb-pic.oss-cn-shanghai.aliyuncs.com/QQ%E6%88%AA%E5%9B%BE20200813165034.png">
+<meta property="og:image" content="https://justlxb-pic.oss-cn-shanghai.aliyuncs.com/QQ%E6%88%AA%E5%9B%BE20200813165118.png">
 <meta property="article:published_time" content="2020-08-08T13:50:32.000Z">
-<meta property="article:modified_time" content="2020-08-11T12:17:33.664Z">
+<meta property="article:modified_time" content="2020-08-13T11:12:20.481Z">
 <meta property="article:author" content="lxb">
 <meta property="article:tag" content="SpringBoot">
 <meta name="twitter:card" content="summary">
@@ -390,7 +396,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  1.7k
+                  2.3k
                 </span>
               
 
@@ -406,7 +412,7 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  7
+                  10
                 </span>
               
             </div>
@@ -565,6 +571,51 @@
 <p>优先级为:</p>
 <p>​    resource &gt; static(默认)&gt;public</p>
 <p>在默认的资源目录下, 创建一个<code>index.html</code>页面, 系统会将它视作工程的首页.</p>
+<h2 id="thymeleaf"><a href="#thymeleaf" class="headerlink" title="thymeleaf"></a>thymeleaf</h2><ol>
+<li><p>首先在porm.xml中引入依赖</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>net.sourceforge.nekohtml<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>nekohtml<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>1.9.22<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line"><span class="comment">&lt;!--解析html包--&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.boot<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-boot-starter-thymeleaf<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>在<code>/templates</code>目录下编写html页面</p>
+</li>
+<li><p>一些简单语法</p>
+<p>Simple expressions:</p>
+<ul>
+<li>Variable Expressions: <code>${...}</code></li>
+<li>Selection Variable Expressions: <code>*{...}</code></li>
+<li>Message Expressions: <code>#{...}</code></li>
+<li>Link URL Expressions: <code>@{...}</code></li>
+<li>Fragment Expressions: <code>~{...}</code></li>
+</ul>
+</li>
+</ol>
+<h2 id="MVC配置"><a href="#MVC配置" class="headerlink" title="MVC配置"></a>MVC配置</h2><p>我们可以自定义一个MVC配置类, 在这类中可以编写视图解析器或者国际化组件等, 从而绕开springboot默认的各种组件</p>
+<p>如果要自定义MVC配置类, 首先需要实现<code>WebMvcConfigurer</code>接口, 标明<code>@Configuration</code>注解, <strong>并且不能带有@EnableWebMvc注解!!!</strong></p>
+<p>在SpringMVC阶段实现页面跳转是写<code>Controller</code>实现, 现在直接在自定义配置类中实现即可</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Configuration</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MyMvcConfig</span> <span class="keyword">implements</span> <span class="title">WebMvcConfigurer</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">addViewControllers</span><span class="params">(ViewControllerRegistry registry)</span> </span>&#123;</span><br><span class="line">        registry.addViewController(<span class="string">"/"</span>).setViewName(<span class="string">"index"</span>);</span><br><span class="line">        registry.addViewController(<span class="string">"/index.html"</span>).setViewName(<span class="string">"index"</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>这样就能实现在<code>localhost:8080/</code>地址下或者<code>localhost:8080/index.html</code>地址下访问<code>index.html</code>页面</p>
+<h2 id="首页配置"><a href="#首页配置" class="headerlink" title="首页配置"></a>首页配置</h2><p>所有的静态资源都要用thymeleaf接管</p>
+<p>首先引入命名空间:</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">html</span> <span class="attr">lang</span>=<span class="string">"en"</span> <span class="attr">xmlns:th</span>=<span class="string">"http://www.thymeleaf.org"</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>用thymeleaf接管所有的本地资源:</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- Bootstrap core CSS --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">link</span> <span class="attr">th:href</span>=<span class="string">"@&#123;/css/bootstrap.min.css&#125;"</span> <span class="attr">rel</span>=<span class="string">"stylesheet"</span>&gt;</span></span><br><span class="line"><span class="comment">&lt;!-- Custom styles for this template --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">link</span> <span class="attr">th:href</span>=<span class="string">"@&#123;/css/signin.css&#125;"</span> <span class="attr">rel</span>=<span class="string">"stylesheet"</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="国际化"><a href="#国际化" class="headerlink" title="国际化"></a>国际化</h2><p>首先创建一个配置文件收录所有需要国际化的标签</p>
+<p><img src="https://justlxb-pic.oss-cn-shanghai.aliyuncs.com/QQ%E6%88%AA%E5%9B%BE20200813164606.png" alt=""></p>
+<p>编写需要国际化的内容</p>
+<p><img src="https://justlxb-pic.oss-cn-shanghai.aliyuncs.com/QQ%E6%88%AA%E5%9B%BE20200813164633.png" alt=""></p>
+<p>在s<code>pring.messages.basename=i18n.login</code>添加该配置文件信息</p>
+<p><img src="https://justlxb-pic.oss-cn-shanghai.aliyuncs.com/QQ%E6%88%AA%E5%9B%BE20200813164750.png" alt=""></p>
+<p>从前端页面发送国际化的请求:</p>
+<p><img src="https://justlxb-pic.oss-cn-shanghai.aliyuncs.com/QQ%E6%88%AA%E5%9B%BE20200813164858.png" alt=""></p>
+<p>然后编写解析器来解析发送来的国际化请求</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MyLocalResolver</span> <span class="keyword">implements</span> <span class="title">LocaleResolver</span> </span>&#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> Locale <span class="title">resolveLocale</span><span class="params">(HttpServletRequest httpServletRequest)</span> </span>&#123;</span><br><span class="line">        <span class="comment">// 获取请求中的语言参数</span></span><br><span class="line">        String language = httpServletRequest.getParameter(<span class="string">"l"</span>);</span><br><span class="line">        <span class="comment">// 如果没有就使用默认的</span></span><br><span class="line">        Locale locale = Locale.getDefault();</span><br><span class="line">        <span class="comment">// 如果请求的链接携带了国际化的参数</span></span><br><span class="line">        <span class="keyword">if</span>(!StringUtils.isEmpty(language))&#123;</span><br><span class="line">            String[] s = language.split(<span class="string">"_"</span>);</span><br><span class="line">            locale = <span class="keyword">new</span> Locale(s[<span class="number">0</span>], s[<span class="number">1</span>]);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> locale;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setLocale</span><span class="params">(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, Locale locale)</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>将该本地化解析器组件放入自定义的MVC配置类中</p>
+<p><img src="https://justlxb-pic.oss-cn-shanghai.aliyuncs.com/QQ%E6%88%AA%E5%9B%BE20200813165034.png" alt=""></p>
+<p>然后在首页就可以进行中英文切换了</p>
+<p><img src="https://justlxb-pic.oss-cn-shanghai.aliyuncs.com/QQ%E6%88%AA%E5%9B%BE20200813165118.png" alt=""></p>
 
       
     </div>
@@ -736,7 +787,7 @@
               
                 <a href="/archives/%7C%7C%20archive">
               
-                  <span class="site-state-item-count">124</span>
+                  <span class="site-state-item-count">132</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -758,7 +809,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">48</span>
+                  <span class="site-state-item-count">49</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -825,7 +876,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#第一个SpringBoot程序"><span class="nav-number">1.</span> <span class="nav-text">第一个SpringBoot程序</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#原理初探"><span class="nav-number">2.</span> <span class="nav-text">原理初探</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#自动装配"><span class="nav-number">2.1.</span> <span class="nav-text">自动装配</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#配置文件"><span class="nav-number">3.</span> <span class="nav-text">配置文件</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#多环境配置"><span class="nav-number">3.1.</span> <span class="nav-text">多环境配置</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Web开发"><span class="nav-number">4.</span> <span class="nav-text">Web开发</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#静态资源引入"><span class="nav-number">4.1.</span> <span class="nav-text">静态资源引入</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#第一个SpringBoot程序"><span class="nav-number">1.</span> <span class="nav-text">第一个SpringBoot程序</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#原理初探"><span class="nav-number">2.</span> <span class="nav-text">原理初探</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#自动装配"><span class="nav-number">2.1.</span> <span class="nav-text">自动装配</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#配置文件"><span class="nav-number">3.</span> <span class="nav-text">配置文件</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#多环境配置"><span class="nav-number">3.1.</span> <span class="nav-text">多环境配置</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Web开发"><span class="nav-number">4.</span> <span class="nav-text">Web开发</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#静态资源引入"><span class="nav-number">4.1.</span> <span class="nav-text">静态资源引入</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#thymeleaf"><span class="nav-number">4.2.</span> <span class="nav-text">thymeleaf</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#MVC配置"><span class="nav-number">4.3.</span> <span class="nav-text">MVC配置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#首页配置"><span class="nav-number">4.4.</span> <span class="nav-text">首页配置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#国际化"><span class="nav-number">4.5.</span> <span class="nav-text">国际化</span></a></li></ol></li></ol></div>
             
 
           </div>
@@ -859,7 +910,7 @@
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">107.6k</span>
+    <span title="Site words total count">111.4k</span>
   
 </div>
 
