@@ -122,8 +122,11 @@
 <meta property="og:image" content="https://justlxb-pic.oss-cn-shanghai.aliyuncs.com/QQ%E6%88%AA%E5%9B%BE20200903204453.png">
 <meta property="og:image" content="https://justlxb-pic.oss-cn-shanghai.aliyuncs.com/QQ%E6%88%AA%E5%9B%BE20200903204602.png">
 <meta property="og:image" content="https://justlxb-pic.oss-cn-shanghai.aliyuncs.com/QQ%E6%88%AA%E5%9B%BE20200903204740.png">
+<meta property="og:image" content="https://justlxb-pic.oss-cn-shanghai.aliyuncs.com/QQ%E6%88%AA%E5%9B%BE20200904100811.png">
+<meta property="og:image" content="https://justlxb-pic.oss-cn-shanghai.aliyuncs.com/QQ%E6%88%AA%E5%9B%BE20200904100849.png">
+<meta property="og:image" content="https://justlxb-pic.oss-cn-shanghai.aliyuncs.com/architecture.png">
 <meta property="article:published_time" content="2020-08-08T13:50:32.000Z">
-<meta property="article:modified_time" content="2020-09-03T13:00:08.257Z">
+<meta property="article:modified_time" content="2020-09-04T05:53:51.789Z">
 <meta property="article:author" content="lxb">
 <meta property="article:tag" content="SpringBoot">
 <meta name="twitter:card" content="summary">
@@ -413,7 +416,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  5.1k
+                  5.2k
                 </span>
               
 
@@ -429,7 +432,7 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  23
+                  24
                 </span>
               
             </div>
@@ -780,6 +783,15 @@
 <p>这样配置之后, 调用该服务时系统就会自动开辟一个线程执行该方法</p>
 <p><img src="https://justlxb-pic.oss-cn-shanghai.aliyuncs.com/QQ%E6%88%AA%E5%9B%BE20200903204740.png" alt=""></p>
 <p>经过测试之后, 如果如果不加该注解, 必须要等到3秒以才能在页面中看到<code>OK</code>, 添加了该注解, 就有另外的线程去执行这3秒的休眠, 返回<code>OK</code>的操作与此无关</p>
+<h2 id="定时任务"><a href="#定时任务" class="headerlink" title="定时任务"></a>定时任务</h2><ul>
+<li>TaskScheduler</li>
+<li>TaskExecutor</li>
+</ul>
+<p><img src="https://justlxb-pic.oss-cn-shanghai.aliyuncs.com/QQ%E6%88%AA%E5%9B%BE20200904100811.png" alt=""></p>
+<p><img src="https://justlxb-pic.oss-cn-shanghai.aliyuncs.com/QQ%E6%88%AA%E5%9B%BE20200904100849.png" alt=""></p>
+<p>这样就可以给任务添加定时功能了, 其中的cron表达式专门用于调度任务的执行时间</p>
+<h1 id="分布式-Dubbo-Zookeeper"><a href="#分布式-Dubbo-Zookeeper" class="headerlink" title="分布式 Dubbo+Zookeeper"></a>分布式 Dubbo+Zookeeper</h1><h2 id="Dubbo"><a href="#Dubbo" class="headerlink" title="Dubbo"></a>Dubbo</h2><p>一款高性能,轻量级的开源Java RPC框架, 它提供了三大核心功能: 面向接口的远程方法调用, 智能容错和负载均衡, 以及服务自动注册和实现</p>
+<p><img src="https://justlxb-pic.oss-cn-shanghai.aliyuncs.com/architecture.png" alt=""></p>
 
       
     </div>
@@ -951,7 +963,7 @@
               
                 <a href="/archives/%7C%7C%20archive">
               
-                  <span class="site-state-item-count">176</span>
+                  <span class="site-state-item-count">178</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -962,7 +974,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">7</span>
+                  <span class="site-state-item-count">8</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -1040,7 +1052,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#第一个SpringBoot程序"><span class="nav-number">1.</span> <span class="nav-text">第一个SpringBoot程序</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#原理初探"><span class="nav-number">2.</span> <span class="nav-text">原理初探</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#自动装配"><span class="nav-number">2.1.</span> <span class="nav-text">自动装配</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#配置文件"><span class="nav-number">3.</span> <span class="nav-text">配置文件</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#多环境配置"><span class="nav-number">3.1.</span> <span class="nav-text">多环境配置</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Web开发"><span class="nav-number">4.</span> <span class="nav-text">Web开发</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#静态资源引入"><span class="nav-number">4.1.</span> <span class="nav-text">静态资源引入</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#thymeleaf"><span class="nav-number">4.2.</span> <span class="nav-text">thymeleaf</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#MVC配置"><span class="nav-number">4.3.</span> <span class="nav-text">MVC配置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#首页配置"><span class="nav-number">4.4.</span> <span class="nav-text">首页配置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#国际化"><span class="nav-number">4.5.</span> <span class="nav-text">国际化</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#CRUD功能"><span class="nav-number">5.</span> <span class="nav-text">CRUD功能</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#DATA"><span class="nav-number">6.</span> <span class="nav-text">DATA</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#连接JDBC"><span class="nav-number">6.1.</span> <span class="nav-text">连接JDBC</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#自定义数据源-gt-DRUID"><span class="nav-number">6.2.</span> <span class="nav-text">自定义数据源-&gt;DRUID</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#整合Mybatis"><span class="nav-number">6.3.</span> <span class="nav-text">整合Mybatis</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Shiro"><span class="nav-number">7.</span> <span class="nav-text">Shiro</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#登录拦截"><span class="nav-number">7.1.</span> <span class="nav-text">登录拦截</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#整合Mybatis-1"><span class="nav-number">7.2.</span> <span class="nav-text">整合Mybatis</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#授权"><span class="nav-number">7.3.</span> <span class="nav-text">授权</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#整合Thymeleaf"><span class="nav-number">7.4.</span> <span class="nav-text">整合Thymeleaf</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#任务"><span class="nav-number">8.</span> <span class="nav-text">任务</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#异步任务"><span class="nav-number">8.1.</span> <span class="nav-text">异步任务</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#第一个SpringBoot程序"><span class="nav-number">1.</span> <span class="nav-text">第一个SpringBoot程序</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#原理初探"><span class="nav-number">2.</span> <span class="nav-text">原理初探</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#自动装配"><span class="nav-number">2.1.</span> <span class="nav-text">自动装配</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#配置文件"><span class="nav-number">3.</span> <span class="nav-text">配置文件</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#多环境配置"><span class="nav-number">3.1.</span> <span class="nav-text">多环境配置</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Web开发"><span class="nav-number">4.</span> <span class="nav-text">Web开发</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#静态资源引入"><span class="nav-number">4.1.</span> <span class="nav-text">静态资源引入</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#thymeleaf"><span class="nav-number">4.2.</span> <span class="nav-text">thymeleaf</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#MVC配置"><span class="nav-number">4.3.</span> <span class="nav-text">MVC配置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#首页配置"><span class="nav-number">4.4.</span> <span class="nav-text">首页配置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#国际化"><span class="nav-number">4.5.</span> <span class="nav-text">国际化</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#CRUD功能"><span class="nav-number">5.</span> <span class="nav-text">CRUD功能</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#DATA"><span class="nav-number">6.</span> <span class="nav-text">DATA</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#连接JDBC"><span class="nav-number">6.1.</span> <span class="nav-text">连接JDBC</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#自定义数据源-gt-DRUID"><span class="nav-number">6.2.</span> <span class="nav-text">自定义数据源-&gt;DRUID</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#整合Mybatis"><span class="nav-number">6.3.</span> <span class="nav-text">整合Mybatis</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Shiro"><span class="nav-number">7.</span> <span class="nav-text">Shiro</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#登录拦截"><span class="nav-number">7.1.</span> <span class="nav-text">登录拦截</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#整合Mybatis-1"><span class="nav-number">7.2.</span> <span class="nav-text">整合Mybatis</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#授权"><span class="nav-number">7.3.</span> <span class="nav-text">授权</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#整合Thymeleaf"><span class="nav-number">7.4.</span> <span class="nav-text">整合Thymeleaf</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#任务"><span class="nav-number">8.</span> <span class="nav-text">任务</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#异步任务"><span class="nav-number">8.1.</span> <span class="nav-text">异步任务</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#定时任务"><span class="nav-number">8.2.</span> <span class="nav-text">定时任务</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#分布式-Dubbo-Zookeeper"><span class="nav-number">9.</span> <span class="nav-text">分布式 Dubbo+Zookeeper</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Dubbo"><span class="nav-number">9.1.</span> <span class="nav-text">Dubbo</span></a></li></ol></li></ol></div>
             
 
           </div>
@@ -1074,7 +1086,7 @@
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">129.9k</span>
+    <span title="Site words total count">130.4k</span>
   
 </div>
 
