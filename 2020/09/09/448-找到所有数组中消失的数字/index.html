@@ -79,15 +79,15 @@
 
 
 
-<meta name="description" content="题目描述 题解遍历法遍历整个数组, 如果当前元素比前一个元素相差2或者以上, 说明发生了缺少的数字, 将其加入到数组中即可, 然后数组首部和尾部各自单独考虑 1234567891011121314151617181920212223242526272829public List&lt;Integer&gt; findDisappearedNumbers(int[] nums) &amp;#123;">
+<meta name="description" content="题目描述 题解抽屉原理这道题跟41题几乎是一模一样的思路, 就是通过原地哈希, 将所有的元素都摆放到其对应的位置, 即1放在索引为0处, 2放在索引为1处… 遍历交换位置后的数组, 将所有对不上的元素添加到列表中即可 12345678910111213141516171819202122public List&lt;Integer&gt; findDisappearedNumbers(int[]">
 <meta property="og:type" content="article">
 <meta property="og:title" content="448.找到所有数组中消失的数字">
 <meta property="og:url" content="http://yoursite.com/2020/09/09/448-%E6%89%BE%E5%88%B0%E6%89%80%E6%9C%89%E6%95%B0%E7%BB%84%E4%B8%AD%E6%B6%88%E5%A4%B1%E7%9A%84%E6%95%B0%E5%AD%97/index.html">
 <meta property="og:site_name" content="LxbZone">
-<meta property="og:description" content="题目描述 题解遍历法遍历整个数组, 如果当前元素比前一个元素相差2或者以上, 说明发生了缺少的数字, 将其加入到数组中即可, 然后数组首部和尾部各自单独考虑 1234567891011121314151617181920212223242526272829public List&lt;Integer&gt; findDisappearedNumbers(int[] nums) &amp;#123;">
+<meta property="og:description" content="题目描述 题解抽屉原理这道题跟41题几乎是一模一样的思路, 就是通过原地哈希, 将所有的元素都摆放到其对应的位置, 即1放在索引为0处, 2放在索引为1处… 遍历交换位置后的数组, 将所有对不上的元素添加到列表中即可 12345678910111213141516171819202122public List&lt;Integer&gt; findDisappearedNumbers(int[]">
 <meta property="og:image" content="https://justlxb-pic.oss-cn-shanghai.aliyuncs.com/QQ%E6%88%AA%E5%9B%BE20200909223234.png">
 <meta property="article:published_time" content="2020-09-09T14:31:31.000Z">
-<meta property="article:modified_time" content="2020-09-09T14:41:53.151Z">
+<meta property="article:modified_time" content="2020-09-12T14:16:24.660Z">
 <meta property="article:author" content="lxb">
 <meta property="article:tag" content="数组">
 <meta name="twitter:card" content="summary">
@@ -377,7 +377,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  211
+                  183
                 </span>
               
 
@@ -415,8 +415,9 @@
 
       
         <h1 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h1><p><img src="https://justlxb-pic.oss-cn-shanghai.aliyuncs.com/QQ%E6%88%AA%E5%9B%BE20200909223234.png" alt=""></p>
-<h1 id="题解"><a href="#题解" class="headerlink" title="题解"></a>题解</h1><h2 id="遍历法"><a href="#遍历法" class="headerlink" title="遍历法"></a>遍历法</h2><p>遍历整个数组, 如果当前元素比前一个元素相差2或者以上, 说明发生了缺少的数字, 将其加入到数组中即可, 然后数组首部和尾部各自单独考虑</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> List&lt;Integer&gt; <span class="title">findDisappearedNumbers</span><span class="params">(<span class="keyword">int</span>[] nums)</span> </span>&#123;</span><br><span class="line">    Arrays.sort(nums);</span><br><span class="line">    List&lt;Integer&gt; res = <span class="keyword">new</span> ArrayList&lt;&gt;();</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= nums.length; i++) &#123;</span><br><span class="line">        <span class="keyword">if</span> (i == <span class="number">1</span> &amp;&amp; nums[i - <span class="number">1</span>] != i) &#123;</span><br><span class="line">            <span class="keyword">int</span> distinct = nums[i - <span class="number">1</span>] - <span class="number">1</span>;</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; distinct; j++) &#123;</span><br><span class="line">                res.add(<span class="number">1</span> + j);</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">continue</span>;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (i == nums.length &amp;&amp; nums[i - <span class="number">1</span>] != i) &#123;</span><br><span class="line">            <span class="keyword">int</span> distinct = i - nums[i - <span class="number">1</span>];</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">1</span>; j &lt;= distinct; j++) &#123;</span><br><span class="line">                res.add(nums[i - <span class="number">1</span>] + j);</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">continue</span>;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (i &gt;= <span class="number">2</span> &amp;&amp; nums[i - <span class="number">1</span>] - nums[i - <span class="number">2</span>] &gt; <span class="number">1</span>) &#123;</span><br><span class="line">            <span class="keyword">int</span> distinct = nums[i - <span class="number">1</span>] - nums[i - <span class="number">2</span>];</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">1</span>; j &lt; distinct; j++) &#123;</span><br><span class="line">                res.add(nums[i - <span class="number">2</span>] + j);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> res;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="题解"><a href="#题解" class="headerlink" title="题解"></a>题解</h1><h2 id="抽屉原理"><a href="#抽屉原理" class="headerlink" title="抽屉原理"></a>抽屉原理</h2><p>这道题跟41题几乎是一模一样的思路, 就是通过原地哈希, 将所有的元素都摆放到其对应的位置, 即1放在索引为0处, 2放在索引为1处…</p>
+<p>遍历交换位置后的数组, 将所有对不上的元素添加到列表中即可</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> List&lt;Integer&gt; <span class="title">findDisappearedNumbers</span><span class="params">(<span class="keyword">int</span>[] nums)</span> </span>&#123;</span><br><span class="line">    List&lt;Integer&gt; res = <span class="keyword">new</span> ArrayList&lt;&gt;();</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; nums.length; i++) &#123;</span><br><span class="line">        <span class="keyword">while</span> (nums[i] != nums[nums[i] - <span class="number">1</span>]) &#123;</span><br><span class="line">            swap(nums, i, nums[i] - <span class="number">1</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; nums.length; i++) &#123;</span><br><span class="line">        <span class="keyword">if</span> (nums[i] != i + <span class="number">1</span>) &#123;</span><br><span class="line">            res.add(i + <span class="number">1</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> res;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">swap</span><span class="params">(<span class="keyword">int</span>[] nums, <span class="keyword">int</span> i, <span class="keyword">int</span> j)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> temp = nums[i];</span><br><span class="line">    nums[i] = nums[j];</span><br><span class="line">    nums[j] = temp;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 
       
@@ -496,6 +497,10 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2020/09/10/41-%E7%BC%BA%E5%A4%B1%E7%9A%84%E7%AC%AC%E4%B8%80%E4%B8%AA%E6%AD%A3%E6%95%B0/" rel="prev" title="41.缺失的第一个正数">
+                41.缺失的第一个正数 <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -585,7 +590,7 @@
               
                 <a href="/archives/%7C%7C%20archive">
               
-                  <span class="site-state-item-count">182</span>
+                  <span class="site-state-item-count">183</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -674,7 +679,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#题目描述"><span class="nav-number">1.</span> <span class="nav-text">题目描述</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#题解"><span class="nav-number">2.</span> <span class="nav-text">题解</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#遍历法"><span class="nav-number">2.1.</span> <span class="nav-text">遍历法</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#题目描述"><span class="nav-number">1.</span> <span class="nav-text">题目描述</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#题解"><span class="nav-number">2.</span> <span class="nav-text">题解</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#抽屉原理"><span class="nav-number">2.1.</span> <span class="nav-text">抽屉原理</span></a></li></ol></li></ol></div>
             
 
           </div>
@@ -708,7 +713,7 @@
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">143.1k</span>
+    <span title="Site words total count">143.2k</span>
   
 </div>
 
