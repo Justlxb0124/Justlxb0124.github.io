@@ -86,7 +86,7 @@
 <meta property="og:site_name" content="LxbZone">
 <meta property="og:description" content="题目描述给定一个链表，两两交换其中相邻的节点，并返回交换后的链表。 你不能只是单纯的改变节点内部的值，而是需要实际的进行节点交换。 示例：给定 1-&gt;2-&gt;3-&gt;4, 你应该返回 2-&gt;1-&gt;4-&gt;3. 题解解一由题目可知，每两个节点作为一对进行交换，然后进行下一对的交换。首先编写一个交换节点的函数，然后对原链表进行遍历的过程中，不断调用该函数。原链表的前进速度">
 <meta property="article:published_time" content="2020-07-26T13:12:22.000Z">
-<meta property="article:modified_time" content="2020-07-26T13:45:33.811Z">
+<meta property="article:modified_time" content="2020-10-13T02:58:04.753Z">
 <meta property="article:author" content="lxb">
 <meta property="article:tag" content="链表">
 <meta name="twitter:card" content="summary">
@@ -375,7 +375,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  333
+                  368
                 </span>
               
 
@@ -419,6 +419,8 @@
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">public ListNode swapPairs(ListNode head) &#123;</span><br><span class="line">        if (head &#x3D;&#x3D; null)</span><br><span class="line">            return null;</span><br><span class="line">        ListNode dummyNode &#x3D; new ListNode(0);</span><br><span class="line">        dummyNode.next &#x3D; head;</span><br><span class="line"></span><br><span class="line">        ListNode cur &#x3D; dummyNode;</span><br><span class="line">        while (cur.next !&#x3D; null &amp;&amp; cur.next.next !&#x3D; null) &#123;</span><br><span class="line">            cur.next &#x3D; swap(cur.next);</span><br><span class="line">            cur &#x3D; cur.next.next;</span><br><span class="line">        &#125;</span><br><span class="line">        return dummyNode.next;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    private ListNode swap(ListNode cur) &#123;</span><br><span class="line">        ListNode temp &#x3D; cur.next;</span><br><span class="line">        cur.next &#x3D; temp.next;</span><br><span class="line">        temp.next &#x3D; cur;</span><br><span class="line">        return temp;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
 
 <h2 id="解二"><a href="#解二" class="headerlink" title="解二"></a>解二</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> ListNode <span class="title">swapPairs</span><span class="params">(ListNode head)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (head == <span class="keyword">null</span> || head.next == <span class="keyword">null</span>)</span><br><span class="line">        <span class="keyword">return</span> head;</span><br><span class="line"></span><br><span class="line">    ListNode dummy = <span class="keyword">new</span> ListNode(<span class="number">0</span>);</span><br><span class="line">    dummy.next = head;</span><br><span class="line"></span><br><span class="line">    ListNode pre2 = dummy;</span><br><span class="line">    ListNode pre = head;</span><br><span class="line">    ListNode cur = pre.next;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">while</span> (pre != <span class="keyword">null</span> &amp;&amp; pre.next != <span class="keyword">null</span>) &#123;</span><br><span class="line">        cur = pre.next;</span><br><span class="line">        pre.next = cur.next;</span><br><span class="line">        cur.next = pre;</span><br><span class="line">        pre2.next = cur;</span><br><span class="line"></span><br><span class="line">        pre2 = pre;</span><br><span class="line">        pre = pre.next;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> dummy.next;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="递归方法"><a href="#递归方法" class="headerlink" title="递归方法"></a>递归方法</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> ListNode <span class="title">swapPairs</span><span class="params">(ListNode head)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (head == <span class="keyword">null</span> || head.next == <span class="keyword">null</span>) &#123;</span><br><span class="line">        <span class="keyword">return</span> head;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    ListNode next = head.next;</span><br><span class="line">    head.next = swapPairs(next.next);</span><br><span class="line">    next.next = head;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> next;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 
       
@@ -591,7 +593,7 @@
               
                 <a href="/archives/%7C%7C%20archive">
               
-                  <span class="site-state-item-count">207</span>
+                  <span class="site-state-item-count">214</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -680,7 +682,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#题目描述"><span class="nav-number">1.</span> <span class="nav-text">题目描述</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#题解"><span class="nav-number">2.</span> <span class="nav-text">题解</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#解一"><span class="nav-number">2.1.</span> <span class="nav-text">解一</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#解二"><span class="nav-number">2.2.</span> <span class="nav-text">解二</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#题目描述"><span class="nav-number">1.</span> <span class="nav-text">题目描述</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#题解"><span class="nav-number">2.</span> <span class="nav-text">题解</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#解一"><span class="nav-number">2.1.</span> <span class="nav-text">解一</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#解二"><span class="nav-number">2.2.</span> <span class="nav-text">解二</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#递归方法"><span class="nav-number">2.3.</span> <span class="nav-text">递归方法</span></a></li></ol></li></ol></div>
             
 
           </div>
@@ -714,7 +716,7 @@
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">150.3k</span>
+    <span title="Site words total count">151.9k</span>
   
 </div>
 
